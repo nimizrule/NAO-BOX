@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="15" tooltip="Read a value specified as a parameter from the Arduino board." x="129" y="151">
+        <bitmap>libraries/box/ArduiNao/read.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+        pass
+
+    def onLoad(self):
+        self.arduino=None
+
+
+    def onUnload(self):
+        self.arduino=None
+
+    def onInput_onStart(self ):
+        if self.arduino==None:        
+            self.arduino=ALProxy("ArduiNao")
+        dataSend=self.getParameter("data")
+        dataRead=self.arduino.readData(dataSend)
+        self.onStopped(dataRead)]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Output name="onStopped" type="3" type_size="1" nature="1" inner="0" tooltip="String value that was read." id="3" />
+        <Parameter name="data" inherits_from_parent="0" content_type="3" value="" default_value="0" custom_choice="0" tooltip="Value to be read." id="4" />
+    </Box>
+</ChoregrapheBox>
