@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="3" tooltip="Load and unload the module when the box is loaded/unloaded.&#x0A;There should be only one instance of this box in a behavior, ideally at the root level." x="139" y="170">
+        <bitmap>libraries/box/ArduiNao/arduino.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA["""
+    HumaRobotics ArduiNao
+    
+    Arduino Flash and Communication Tools for Nao
+
+    This software is graciously provided by HumaRobotics under the Simplified BSD License.
+    HumaRobotics is a trademark of Generation Robots.
+    
+    Copyright (c) 2013, Generation Robots.
+    All rights reserved.
+    
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met: 
+    
+    1. Redistributions of source code must retain the above copyright notice, this
+       list of conditions and the following disclaimer. 
+    2. Redistributions in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimer in the documentation
+       and/or other materials provided with the distribution. 
+    
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+    ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+    WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+    DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+    ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+    (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+    LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+    ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    
+    The views and conclusions contained in the software and documentation are those
+    of the authors and should not be interpreted as representing official policies, 
+    either expressed or implied, of the FreeBSD Project.  
+"""
+
+###############################
+#    ArduiNao module and functions  #
+###############################
+
+from naoqi import ALModule
+from naoqi import ALProxy
+import time
+try:
+    import serial
+except:
+    raise Exception("Python module 'serial' not found: Please connect to a real Nao robot")
+import struct
+from threading import Thread
+from multiprocessing import Lock
+
+def lineToByteArray(line):
+  """
+  Converts a string of HEX values into a byte array (skipping the first character)
+  Typical string: 
+    ":0506FA32"
+  """
+  l=[]
+  line=line[1:] # skip ':'
+# While there are at least to chars to read
+  while len(line)>1:
+    hexnum=line[0:2]
+    if hexnum.strip()=='': break
+    v=int(hexnum, 16)
+    l.append(v)
+    line=line[2:]
+  return l
+
+
+def convertHexToBin(hexpath):
+  """
+  Converts a HEX file provided into a BIN file that contains its binary representation
+  Returns the full path of the generated file    
+  """
+  print "Opening input file %s"%hexpath
+  fin=open(hexpath)
+  binpath=hexpath+".bin"
+  print "Opening output file %s"%binpath
+  fout=open(binpath,"wb")
+
+
+  # Perform conversion
+  bytecount=0
+  while True:      
+    line=fin.readline()
+    if not line:
+      break
+    
+  #if line[0]!=':': continue
+    barray=lineToByteArray(line)
+    datasize=barray[0]
+    type=barray[3]
+    if type==00: 
+      bytecount+=datasize
+      for i in range(0,datasize):
+        b=barray[4+i]
+        out =struct.pack('B',b)
+        fout.write(out)
+  print ("Done writing",bytecount,"bytes")
+  fin.close()
+  fout.close()
+  print "Conversion output",bytecount,"bytes"
+  print "Done"
+  return binpath
+
+
+
+def bytesToHex(byteStr ):
+  """Converts an array of bytes (represented as a string) into its hexadecimal string representation"""
+  return ''.join( [ "%02X " % ord( x ) for x in byteStr ] ).strip()
+
+
+
+        
+def hexToBytes(self, hexStr):
+  """Converts an hexadecimal string representation of bytes into an array of bytes"""
+  bytes=[]
+  hexStr=''.join(hexStr.split(" "))
+  #print hexStr
+  for i in range(0,len(hexStr),2):
+      bytes.append(chr(int(hexStr[i:i+2],16)))
+      #print bytes
+
+  return ''.join( bytes )
+      
+  
+
+
+
+
+
+
+
+class ArduiNaoModuleClass(ALModule):
+    """Module that provides Arduino Flashing and Communication capabilities from Nao"""
+    
+    
+    def __init__(self ,name):
+        ALModule.__init__(self,name)
+        self.ser=None
+        self.threadIsRunning=False        
+        self.mutex=Lock()
+        self.setPossibleDevices(['/dev/ttyACM0','/dev/ttyACM1','/dev/ttyACM2','/dev/ttyACM3'])
+        self.signatures={"1E 95 0F":"ATMega328P"}
+        self.defaultTimeout=1
+        self.threadTimeout=0.1
+        self.resetTime=2
+        
+        self.logger=ALProxy("ALLogger")
+        self.logger.info(self.getName(), "Initializing")
+        self.memory=ALProxy("ALMemory")
+        self.openSerial() # Wait for full reset
+        time.sleep(self.resetTime)
+        self.logger.info(self.getName(), "Ready")
+
+    def setPossibleDevices(self,deviceList):
+        self.possibleDevices=deviceList
+
+    def isReady(self):
+        return self.ser!=None        
+
+    def openSerial(self):
+        if self.ser!=None:
+            self.closeSerial()
+        for device in self.possibleDevices:
+            try:
+                self.ser=serial.Serial(port=device, baudrate=115200,bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE)
+                self.logger.info(self.getName(), "Serial device %s opened"%device)
+                break
+            except:
+                self.logger.info(self.getName(), "Could not open serial device %s"%device)
+        if self.ser==None:
+          self.logger.error(self.getName(), "Could not open any serial device: Please connect an Arduino board")
+          raise Exception(self.getName()+": ERROR: Could not open any serial device, please connect an Arduino board")    
+        else:
+            self.ser.timeout=self.defaultTimeout # default read timeout 100ms
+        
+    def closeSerial(self):
+        if self.ser!=None:
+            self.logger.info(self.getName(), "Closing serial device")
+            self.ser.close()
+            self.ser=None
+        
+    def flash(self,hexpath):
+        """ Flash un fichier HEX avec un chemin complet sur l'Arduino"""
+                
+        self.stopThread()
+        self.mutex.acquire()
+        
+        if not os.path.isfile(hexpath):
+            self.mutex.release()
+            return -4
+        
+        self.closeSerial() # Close serial
+ 
+        binpath=convertHexToBin(hexpath) #conversion .hex -> .bin
+        
+        self.openSerial()  # Reopen serial to reset Arduino
+        if self.ser==None:
+            self.mutex.release()
+            return -3
+            
+        # Blocking mode
+        self.ser.timeout=None
+        
+        ser=self.ser
+        ser.flush()
+        
+        ####################
+        #    Synchronisation        #
+        ####################
+        
+        self.logger.info(self.getName(),"Waiting for Arduino Bootloader sync...")
+
+        input=chr(0x30)+chr(0x20)
+        for i in range(0,8):
+            ser.write(input)
+            time.sleep(0.26)
+            sync=ser.read(ser.inWaiting())            
+            time.sleep(0.1)
+        sync=bytesToHex(sync)
+        #print sync
+        if sync !="14 10":
+            self.logger.info(self.getName(), "Sync fail")
+            self.mutex.release()
+            return -1
+        else:
+             self.logger.info(self.getName(),"Sync sucess")
+        
+        #######################
+        #        Read device signature    #
+        #######################
+        ser.flush()        
+        asksig=chr(0x75)+chr(0x20)
+        ser.write(asksig)
+        time.sleep(0.2)
+        sig=ser.read(ser.inWaiting())
+        sig=bytesToHex(sig[1:4])
+        if sig in self.signatures.keys():
+            device=self.signatures[sig]
+            self.logger.info(self.getName(),"Identified chip: %s signature: %s"%(device,sig))
+        else:            
+            self.logger.info(self.getName(),"Unidentified chip: %s"%sig)
+            self.mutex.release()
+            return -2
+        
+        
+        self.logger.info(self.getName(), "Uploading firmware...")
+        
+        
+        firmware=open(binpath,"r").read()
+        taillefichier=len(firmware)
+        
+        nbFullTram=taillefichier/0x80
+        TailleLastTram=taillefichier%0x80
+        send=[]
+        
+    #    print TailleLastTram
+        
+    #    print firmware
+        
+        addrH=0
+        addrL=0
+        
+        delayTrame=0.05
+        for i in range(0,nbFullTram):
+            cnt=i*0x80
+            
+            
+            #################
+            #    LoadAddr            #
+            #################
+            if i>0:
+                addrH=addrH+0x40
+            if addrH>0xc0:
+                addrL=addrL+1
+                addrH=0x00
+            addr=chr(0x55)+chr(addrH)+chr(addrL)+chr(0x20)
+            ser.write(addr)
+            time.sleep(delayTrame)
+            
+            #send.append(firmware[0:10])
+            
+            ##################
+            #    Send Firmware       #
+            ##################
+            
+            send=chr(0x64)+chr(0)+chr(0x80)+chr(0x46)+firmware[cnt:cnt+0x80]+chr(0x20)
+            ser.write(send)
+            time.sleep(delayTrame)
+            
+            #print "passed"
+        
+        if TailleLastTram!=0:
+            #cnt=cnt+1
+            #################
+            #    LoadAddr            #
+            #################
+            addrH=addrH+0x40
+            if addrH>0xc0:
+                addrL=addrL+1
+                addrH=0x00
+            addr=chr(0x55)+chr(addrH)+chr(addrL)+chr(0x20)
+            ser.write(addr)
+            time.sleep(delayTrame)
+            
+            ##################
+            #    Send Firmware       #
+            ##################
+            cnt=cnt+0x80
+            send=chr(0x64)+chr(0)+chr(TailleLastTram)+chr(0x46)+firmware[cnt:cnt+TailleLastTram]+chr(0x20)
+            ser.write(send)
+            time.sleep(delayTrame)
+            
+        self.logger.info(self.getName(),"Firmware uploaded, leaving prog mode")    
+            
+        ###############
+        #    leave progmode  #
+        ###############
+        send=chr(0x51)+chr(0x20)
+        ser.write(send)
+        time.sleep(0.1)
+        
+        self.logger.info(self.getName(),"Flash finished")    
+        
+        self.closeSerial()
+        self.openSerial()
+        if self.ser==None:
+            self.mutex.release()
+            return -3
+        
+        time.sleep(self.resetTime) # Wait for full reset
+        self.logger.info(self.getName(), "Ready")        
+        self.mutex.release()
+        return 0    
+        
+
+  
+    def sendData(self,data):
+        self.mutex.acquire()  
+        self.logger.info(self.getName(),"Send data >> %s"%data)
+        send=data+"\r\n"
+        self.ser.write(send)
+        self.ser.flushOutput()
+        #~ time.sleep(0.03)
+        self.mutex.release()
+    
+    def readData(self,data):
+        self.mutex.acquire()
+        
+        manageThread=self.threadIsRunning
+        if manageThread: self.stopThread()
+
+        size=len(data)
+        self.logger.info(self.getName(),"Read data >> %s"%data)
+        send=data+"\r\n"
+        self.ser.flushInput()
+        self.ser.write(send)
+        self.ser.flushOutput()
+
+        dataIn=self.readSerialLine()
+
+        self.logger.info(self.getName(),"Read data << %s"%dataIn)
+
+        if manageThread: self.startThread()
+        self.mutex.release()
+        return dataIn
+      
+    def startThread(self):
+        if not self.threadIsRunning:
+            self.logger.info(self.getName(),"Starting thread")
+            self.threadIsRunning=True
+            self.thread=Thread(target=self.threadHandler)
+            self.thread.start()
+
+    def stopThread(self):
+        if self.threadIsRunning:
+            self.logger.info(self.getName(),"Stopping Thread")
+            self.threadIsRunning=False
+            self.thread.join()
+            self.logger.info(self.getName(),"Stopped Thread")
+            
+    def readSerialLine(self):
+        line=""
+        while True:
+            ch=self.ser.read(1)
+            if ch==None or ch=='': return None
+            if ch=='\n' or ch=='\r':
+                return line
+            line=line+ch
+        
+    def threadHandler(self):
+        self.logger.info(self.getName(),"Thread: begin")
+        self.ser.timeout=self.threadTimeout
+        while self.threadIsRunning:
+            dataIn=self.readSerialLine()
+            if dataIn==None or dataIn=="":
+                continue
+            self.logger.info(self.getName(),"Thread: Read data << %s"%dataIn)
+            self.memory.raiseMicroEvent("Arduino/Event",dataIn)
+        self.ser.timeout=self.defaultTimeout
+        self.logger.info(self.getName(),"Thread: finish")
+          
+    
+    def exit(self):
+        """destroy the module"""
+        self.stopThread()
+        self.mutex.acquire()
+        self.closeSerial()
+        self.mutex.release()
+        ALModule.exit(self)
+        
+
+
+
+
+####################
+#    Choregraphe Box   #
+####################
+
+class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+        pass
+
+    def onLoad(self):
+        self.logger.info("#####################")
+        self.logger.info("Starting ArduiNao Module")
+        self.logger.info("#####################")
+        global ArduiNao
+        ArduiNao = ArduiNaoModuleClass("ArduiNao")
+        
+
+    def onUnload(self):
+        try:    
+            self.logger.info("#####################")
+            self.logger.info("Exiting ArduiNao Module")
+            self.logger.info("#####################")
+            p = ALProxy("ArduiNao")
+            p.exit()
+        except:
+            pass]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+    </Box>
+</ChoregrapheBox>

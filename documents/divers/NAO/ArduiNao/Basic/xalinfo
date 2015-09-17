@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Folder expanded="yes">
+    <Node name="ArduiNaoModule" />
+    <Node name="ArduiNaoFlash" />
+    <Node name="ArduiNaoCheck" />
+    <Node name="ArduiNaoRead" />
+    <Node name="ArduiNaoWrite" />
+    <Node name="ArduiNaoWatch" />
+</Folder>
