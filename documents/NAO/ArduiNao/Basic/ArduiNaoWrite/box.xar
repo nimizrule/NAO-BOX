@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ChoregrapheBox xar_version="3">
+    <Box name="root" id="14" tooltip="Write string data provided as a parameter on the Arduino board." x="274" y="179">
+        <bitmap>libraries/box/ArduiNao/write.png</bitmap>
+        <script language="4">
+            <content>
+                <![CDATA[class MyClass(GeneratedClass):
+    def __init__(self):
+        GeneratedClass.__init__(self)
+        pass
+
+    def onLoad(self):
+        self.arduino=None
+
+
+    def onUnload(self):
+        self.arduino=None
+
+    def onInput_onStart(self ):
+        if self.arduino==None:        
+            self.arduino=ALProxy("ArduiNao")
+        dataSend=self.getParameter("data")
+        self.arduino.sendData(dataSend)
+        self.onStopped()]]>
+</content>
+        </script>
+        <Input name="onLoad" type="1" type_size="1" nature="0" inner="1" tooltip="Signal sent when diagram is loaded." id="1" />
+        <Input name="onStart" type="1" type_size="1" nature="2" inner="0" tooltip="Box behavior starts when a signal is received on this input." id="2" />
+        <Output name="onStopped" type="1" type_size="1" nature="1" inner="0" tooltip="Signal sent when box behavior is finished." id="3" />
+        <Parameter name="data" inherits_from_parent="0" content_type="3" value="" default_value="0" custom_choice="0" tooltip="" id="4" />
+    </Box>
+</ChoregrapheBox>
