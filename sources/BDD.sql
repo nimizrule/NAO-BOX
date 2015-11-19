@@ -29,7 +29,7 @@ USE `naobox`;
 --
 
 CREATE TABLE IF NOT EXISTS `nb_commands` (
-  `_cmd_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de la commande',
+  `cmd_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de la commande',
   `cmd_name` varchar(30) NOT NULL COMMENT 'nom de la commande',
   `cmd_file` varchar(30) NOT NULL COMMENT 'fichier associe a la commande',
   `cmd_description` text COMMENT 'description de la commande',
