@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `nb_commands` (
   `cmd_file` varchar(30) NOT NULL COMMENT 'fichier associe a la commande',
   `cmd_description` text COMMENT 'description de la commande',
   `cmd_package_id` int(11) DEFAULT NULL COMMENT 'package auquel appartient la commande',
-  PRIMARY KEY (`_cmd_id`),
+  PRIMARY KEY (`cmd_id`),
   KEY `cmd_package_id` (`cmd_package_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Commandes pour NAO' AUTO_INCREMENT=1 ;
 
