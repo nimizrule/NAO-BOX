@@ -1,7 +1,7 @@
 
 <h2>Information De nao</h2>	
 
-la température des moteurs, son adresse IP, etc. Mais également des informations liées au Raspberry telles que la place restante sur la carte SD, la version de l’OS, le nombre de fichiers…
+
 <div>
 	<table border="1" style="width:100%">
 	  <tr>
