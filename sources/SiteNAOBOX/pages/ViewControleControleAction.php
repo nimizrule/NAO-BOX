@@ -1,5 +1,24 @@
-
-<h2>Controles Action</h2>	
+<!--
+	 *  Page permettant de controler le robot en mode choix d'une action
+	 * 
+	 * @author Bastien VAUTIER
+	 * @version 0.0.1
+	 * @copyright 2015 3iL
+-->
+<table border="1">
+	<tr>
+		<td>
+			<h2>
+				<a href="index.php?page=ViewControleControleAction">Controle par action</a>
+			</h2>
+		</td>
+		<td>
+			<h2>
+				<a href="index.php?page=ViewControlePas">Controle pas à pas</a>	
+			</h2>
+		</td>	
+	</tr>	 
+</table>
 
 <?php 	
 /* function:  generates thumbnail */
@@ -71,5 +90,5 @@ function get_file_extension($file_name) {
 		echo '<p>There are no images in this gallery.</p>';
 	}
 	?>
-</section>
 
+</section>

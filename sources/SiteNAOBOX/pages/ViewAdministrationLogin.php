@@ -1,3 +1,10 @@
+<!--
+	 *  Page permettant à l'adminstrateur ou un utilisateur de se connecter
+	 * 
+	 * @author Bastien VAUTIER
+	 * @version 0.0.1
+	 * @copyright 2015 3iL
+-->
 
 <h2>Administration</h2>	
 		

@@ -1,5 +1,25 @@
+<!--
+	 *  Page permettant de controler le robot en mode pas à pas
+	 * 
+	 * @author Bastien VAUTIER
+	 * @version 0.0.1
+	 * @copyright 2015 3iL
+-->
 
-<h2>Controles Pas</h2>	
+<table border="1">
+	<tr>
+		<td>
+			<h2>
+				<a href="index.php?page=ViewControleControleAction">Controle par action</a>
+			</h2>
+		</td>
+		<td>
+			<h2>
+				<a href="index.php?page=ViewControlePas">Controle pas à pas</a>	
+			</h2>
+		</td>	
+	</tr>	 
+</table>
 
 <div>
 	<table border="0" style="width:100%">

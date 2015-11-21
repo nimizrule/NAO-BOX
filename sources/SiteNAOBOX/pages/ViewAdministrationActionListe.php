@@ -1,4 +1,12 @@
 
+<!--
+	 *  Page affichant la liste des actions disponible pour le robot nao du nao
+	 * 
+	 * @author Bastien VAUTIER
+	 * @version 0.0.1
+	 * @copyright 2015 3iL
+-->
+
 <h2>Administration</h2>	
 		
 <h3>Liste des périphérique</h3>
@@ -53,13 +61,13 @@ if (isset($_GET['action'])){
 	echo 'if action ';
 	if ($_GET['action']=="supprimer") {
 //echo 'supprimer delete ';
-		supprimerAction ($con,$_GET['id']);
+		supprimerAction ($con,$_GET['cmd_id']);
 	}						
 }		
 
 function supprimerAction ($con,$id){
 	$table="nb_commands";	
-	$requete = "DELETE FROM ".$table." WHERE id=(".$id.");";
+	$requete = "DELETE FROM ".$table." WHERE cmd_id=(".$id.");";
 //echo $requete;
 	if (mysqli_query($con, $requete)) {
 //echo "Delete row successfully";		
@@ -77,7 +85,7 @@ function ajouterAction($con,$name,$file,$description){
 	$champ_cmd_file= "cmd_file";
 	$champ_cmd_description= "cmd_description";
 	$champ_cmd_package= "cmd_package_id";
-	$requete = "INSERT INTO naobox ".$table." (cmd_id ".$champ_cmd_name.",".$champ_cmd_file.") VALUES (NULL'".$nom."','".$file."','".$description."');";
+	$requete = "INSERT INTO naobox ".$table." ('cmd_id ".$champ_cmd_name.",".$champ_cmd_file.") VALUES (NULL'".$nom."','".$file."','".$description."');";
 //echo $requete;	
 	if (mysqli_query($con, $requete)) {
 //echo "Insert successfully";	
@@ -107,7 +115,8 @@ function afficheAll($con){					// variable pour la requête
 		// Modifier action
 		echo"<td><img src='images/textures/EnregistrerPeriph.png' alt='' style=''width:20px;height:20px;'/></a></td>";
 		// Supprimer action
-		echo"<td><img src='images/textures/SuppPeriph.png' alt='' style=''width:20px;height:20px;'/></a></td>";
+		echo"<td><a href='?page=ViewAdministrationActionListe&action=supprimer&cmd_id=".$row['cmd_id']."' ><img src='images/textures/SuppPeriph.png' alt='' style=''width:20px;height:20px;'/></a></a></td>";
+		
 		//echo "<td> <a href='?page=ViewAdministrationAjouterPeripherique&action=supprimer&id=".$row['id']."' > Supprimer </a> </td>";							
 		echo "</tr>";	
 	}

@@ -1,3 +1,10 @@
+<!--
+	 *  Page affichant la liste des peripheriques pouvant se connecter a NAO
+	 * 
+	 * @author Bastien VAUTIER
+	 * @version 0.0.1
+	 * @copyright 2015 3iL
+-->
 
 <h2>Administration</h2>	
 		
@@ -27,6 +34,7 @@
 			<th>Nom du périphérique</th>
 			<th>Adresse mac</th>	
 			<th>Adresse IP</th>	
+			<th>Description</th>	
 			<th>Modification de l'action</th>	
 			<th>Supprimer de l'action</th>							
 		</tr>			
@@ -47,13 +55,13 @@ if (isset($_GET['action'])){
 	echo 'if action ';
 	if ($_GET['action']=="supprimer") {
 //echo 'supprimer delete ';
-		supprimerAction ($con,$_GET['id']);
+		supprimerAction ($con,$_GET['prl_id']);
 	}						
 }		
 
 function supprimerAction ($con,$id){
-	$table="nb_commands";	
-	$requete = "DELETE FROM ".$table." WHERE id=(".$id.");";
+	$table="nb_peripherals";	
+	$requete = "DELETE FROM ".$table." WHERE prl_id=(".$id.");";
 //echo $requete;
 	if (mysqli_query($con, $requete)) {
 //echo "Delete row successfully";		
@@ -63,25 +71,6 @@ function supprimerAction ($con,$id){
 		echo "Error updating record: " . mysqli_error($con);						
 //echo $requete;
 	}		
-}
-
-function ajouterAction($con,$name,$adresseMac,$adresseIP,$description){
-	$table="nb_peripherals";
-	$champ_prl_name = "prl_name";
-	$champ_prl_mac_adress= "prl_mac_adress";
-	$champ_prl_ip_adress= "prl_ip_adress";
-	$champ_prl_description= "prl_description";
-	$requete = "INSERT INTO naobox ".$table." (cmd_id ".$champ_prl_name.",".$prl_mac_adress.",".$prl_ip_adress.",".$prl_description.") VALUES (NULL'".$name."','".$adresseMac."','".$adresseIP."','".$description."');";
-  //INSERT INTO `naobox`.`nb_peripherals` (`prl_id`, `prl_name`, `prl_mac_adress`, `prl_ip_adress`, `prl_description`) VALUES (NULL, 'le nom', 'l''adresse max', '10.3.3.2', 'SA Description');
-//echo $requete;	
-	if (mysqli_query($con, $requete)) {
-//echo "Insert successfully";	
-	} 
-	else 
-	{
-//echo "Error updating record: " . mysqli_error($con);						
-//echo $requete;
-	}	
 }
 
 function afficheAll($con){					// variable pour la requête
@@ -96,12 +85,12 @@ function afficheAll($con){					// variable pour la requête
 		echo"<td>".$row['prl_name']."</td>";
 		echo"<td>".$row['prl_mac_adress']."</td>";
 		echo"<td>".$row['prl_ip_adress']."</td>";
-		//echo"<td>".$row['prl_description']."</td>";
+		echo"<td>".$row['prl_description']."</td>";
 		//echo "<td> <a href='?page=ViewAdministrationAjouterPeripherique&action=supprimer&id=".$row['id']."' > Supprimer </a> </td>";							
 		// Modifier action
 		echo"<td><img src='images/textures/EnregistrerPeriph.png' alt='' style=''width:20px;height:20px;'/></a></td>";
 		// Supprimer action
-		echo"<td><img src='images/textures/SuppPeriph.png' alt='' style=''width:20px;height:20px;'/></a></td>";
+		echo"<td><a href='?page=ViewAdministrationListePeripherique&action=supprimer&prl_id=".$row['prl_id']."' ><img src='images/textures/SuppPeriph.png' alt='' style=''width:20px;height:20px;'/></a></a></td>";
 		echo "</tr>";	
 	}
 }

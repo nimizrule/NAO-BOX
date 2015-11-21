@@ -1,4 +1,10 @@
-
+<!--
+	 *  Page devant afficher l'état des different capteurs du robot
+	 * 
+	 * @author Bastien VAUTIER
+	 * @version 0.0.1
+	 * @copyright 2015 3iL
+-->
 <h2>Information De nao</h2>	
 
 

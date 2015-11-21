@@ -1,3 +1,10 @@
+<!--
+	 *  Page affichant la vue du base de l'administration
+	 * 
+	 * @author Bastien VAUTIER
+	 * @version 0.0.1
+	 * @copyright 2015 3iL
+-->
 
 
 <table border="1">

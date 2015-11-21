@@ -1,3 +1,10 @@
+<!--
+	 *  Page permettant de changer le mot de passe d'un utilisateur
+	 * 
+	 * @author Bastien VAUTIER
+	 * @version 0.0.1
+	 * @copyright 2015 3iL
+-->
 
 <h2>Administration</h2>	
 		

@@ -1,3 +1,10 @@
+<!--
+	 *  Page contenant la page de base du site web
+	 * 
+	 * @author Bastien VAUTIER
+	 * @version 0.0.1
+	 * @copyright 2015 3iL
+-->
 
 <div>
 	<table border="0" style="width:100%">
