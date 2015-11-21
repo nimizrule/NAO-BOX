@@ -2,7 +2,23 @@
 <h2>Administration</h2>	
 		
 <h3>Liste des périphérique</h3>
-<table border="0" style="width:100%">
+
+TODO ajouter les rq sql avec la BDD
+<table border="1">
+	<tr>
+		<td>
+			<h2>
+				<a href="index.php?page=ViewAdministrationAjouterPeripherique">Ajouter un périphérique</a>
+			</h2>
+		</td>
+		<td>
+			<h2>
+				<a href="index.php?page=ViewAdministrationListePeripherique">Liste des périphérique autorisé</a>	
+			</h2>
+		</td>	
+	</tr>	 
+</table>
+<table border="1" style="width:100%">
 	  <tr>
 	    <td>
 	    	 <p>Nom du périphérique</p>
@@ -14,13 +30,17 @@
 	  		<p>Addresse IP</p>
 	  	</td>
 	  	<td><!-- Modifier périphérique -->
-	  		<a href="#" class="bordered-feature-image"><img src="images/EnregistrerPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
+	  		<p>
+	  			<a href="#" class="bordered-feature-image"><img src="images/EnregistrerPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
+	   		</p>
 	    </td>	
 	    <td><!-- Supprimer périphérique -->
-	  		<a href="#" class="bordered-feature-image"><img src="images/SuppPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
+	  		<p>	  		
+	  			<a href="#" class="bordered-feature-image"><img src="images/SuppPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
+	   		 </p>
 	    </td>	
-	  </tr>	 
-	   <tr>
+	  </tr>	 	  
+	    <tr>
 	    <td>
 	    	 <p>Nom du périphérique</p>
 		</td>
@@ -31,13 +51,17 @@
 	  		<p>Addresse IP</p>
 	  	</td>
 	  	<td><!-- Modifier périphérique -->
-	  		<a href="#" class="bordered-feature-image"><img src="images/EnregistrerPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
+	  		<p>
+	  			<a href="#" class="bordered-feature-image"><img src="images/EnregistrerPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
+	   		</p>
 	    </td>	
 	    <td><!-- Supprimer périphérique -->
-	  		<a href="#" class="bordered-feature-image"><img src="images/SuppPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
+	  		<p>	  		
+	  			<a href="#" class="bordered-feature-image"><img src="images/SuppPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
+	   		 </p>
 	    </td>	
-	  </tr>
-	   <tr>
+	  </tr>	 	
+	    <tr>
 	    <td>
 	    	 <p>Nom du périphérique</p>
 		</td>
@@ -48,13 +72,17 @@
 	  		<p>Addresse IP</p>
 	  	</td>
 	  	<td><!-- Modifier périphérique -->
-	  		<a href="#" class="bordered-feature-image"><img src="images/EnregistrerPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
+	  		<p>
+	  			<a href="#" class="bordered-feature-image"><img src="images/EnregistrerPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
+	   		</p>
 	    </td>	
 	    <td><!-- Supprimer périphérique -->
-	  		<a href="#" class="bordered-feature-image"><img src="images/SuppPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
+	  		<p>	  		
+	  			<a href="#" class="bordered-feature-image"><img src="images/SuppPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
+	   		 </p>
 	    </td>	
-	  </tr>
-	   <tr>
+	  </tr>	 	
+	    <tr>
 	    <td>
 	    	 <p>Nom du périphérique</p>
 		</td>
@@ -65,44 +93,14 @@
 	  		<p>Addresse IP</p>
 	  	</td>
 	  	<td><!-- Modifier périphérique -->
-	  		<a href="#" class="bordered-feature-image"><img src="images/EnregistrerPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
+	  		<p>
+	  			<a href="#" class="bordered-feature-image"><img src="images/EnregistrerPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
+	   		</p>
 	    </td>	
 	    <td><!-- Supprimer périphérique -->
-	  		<a href="#" class="bordered-feature-image"><img src="images/SuppPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
+	  		<p>	  		
+	  			<a href="#" class="bordered-feature-image"><img src="images/SuppPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
+	   		 </p>
 	    </td>	
-	  </tr>
-	   <tr>
-	    <td>
-	    	 <p>Nom du périphérique</p>
-		</td>
-	    <td>
-	    	<p>Adresse mac </p>
-		</td>	
-	    <td>
-	  		<p>Addresse IP</p>
-	  	</td>
-	  	<td><!-- Modifier périphérique -->
-	  		<a href="#" class="bordered-feature-image"><img src="images/EnregistrerPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
-	    </td>	
-	    <td><!-- Supprimer périphérique -->
-	  		<a href="#" class="bordered-feature-image"><img src="images/SuppPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
-	    </td>	
-	  </tr>
-	   <tr>
-	    <td>
-	    	 <p>Nom du périphérique</p>
-		</td>
-	    <td>
-	    	<p>Adresse mac </p>
-		</td>	
-	    <td>
-	  		<p>Addresse IP</p>
-	  	</td>
-	  	<td><!-- Modifier périphérique -->
-	  		<a href="#" class="bordered-feature-image"><img src="images/EnregistrerPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
-	    </td>	
-	    <td><!-- Supprimer périphérique -->
-	  		<a href="#" class="bordered-feature-image"><img src="images/SuppPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
-	    </td>	
-	  </tr>
+	  </tr>	 	
 </table>

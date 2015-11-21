@@ -7,7 +7,7 @@ header('Content-Type: text/html; charset=UTF-8');
 <html>
 <head>
 	<title> Le Site Web de Neitsab </title>
-	<meta name="description" content="Site de la box NAOBOX"/>
+	<meta name="description" content="Site de NAOBOX"/>
 	<!-- Mots clé lisible par les robots -->
 	<meta name="keyword" content="site web,NAOBOX"/>
 	<!-- Indexer la page au moteur de recherche et ne pas parcourir les liens présent dans la page -->
@@ -78,16 +78,16 @@ header('Content-Type: text/html; charset=UTF-8');
 				<li><a href="index.php?page=ViewAdministration">Administration</a></li>
 				-->
 				<li> 
-					<img src="images/batterie.png" style="width:60px;height:20px;">					
+					<img src="images/textures/batterie.png" style="width:60px;height:20px;">					
 				</li>	
 				<li>
 					<a href="#">
-						<img src="images/CarreStopAction.png" style="width:15px;height:15px;">			
+						<img src="images/textures//CarreStopAction.png" style="width:15px;height:15px;">			
 					</a>							
 				</li>	
 				<li>
 					<a href="index.php?page=defaut">
-						<img src="images/Acceuil.png" style="width:30px;height:35px;">		
+						<img src="images/textures//Acceuil.png" style="width:30px;height:35px;">		
 					</a>
 								
 				</li>			

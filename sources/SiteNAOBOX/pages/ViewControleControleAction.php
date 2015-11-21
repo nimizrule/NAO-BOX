@@ -1,6 +1,5 @@
 
-<h2>Controles des actions</h2>	
-
+<h2>Controles Action</h2>	
 
 <?php 	
 /* function:  generates thumbnail */
@@ -44,7 +43,7 @@ function get_file_extension($file_name) {
 <section>
 	<?php 	
 	/** paramètres **/
-	$images_dir = 'images/galerie-photo/';
+	$images_dir = 'images/galerie-Action/';
 	$thumbs_dir = 'images/preload-images-thumbs/';
 	$thumbs_width = 200;
 	$images_per_row = 5;
@@ -74,36 +73,3 @@ function get_file_extension($file_name) {
 	?>
 </section>
 
-
-<script>
-function loadXML(url)
-{
-	var xmlhttp;
-	var txt,x,u,i;
-	xmlhttp = new XMLHttpRequest();
-	xmlhttp.onreadystatechange=function()
-	{
-		if (xmlhttp.readyState==4 && xmlhttp.status==200){
-			txt="<tr><th></th></tr>";
-			x=xmlhttp.responseXML.documentElement.getElementsByTagName("Image");
-			for(i=0;i<x.length;i++){
-				txt=txt + "<tr>";
-				y=x[i].getElementsByTagName("chemin");
-				txt=txt+"<img src="+y[0].firstChild.nodeValue+"id=\"ImageXML\">";					
-				txt=txt + "</tr>";
-			}
-			document.getElementById('viewer').innerHTML=txt;
-		}
-	}
-	xmlhttp.open("GET",url,true);
-	xmlhttp.send();
-}					
-</script>
-
-<script>
-loadXML('xml/Photo.xml');
-</script>
-
-<h3>Affichage des images via un xml</h3>
-<div id="viewer">
-</div>

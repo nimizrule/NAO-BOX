@@ -10,7 +10,7 @@
 		<input type="password" name="newPassword" value=""/></br>
 		<strong>Répétition du mot de passe : </strong></br>					
 		<input type="password" name="newPasswordcheck" value=""/></br>
-		<button type="submit" name="btModifierMotDePasse">Connexion</button></br>
+		<button type="submit" name="btModifierMotDePasse">Valider le changement de paramètre</button></br>
 	</form>			
 </div>
 

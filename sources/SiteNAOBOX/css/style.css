@@ -14,20 +14,7 @@
 		text-decoration:none
 	}
 	
-	/* visited link */
-	a:visited {
-		color: black;
-	}
-	/*background-color: grey;*/
-	/* mouse over link */
-	a:hover {
-		color: black;
-	}
-
-	/* selected link */
-	a:active {
-		color: black;
-	}
+	
 	
 	#TexteMenuSuperieur {		
 		margin-top:5px;
@@ -52,7 +39,7 @@
 	
 	#logoSite  {
 		position: absolute;
-		background: url('../images/logoSite.png') 0 0 no-repeat;		
+		background: url('../images/textures//logoSite.png') 0 0 no-repeat;		
 		width: 125px;
 		height: 114px;
 		display: block;
@@ -120,7 +107,7 @@
 	h1, h2 {
 		color:green;
 		font-style:italic;
-		font-family: 'Pacifico', cursive;		
+		/*font-family: 'Pacifico', cursive;	*/	
 		margin-top:0;
 	}
 	
