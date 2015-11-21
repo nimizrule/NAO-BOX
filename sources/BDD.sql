@@ -1,13 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.11.1deb2+deb7u2
+-- version 4.0.4
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Mar 17 Novembre 2015 à 22:32
--- Version du serveur: 5.5.46
--- Version de PHP: 5.4.45-0+deb7u2
+-- Généré le: Sam 21 Novembre 2015 à 12:14
+-- Version du serveur: 5.6.12-log
+-- Version de PHP: 5.4.16
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Base de données: `naobox`
 --
-CREATE DATABASE `naobox` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE DATABASE IF NOT EXISTS `naobox` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `naobox`;
 
 -- --------------------------------------------------------
@@ -76,7 +76,15 @@ CREATE TABLE IF NOT EXISTS `nb_profiles` (
   `prf_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id du profil utilisateur',
   `prf_name` varchar(30) NOT NULL COMMENT 'nom du profil utilisateur',
   PRIMARY KEY (`prf_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Profils utilisateurs' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Profils utilisateurs' AUTO_INCREMENT=3 ;
+
+--
+-- Contenu de la table `nb_profiles`
+--
+
+INSERT INTO `nb_profiles` (`prf_id`, `prf_name`) VALUES
+(1, 'user'),
+(2, 'admin');
 
 -- --------------------------------------------------------
 
@@ -87,13 +95,21 @@ CREATE TABLE IF NOT EXISTS `nb_profiles` (
 CREATE TABLE IF NOT EXISTS `nb_users` (
   `usr_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id de l utilisateur',
   `usr_login` varchar(30) NOT NULL COMMENT 'login de l utilisateur',
-  `usr_pwd` varchar(80) NOT NULL COMMENT 'mot de passe de l utilisateur',
-  `usr_connected` tinyint(1) NOT NULL COMMENT 'etat de la connexion',
+  `usr_pwd` varchar(80) DEFAULT NULL COMMENT 'mot de passe de l utilisateur',
+  `usr_connected` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'etat de la connexion',
   `usr_last_use` datetime DEFAULT NULL COMMENT 'date de la derniere connexion',
   `usr_profile_id` int(11) NOT NULL COMMENT 'id du profil utilisateur',
   PRIMARY KEY (`usr_id`),
   KEY `usr_profile_id` (`usr_profile_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Utilisateurs' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='Utilisateurs' AUTO_INCREMENT=3 ;
+
+--
+-- Contenu de la table `nb_users`
+--
+
+INSERT INTO `nb_users` (`usr_id`, `usr_login`, `usr_pwd`, `usr_connected`, `usr_last_use`, `usr_profile_id`) VALUES
+(1, 'user', NULL, 0, NULL, 1),
+(2, 'admin', NULL, 0, NULL, 2);
 
 --
 -- Contraintes pour les tables exportées
