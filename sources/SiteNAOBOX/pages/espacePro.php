@@ -6,6 +6,8 @@
 	 * @copyright 2015 3iL
 -->
 
+Cette page ne fait pour le moment rien elle conserve juste du code pour verifier la connextion d'une personne
+
 <?php	
 //messageBienvenue();
 //function gestionConnection(){

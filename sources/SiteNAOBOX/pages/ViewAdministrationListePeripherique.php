@@ -30,13 +30,13 @@
 		<!-- tr = ligne du tableau  -->
 		<tr>
 			<!-- th = colonnes de titres du tableau  -->
-			<th>ID</th>
+			<!-- <th>ID</th> -->
 			<th>Nom du périphérique</th>
 			<th>Adresse mac</th>	
 			<th>Adresse IP</th>	
 			<th>Description</th>	
-			<th>Modification de l'action</th>	
-			<th>Supprimer de l'action</th>							
+			<th>Modifier périphérique</th>	
+			<th>Supprimer le périphérique</th>							
 		</tr>			
 
 <?php // côté serveur
@@ -52,7 +52,7 @@ if (mysqli_connect_errno($con)){
 			
 // de base les informations son en GET ( écris dans l'adresse internet)
 if (isset($_GET['action'])){	
-	echo 'if action ';
+	//echo 'if action ';
 	if ($_GET['action']=="supprimer") {
 //echo 'supprimer delete ';
 		supprimerAction ($con,$_GET['prl_id']);
@@ -81,7 +81,7 @@ function afficheAll($con){					// variable pour la requête
 	while ($row = mysqli_fetch_array($resultat))
 	{
 		echo "<tr>";								
-		echo"<td>".$row['prl_id']."</td>";
+		//echo"<td>".$row['prl_id']."</td>";
 		echo"<td>".$row['prl_name']."</td>";
 		echo"<td>".$row['prl_mac_adress']."</td>";
 		echo"<td>".$row['prl_ip_adress']."</td>";

@@ -22,36 +22,52 @@
 </table>
 
 <div>
-	<table border="0" style="width:100%">
+	<table id="mainDeplacementPasAPas">
 		<tr>
 			<td>
-				<a href="#" class="bordered-feature-image"><img src="images/deplacement/AvantGauche.png" alt=""style="width:30px;height:30px;" /></a>			
+				<a href="#">
+					<img id='iconDeplacement' src="images/deplacement/AvantGauche.png"/>
+				</a>			
 			</td>
 			<td>
-				<a href="#" class="bordered-feature-image"><img src="images/deplacement/Haut.png" alt=""style="width:30px;height:30px;" /></a>			
+				<a href="#">
+					<img id='iconDeplacement' src="images/deplacement/Haut.png"/>
+				</a>			
 			</td>	
 			<td>	
-				<a href="#" class="bordered-feature-image"><img src="images/deplacement/AvantDroit.png" alt=""style="width:30px;height:30px;" /></a>			
+				<a href="#">
+					<img id='iconDeplacement' src="images/deplacement/AvantDroit.png"/>
+				</a>			
 			</td>	
 		</tr>
 		<tr>
 			<td>
-				<a href="#" class="bordered-feature-image"><img src="images/deplacement/Gauche.png" alt="" style="width:30px;height:30px;"/></a>			
+				<a href="#">
+					<img id='iconDeplacement' src="images/deplacement/Gauche.png"/>
+				</a>			
 			</td>
 			<td></td>	
 			<td>
-				<a href="#" class="bordered-feature-image"><img src="images/deplacement/Droit.png" alt="" style="width:30px;height:30px;"/></a>			
+				<a href="#">
+					<img id='iconDeplacement' src="images/deplacement/Droit.png"/>
+				</a>			
 			</td>
 		</tr>
 		<tr>
 			<td>
-				<a href="#" class="bordered-feature-image"><img src="images/deplacement/ArriereGauche.png" alt=""style="width:30px;height:30px;" /></a>			
+				<a href="#">
+					<img id='iconDeplacement' src="images/deplacement/ArriereGauche.png"/>
+				</a>			
 			</td>
 			<td>
-				<a href="#" class="bordered-feature-image"><img src="images/deplacement/bas.png" alt=""style="width:30px;height:30px;" /></a>			
+				<a href="#">
+					<img id='iconDeplacement' src="images/deplacement/bas.png"/>
+				</a>			
 			</td>	
 			<td>
-				<a href="#" class="bordered-feature-image"><img src="images/deplacement/ArriereDroit.png" alt=""style="width:30px;height:30px;" /></a>			
+				<a href="#">
+					<img id='iconDeplacement' src="images/deplacement/ArriereDroit.png"/>
+				</a>			
 			</td>	
 		</tr>
 	</table>

@@ -11,7 +11,6 @@
 
 <script> // côté client
 // Fonction permettant d'empecher l'ajout d'entrée dans la table
-
 function gestionSubmit() {
 	if (document.getElementsByTagName("NomPeripherique") == "" 
 		&&  document.getElementsByTagName("adresseMac") == ""

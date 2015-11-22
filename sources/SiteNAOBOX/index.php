@@ -35,7 +35,6 @@ header('Content-Type: text/html; charset=UTF-8');
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
 <script src="//code.jquery.com/jquery-1.10.2.js"></script>
 <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
-
 <!-- Fin de la gestion des calendrier-->
 
 
@@ -43,32 +42,13 @@ header('Content-Type: text/html; charset=UTF-8');
 <!--  Nécéssaire pour la balise google +-->
 <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
 
-<script>
-	$(document).ready(function(){
-		$("#buttonUp").click(function(){
-			$("#toMove").css("color", "black").slideUp(2000);
-		});
-		$("#buttonDown").click(function(){
-			$("#toMove").css("color", "black").slideDown(2000);
-		});
-
-		$("#buttonUp").click(function(){
-			$("#listeLangage").css("color", "black").slideUp(2000);
-		});
-		$("#buttonDown").click(function(){
-			$("#listeLangage").css("color", "black").slideDown(2000);
-		});
-	});
-</script>
-</head>
-
 </head>
 <body>
-	<header> 
+	<header id="MenuSuperieur"> 
 		<header id='logoSite'> 
 		</header>		
-		<div id="MenuSuperieur">
-			<ul style="list-style-type:none">
+		<div >
+			<ul>
 				<!--<li><a href="index.php?page=defaut"> Accueil</a></li>
 				<li><a href="index.php?page=ViewControle">Controle</a></li>
 				<li><a href="index.php?page=ViewCapteur">Capteur</a></li>
@@ -78,32 +58,37 @@ header('Content-Type: text/html; charset=UTF-8');
 				<li><a href="index.php?page=ViewAdministration">Administration</a></li>
 				-->
 				<li> 
-					<img src="images/textures/batterie.png" style="width:60px;height:20px;">					
+					<img id="imgHeader" src="images/textures/batterie.png">					
+				</li>	
+				<li>
+					<a href="javascript:history.go(-1)">
+						<img id="imgHeader" src="images/textures/BackPrecedentPage.png">			
+					</a>											
 				</li>	
 				<li>
 					<a href="#">
-						<img src="images/textures//CarreStopAction.png" style="width:15px;height:15px;">			
+						<img id="imgHeader" src="images/textures/CarreStopAction.png">			
 					</a>							
 				</li>	
 				<li>
 					<a href="index.php?page=defaut">
-						<img src="images/textures//Acceuil.png" style="width:30px;height:35px;">		
-					</a>
-								
-				</li>			
-				
+						<img id="imgHeader" src="images/textures/Acceuil.png" >		
+					</a>								
+				</li>	
 			</ul>	
 		</div>						
 	</header>
+
+
+
 	<section class="clear"></section>
 	<div  id="content">	
 		<section>
 			<?php
-//Déclaration d'une variable
 			$page = "defaut";
-	// vérification si la variable existe
+			// vérification si la variable existe
 			if (isset($_GET['page'])){
-		// Vérifie l'existance d'une page
+				// Vérifie l'existance d'une page
 				if (file_exists ('pages/'.$_GET['page'].'.php')){
 					$page = $_GET['page'];
 				}

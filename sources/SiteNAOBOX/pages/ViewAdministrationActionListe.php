@@ -10,10 +10,6 @@
 <h2>Administration</h2>	
 		
 <h3>Liste des périphérique</h3>
-
-TODO ajouter les rq sql avec la BDD
-
-
 <table border="1">
 	<tr>
 		<td>
@@ -36,7 +32,7 @@ TODO ajouter les rq sql avec la BDD
 		<!-- tr = ligne du tableau  -->
 		<tr>
 			<!-- th = colonnes de titres du tableau  -->
-			<th>ID</th>
+			<!--<th>ID</th>-->
 			<th>Nom de l'action</th>
 			<th>Nom du fichier</th>	
 			<th>Information supplémentaire</th>	
@@ -58,7 +54,7 @@ if (mysqli_connect_errno($con)){
 			
 // de base les informations son en GET ( écris dans l'adresse internet)
 if (isset($_GET['action'])){	
-	echo 'if action ';
+	//echo 'if action ';
 	if ($_GET['action']=="supprimer") {
 //echo 'supprimer delete ';
 		supprimerAction ($con,$_GET['cmd_id']);
@@ -105,7 +101,7 @@ function afficheAll($con){					// variable pour la requête
 	while ($row = mysqli_fetch_array($resultat))
 	{
 		echo "<tr>";								
-		echo"<td>".$row['cmd_id']."</td>";
+		//echo"<td>".$row['cmd_id']."</td>";
 		echo"<td>".$row['cmd_name']."</td>";
 		echo"<td>".$row['cmd_file']."</td>";
 		//echo"<td>".$row['cmd_description']."</td>";
