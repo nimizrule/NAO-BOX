@@ -6,7 +6,7 @@ header('Content-Type: text/html; charset=UTF-8');
 <!DOCTYPE html>
 <html>
 <head>
-	<title> Le Site Web de Neitsab </title>
+	<title> NAOBOX Site Web </title>
 	<meta name="description" content="Site de NAOBOX"/>
 	<!-- Mots clé lisible par les robots -->
 	<meta name="keyword" content="site web,NAOBOX"/>
