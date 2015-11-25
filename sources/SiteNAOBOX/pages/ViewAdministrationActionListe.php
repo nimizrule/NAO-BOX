@@ -106,10 +106,10 @@ function afficheAll($con){					// variable pour la requête
 		echo"<td>".$row['cmd_file']."</td>";
 		//echo"<td>".$row['cmd_description']."</td>";
 		//echo"<td>".$row['cmd_package_id']."</td>";
-		// Affchage d'une information détaillé de la commande-->
+		// Affchage d'une information détaillé de la commande-->		
 		echo"<td><img src='images/textures/ModifierAction.png' alt='' style=''width:20px;height:20px;'/></a></td>";
 		// Modifier action
-		echo"<td><img src='images/textures/EnregistrerPeriph.png' alt='' style=''width:20px;height:20px;'/></a></td>";
+		echo"<td><a href='?page=ViewAdministrationModifierAction&cmd_id=".$row['cmd_id']."'><img src='images/textures/EnregistrerPeriph.png' alt='' style=''width:20px;height:20px;'/></a></td>";
 		// Supprimer action
 		echo"<td><a href='?page=ViewAdministrationActionListe&action=supprimer&cmd_id=".$row['cmd_id']."' ><img src='images/textures/SuppPeriph.png' alt='' style=''width:20px;height:20px;'/></a></a></td>";
 		

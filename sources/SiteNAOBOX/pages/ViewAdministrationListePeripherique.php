@@ -88,7 +88,7 @@ function afficheAll($con){					// variable pour la requête
 		echo"<td>".$row['prl_description']."</td>";
 		//echo "<td> <a href='?page=ViewAdministrationAjouterPeripherique&action=supprimer&id=".$row['id']."' > Supprimer </a> </td>";							
 		// Modifier action
-		echo"<td><img src='images/textures/EnregistrerPeriph.png' alt='' style=''width:20px;height:20px;'/></a></td>";
+		echo"<td><a href='?page=ViewAdministrationModifierPeripherique&prl_id=".$row['prl_id']."'><img src='images/textures/EnregistrerPeriph.png' alt='' style=''width:20px;height:20px;'/></a></td>";
 		// Supprimer action
 		echo"<td><a href='?page=ViewAdministrationListePeripherique&action=supprimer&prl_id=".$row['prl_id']."' ><img src='images/textures/SuppPeriph.png' alt='' style=''width:20px;height:20px;'/></a></a></td>";
 		echo "</tr>";	
@@ -101,50 +101,3 @@ afficheAll($con);
 mysqli_close($con);
 ?>
 </table>
-
-<!--
-<table border="1" style="width:100%">	 
-	    <tr>
-	    <td>
-	    	 <p>Nom du périphérique</p>
-		</td>
-	    <td>
-	    	<p>Adresse mac </p>
-		</td>	
-	    <td>
-	  		<p>Addresse IP</p>
-	  	</td>
-	  	<td>
-	  		<p>
-	  			<a href="#" class="bordered-feature-image"><img src="images/textures//EnregistrerPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
-	   		</p>
-	    </td>	
-	    <td>
-	  		<p>	  		
-	  			<a href="#" class="bordered-feature-image"><img src="images/textures//SuppPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
-	   		 </p>
-	    </td>	
-	  </tr>	 	
-	    <tr>
-	    <td>
-	    	 <p>Nom du périphérique</p>
-		</td>
-	    <td>
-	    	<p>Adresse mac </p>
-		</td>	
-	    <td>
-	  		<p>Addresse IP</p>
-	  	</td>
-	  	<td>
-	  		<p>
-	  			<a href="#" class="bordered-feature-image"><img src="images/textures//EnregistrerPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
-	   		</p>
-	    </td>	
-	    <td> 
-	  		<p>	  		
-	  			<a href="#" class="bordered-feature-image"><img src="images/textures//SuppPeriph.png" alt="" style="width:20px;height:20px;"/></a>			
-	   		 </p>
-	    </td>	
-	  </tr>	 	
-</table>
--->

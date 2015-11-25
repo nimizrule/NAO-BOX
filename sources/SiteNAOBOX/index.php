@@ -6,49 +6,60 @@ header('Content-Type: text/html; charset=UTF-8');
 <!DOCTYPE html>
 <html>
 <head>
-	<title> NAOBOX Site Web </title>
-	<meta name="description" content="Site de NAOBOX"/>
-	<!-- Mots clé lisible par les robots -->
-	<meta name="keyword" content="site web,NAOBOX"/>
-	<!-- Indexer la page au moteur de recherche et ne pas parcourir les liens présent dans la page -->
-	<meta name="robots" content="index,nofollow"/>
-	<!-- Largeur d'affichage pour les appareils mobiles -->
-	<!--<meta name="viewport" content="width=device-width" />-->
-	<meta name="viewport" content="initial-scale=1.0" />
-	<!-- Intégration du css tout écran -->
-	<link rel="stylesheet" type="text/css" href="css/style.css" media="screen">
-	<!-- Intégration du css spécifique mobile -->
-<!--
-<link rel="stylesheet" type="text/css" href="mobile.css" media="screen and (max-width:640px)">
--->		
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js">
-</script>		
-<script src="js/jquery.rotate.js"></script>
-<script src="js/script.js"></script>
-<!-- Pour la gestion des calendrier-->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
-<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/themes/base/jquery-ui.css" type="text/css" />
-<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.1/jquery-ui.min.js"></script>
-<script src=""></script>
-
-<!-- pour le format de la date-->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
-<!-- Fin de la gestion des calendrier-->
-
-
-
-<!--  Nécéssaire pour la balise google +-->
-<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
-
+	<title>NAOBOX</title>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" >
+	<link rel="stylesheet" type="text/css" href="css/style.css" media="screen">		
 </head>
 <body>
-	<header id="MenuSuperieur"> 
-		<header id='logoSite'> 
-		</header>		
-		<div >
-			<ul>
+	<header>
+		<section id="header-title">
+			NAO BOX - PILOTAGE DU ROBOT NAO
+			<img src="images/textures/batterie.png" class="battery">
+		</section>
+		<section id="header-controls">
+			<div>
+				<img src="images/textures//CarreStopAction.png" style="width:15px;height:15px;">
+			</div>
+			<div>
+				<img src="images/textures//Acceuil.png" style="width:30px;height:35px;">
+			</div>		
+					<img src="images/textures/batterie.png" style="width:60px;height:20px;">					
+					<a href="#">
+						<img src="images/textures//CarreStopAction.png" style="width:15px;height:15px;">			
+					</a>							
+					<a href="index.php?page=defaut">
+						<img src="images/textures//Acceuil.png" style="width:30px;height:35px;">		
+		</section>
+	</header>
+	<section id="content">
+		<div id="content-blockControl">
+			<a href="" alt="Contrôles">
+				<img src="images/textures/btn_controles_enb.jpg"/>
+			</a>
+		</div>
+		<div id="content-blockSensors">
+			<a href="" alt="Capteurs">
+				<img src="images/textures/btn_capteurs_enb.jpg"/>
+			</a>
+		</div>
+		<div id="content-blockInfos">
+			<a href="" alt="Informations">
+				<img src="images/textures/btn_informations_enb.jpg"/>
+			</a>
+		</div>
+		<div id="content-blockManuals">
+			<a href="" alt="Guides">
+				<img src="images/textures/btn_guides_enb.jpg"/>
+			</a>
+		</div>
+		<div id="content-blockAdministrator">
+			<a href="" alt="Administration">
+				<img src="images/textures/btn_administration_enb.jpg"/>
+			</a>
+		</div>
+	</section>
+		<div id="MenuSuperieur">
+			<ul style="list-style-type:none">
 				<!--<li><a href="index.php?page=defaut"> Accueil</a></li>
 				<li><a href="index.php?page=ViewControle">Controle</a></li>
 				<li><a href="index.php?page=ViewCapteur">Capteur</a></li>
@@ -57,38 +68,18 @@ header('Content-Type: text/html; charset=UTF-8');
 				<li><a href="index.php?page=espacePro">Espace pro</a></li>
 				<li><a href="index.php?page=ViewAdministration">Administration</a></li>
 				-->
-				<li> 
-					<img id="imgHeader" src="images/textures/batterie.png">					
-				</li>	
-				<li>
-					<a href="javascript:history.go(-1)">
-						<img id="imgHeader" src="images/textures/BackPrecedentPage.png">			
-					</a>											
-				</li>	
-				<li>
-					<a href="#">
-						<img id="imgHeader" src="images/textures/CarreStopAction.png">			
-					</a>							
-				</li>	
-				<li>
-					<a href="index.php?page=defaut">
-						<img id="imgHeader" src="images/textures/Acceuil.png" >		
-					</a>								
-				</li>	
+							
+				
 			</ul>	
 		</div>						
-	</header>
-
-
-
-	<section class="clear"></section>
 	<div  id="content">	
 		<section>
 			<?php
+//Déclaration d'une variable
 			$page = "defaut";
-			// vérification si la variable existe
+	// vérification si la variable existe
 			if (isset($_GET['page'])){
-				// Vérifie l'existance d'une page
+		// Vérifie l'existance d'une page
 				if (file_exists ('pages/'.$_GET['page'].'.php')){
 					$page = $_GET['page'];
 				}
