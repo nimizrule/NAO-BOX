@@ -7,6 +7,7 @@
 -->
 
 
+
 <h2>Administration</h2>	
 	
 <script> // côté client
@@ -46,8 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 if (isset($_GET['action'])){	
 	echo 'if action ';
-	if ($_GET['action']=="supprimer") {
-//echo 'supprimer delete ';
+	if ($_GET['action']=="supprimer") {	
 		supprimerAction ($con,$_GET['id']);
 	}						
 }		
@@ -55,14 +55,14 @@ if (isset($_GET['action'])){
 function supprimerAction ($con,$id){
 	$table="nb_commands";	
 	$requete = "DELETE FROM ".$table." WHERE id=(".$id.");";
-//echo $requete;
+	//echo $requete;
 	if (mysqli_query($con, $requete)) {
-//echo "Delete row successfully";		
+	//echo "Delete row successfully";		
 	}
 	else 
 	{
 		echo "Error updating record: " . mysqli_error($con);						
-//echo $requete;
+		echo $requete;
 	}		
 }
 
@@ -74,15 +74,14 @@ function ajouterAction($con,$name,$file,$description){
 	$champ_cmd_description= "cmd_description";
 	$champ_cmd_package= "cmd_package_id";
 	$requete = "INSERT INTO `naobox"."`.`".$table."` (`".$champ_cmd_id."`,`".$champ_cmd_name."`,`".$champ_cmd_file."`,`".$champ_cmd_description."`,`".$champ_cmd_package."`) VALUES (NULL,'".$name."','".$file."','".$description."',NULL);";
-//echo $requete;
-//INSERT INTO `naobox`.`nb_commands` (`cmd_id`, `cmd_name`, `cmd_file`, `cmd_description`, `cmd_package_id`) VALUES (NULL, 'BellyToBellySuplex', 'Belly.ngp', 'Fait une prise de catch', NULL);	
+	//echo $requete;
 	if (mysqli_query($con, $requete)) {
-//echo "Insert successfully";	
+		//echo "Insert successfully";	
 	} 
 	else 
 	{
-//echo "Error updating record: " . mysqli_error($con);						
-//echo $requete;
+		echo "Error updating record: " . mysqli_error($con);						
+		echo $requete;
 	}	
 }
 	

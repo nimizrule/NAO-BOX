@@ -26,47 +26,47 @@
 		<tr>
 			<td>
 				<a href="#">
-					<img id='iconDeplacement' src="images/deplacement/AvantGauche.png"/>
+					<img id='iconDeplacement' src="img/deplacement/AvantGauche.png"/>
 				</a>			
 			</td>
 			<td>
 				<a href="#">
-					<img id='iconDeplacement' src="images/deplacement/Haut.png"/>
+					<img id='iconDeplacement' src="img/deplacement/Haut.png"/>
 				</a>			
 			</td>	
 			<td>	
 				<a href="#">
-					<img id='iconDeplacement' src="images/deplacement/AvantDroit.png"/>
+					<img id='iconDeplacement' src="img/deplacement/AvantDroit.png"/>
 				</a>			
 			</td>	
 		</tr>
 		<tr>
 			<td>
 				<a href="#">
-					<img id='iconDeplacement' src="images/deplacement/Gauche.png"/>
+					<img id='iconDeplacement' src="img/deplacement/Gauche.png"/>
 				</a>			
 			</td>
 			<td></td>	
 			<td>
 				<a href="#">
-					<img id='iconDeplacement' src="images/deplacement/Droit.png"/>
+					<img id='iconDeplacement' src="img/deplacement/Droit.png"/>
 				</a>			
 			</td>
 		</tr>
 		<tr>
 			<td>
 				<a href="#">
-					<img id='iconDeplacement' src="images/deplacement/ArriereGauche.png"/>
+					<img id='iconDeplacement' src="img/deplacement/ArriereGauche.png"/>
 				</a>			
 			</td>
 			<td>
 				<a href="#">
-					<img id='iconDeplacement' src="images/deplacement/bas.png"/>
+					<img id='iconDeplacement' src="img/deplacement/bas.png"/>
 				</a>			
 			</td>	
 			<td>
 				<a href="#">
-					<img id='iconDeplacement' src="images/deplacement/ArriereDroit.png"/>
+					<img id='iconDeplacement' src="img/deplacement/ArriereDroit.png"/>
 				</a>			
 			</td>	
 		</tr>

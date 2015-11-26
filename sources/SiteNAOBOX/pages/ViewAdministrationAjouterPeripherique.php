@@ -49,7 +49,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 if (isset($_GET['action'])){	
 	echo 'if action ';
 	if ($_GET['action']=="supprimer") {
-//echo 'supprimer delete ';
 		supprimerPeripherique ($con,$_GET['id']);
 	}						
 }		
@@ -57,14 +56,14 @@ if (isset($_GET['action'])){
 function supprimerAction ($con,$id){
 	$table="nb_peripherals";	
 	$requete = "DELETE FROM ".$table." WHERE prl_id=(".$id.");";
-//echo $requete;
+
 	if (mysqli_query($con, $requete)) {
-//echo "Delete row successfully";		
+		//echo "Delete row successfully";		
 	}
 	else 
 	{
 		echo "Error updating record: " . mysqli_error($con);						
-//echo $requete;
+		echo $requete;
 	}		
 }
 
@@ -76,16 +75,14 @@ function ajouterPheripherique($con,$name,$adresseMac,$ipAdresse,$description){
 	$champ_prl_ip_adress= "prl_ip_adress";
 	$champ_prl_description= "prl_description";
 	$requete = "INSERT INTO `naobox`.`".$table."` (`".$champ_prl_id."`,`".$champ_prl_name."`,`".$champ_prl_mac_adress."`,`".$champ_prl_ip_adress."`,`".$champ_prl_description."`) VALUES (NULL,'".$name."','".$adresseMac."','".$ipAdresse."','".$description."');";
-   //          INSERT INTO `naobox`.`nb_peripherals` (`prl_id`, `prl_name`, `prl_mac_adress`, `prl_ip_adress`, `prl_description`) VALUES (NULL, 'leNAME', 'leMAC', 'leIP', 'leDESCRPTION');
-	//echo $requete;   
-//echo "Insert successfully";	
+
 	if (mysqli_query($con, $requete)) {
-//echo "Insert successfully";	
+		//echo "Insert successfully";	
 	} 
 	else 
 	{
-//echo "Error updating record: " . mysqli_error($con);						
-//echo $requete;
+		echo "Error updating record: " . mysqli_error($con);						
+		echo $requete;
 	}	
 }
 

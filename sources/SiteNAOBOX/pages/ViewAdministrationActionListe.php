@@ -5,40 +5,46 @@
 	 * @author Bastien VAUTIER
 	 * @version 0.0.1
 	 * @copyright 2015 3iL
--->
+	-->
 
-<h2>Administration</h2>	
-		
-<h3>Liste des périphérique</h3>
-<table border="1">
-	<tr>
-		<td>
-			<h2>
-				<a href="index.php?page=ViewAdministrationActionListe">Liste des actions</a>
-			</h2>
-		</td>
-		<td>
-			<h2>
-				<a href="index.php?page=ViewAdministrationAjouterAction">Creer une action</a>	
-			</h2>
-		</td>	
-	</tr>	 
-</table>
+	<!-- Permet d'afficher ou non la description d'une action -->
+	<head>
+		<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js'></script>
+	</head>
 
 
-<table border="1" style="width:100%">
-	<!-- centrage des textes -->
-	<thead align="center">
-		<!-- tr = ligne du tableau  -->
+	<h2>Administration</h2>	
+
+	<h3>Liste des périphérique</h3>
+	<table border="1">
 		<tr>
-			<!-- th = colonnes de titres du tableau  -->
-			<!--<th>ID</th>-->
-			<th>Nom de l'action</th>
-			<th>Nom du fichier</th>	
-			<th>Information supplémentaire</th>	
-			<th>Modifier l'action</th>	
-			<th>Supprimer l'action</th>							
-		</tr>		
+			<td>
+				<h2>
+					<a href="index.php?page=ViewAdministrationActionListe">Liste des actions</a>
+				</h2>
+			</td>
+			<td>
+				<h2>
+					<a href="index.php?page=ViewAdministrationAjouterAction">Creer une action</a>	
+				</h2>
+			</td>	
+		</tr>	 
+	</table>
+
+
+	<table border="1" style="width:100%">
+		<!-- centrage des textes -->
+		<thead align="center">
+			<!-- tr = ligne du tableau  -->
+			<tr>
+				<!-- th = colonnes de titres du tableau  -->
+				<!--<th>ID</th>-->
+				<th>Nom de l'action</th>
+				<th>Nom du fichier</th>	
+				<th>Information supplémentaire</th>	
+				<th>Modifier l'action</th>	
+				<th>Supprimer l'action</th>							
+			</tr>		
 
 
 <?php // côté serveur
@@ -51,12 +57,11 @@ $con = mysqli_connect($servername, $username, $password, $dbname);
 if (mysqli_connect_errno($con)){
 	echo 'Erreur de connexion:'.mysqli_connect_error();
 }
-			
+
 // de base les informations son en GET ( écris dans l'adresse internet)
 if (isset($_GET['action'])){	
 	//echo 'if action ';
-	if ($_GET['action']=="supprimer") {
-//echo 'supprimer delete ';
+	if ($_GET['action']=="supprimer") {	
 		supprimerAction ($con,$_GET['cmd_id']);
 	}						
 }		
@@ -64,14 +69,14 @@ if (isset($_GET['action'])){
 function supprimerAction ($con,$id){
 	$table="nb_commands";	
 	$requete = "DELETE FROM ".$table." WHERE cmd_id=(".$id.");";
-//echo $requete;
+	//echo $requete;
 	if (mysqli_query($con, $requete)) {
-//echo "Delete row successfully";		
+		//echo "Delete row successfully";		
 	}
 	else 
 	{
 		echo "Error updating record: " . mysqli_error($con);						
-//echo $requete;
+		echo $requete;
 	}		
 }
 
@@ -82,14 +87,14 @@ function ajouterAction($con,$name,$file,$description){
 	$champ_cmd_description= "cmd_description";
 	$champ_cmd_package= "cmd_package_id";
 	$requete = "INSERT INTO naobox ".$table." ('cmd_id ".$champ_cmd_name.",".$champ_cmd_file.") VALUES (NULL'".$nom."','".$file."','".$description."');";
-//echo $requete;	
+	//echo $requete;	
 	if (mysqli_query($con, $requete)) {
-//echo "Insert successfully";	
+		//echo "Insert successfully";	
 	} 
 	else 
 	{
-//echo "Error updating record: " . mysqli_error($con);						
-//echo $requete;
+		echo "Error updating record: " . mysqli_error($con);						
+		echo $requete;
 	}	
 }
 
@@ -100,6 +105,18 @@ function afficheAll($con){					// variable pour la requête
 
 	while ($row = mysqli_fetch_array($resultat))
 	{
+		echo " <script type='text/javascript'>"; 
+		echo  "jQuery(document).ready(function()";
+		echo  "{";    
+		echo      "jQuery('#toggle".$row['cmd_id']."').hide();";  
+		echo     "jQuery('a#toggler".$row['cmd_id']."').click(function()";
+		echo  "{";
+		echo      "jQuery('#toggle".$row['cmd_id']."').toggle(400);";
+		echo     "return false;";
+		echo  "});";   
+		echo "});";
+		echo "</script>"; 
+
 		echo "<tr>";								
 		//echo"<td>".$row['cmd_id']."</td>";
 		echo"<td>".$row['cmd_name']."</td>";
@@ -107,14 +124,20 @@ function afficheAll($con){					// variable pour la requête
 		//echo"<td>".$row['cmd_description']."</td>";
 		//echo"<td>".$row['cmd_package_id']."</td>";
 		// Affchage d'une information détaillé de la commande-->		
-		echo"<td><img src='images/textures/ModifierAction.png' alt='' style=''width:20px;height:20px;'/></a></td>";
+		echo"<td>";
+		echo "<a href='#' id='toggler".$row['cmd_id']."'>";
+			    // echo"<button id='btCacherDescription'>";
+		echo"<img src='img/textures/list.jpg' alt='' style=''width:20px;height:20px;'/>";  
+		echo "</a>";  
+		echo"</td>";
 		// Modifier action
-		echo"<td><a href='?page=ViewAdministrationModifierAction&cmd_id=".$row['cmd_id']."'><img src='images/textures/EnregistrerPeriph.png' alt='' style=''width:20px;height:20px;'/></a></td>";
+		echo"<td><a href='?page=ViewAdministrationModifierAction&cmd_id=".$row['cmd_id']."'><img src='img/textures/crayon.jpg' alt='' style=''width:20px;height:20px;'/></a></td>";
 		// Supprimer action
-		echo"<td><a href='?page=ViewAdministrationActionListe&action=supprimer&cmd_id=".$row['cmd_id']."' ><img src='images/textures/SuppPeriph.png' alt='' style=''width:20px;height:20px;'/></a></a></td>";
-		
-		//echo "<td> <a href='?page=ViewAdministrationAjouterPeripherique&action=supprimer&id=".$row['id']."' > Supprimer </a> </td>";							
-		echo "</tr>";	
+		echo"<td><a href='?page=ViewAdministrationActionListe&action=supprimer&cmd_id=".$row['cmd_id']."' ><img src='img/textures/poubelle.jpg' alt='' style=''width:20px;height:20px;'/></a></a></td>";
+
+		echo "<tr id='toggle".$row['cmd_id']."' style='display:none;'>";
+		echo" <td colspan='5'>".$row['cmd_description']."</td>";
+		echo "</tr>";
 	}
 }
 

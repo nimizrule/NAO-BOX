@@ -11,19 +11,19 @@
 	  <tr>
 	    <td>
 	    	<a href="index.php?page=ViewControlePas" >
-	    		<img id='mainIcon' src="images/textures/action.png"/>
+	    		<img id='mainIcon' src="img/buttons/action_e.jpg"/>
 	    	</a>			
 		    <p>Controle</p>
 		</td>
 	    <td>
 	    	<a href="index.php?page=ViewCapteur">
-	    		<img id='mainIcon' src="images/textures/camera.png"/>
+	    		<img id='mainIcon' src="img/buttons/sensor_e.jpg"/>
 	    	</a>			
 		    <p>Capteur</p>
 		</td>	
 	  <td>
 	  	<a href="index.php?page=ViewInformation">
-	  		<img id='mainIcon' src="images/textures/info.png"/>
+	  		<img id='mainIcon' src="img/buttons/info_e.jpg"/>
 	  	</a>			
 	    <p>Information</p>
 	  </td>	
@@ -31,13 +31,13 @@
 	  <tr>
 	    <td>
 	    	<a href="index.php?page=ViewGuide">
-	    	<img id='mainIcon' src="images/textures/guides.jpg"/></a>			
+	    	<img id='mainIcon' src="img/buttons/manual_e.jpg"/></a>			
 		    <p>Guide</p>
 		</td>
 	    <td></td>	
 	  	<td>
 	  		<a href="index.php?page=ViewAdministrationLogin">
-	  		<img id='mainIcon' src="images/textures/prefs.png"/></a>			
+	  		<img id='mainIcon' src="img/buttons/setting_e.jpg"/></a>			
 	  		<p>Administration</p>
 	  	</td>
 	  </tr>

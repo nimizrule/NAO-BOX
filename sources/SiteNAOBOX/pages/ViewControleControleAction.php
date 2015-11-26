@@ -62,8 +62,8 @@ function get_file_extension($file_name) {
 <section>
 	<?php 	
 	/** paramètres **/
-	$images_dir = 'images/galerie-Action/';
-	$thumbs_dir = 'images/preload-images-thumbs/';
+	$images_dir = 'img/galerie-Action/';
+	$thumbs_dir = 'img/preload-images-thumbs/';
 	$thumbs_width = 200;
 	$images_per_row = 5;
 

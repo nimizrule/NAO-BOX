@@ -77,14 +77,14 @@ function recupererActionInformation($con,$id){
 	$champ_cmd_description= "cmd_description";
 	$champ_cmd_package= "cmd_package_id";
 	$requete = "SELECT * FROM naobox.".$table." WHERE `".$champ_cmd_id."` = ".$id.";";
-//echo $requete; 	
+	
    if (mysqli_query($con, $requete)) {
-//echo "Insert successfully";	
+		//echo "Insert successfully";	
 	} 
 	else 
 	{
-//echo "Error updating record: " . mysqli_error($con);						
-//echo $requete;
+		echo "Error updating record: " . mysqli_error($con);						
+		echo $requete;
 	}
 	return $requete;
 }
@@ -98,12 +98,12 @@ function modifierAction($con,$name,$file,$description,$id){
 	$champ_cmd_package= "cmd_package_id";
 	$requete = "UPDATE `naobox"."`.`".$table."` SET `".$champ_cmd_name."` = '".$name."', `".$champ_cmd_file."` = '".$file."', `".$champ_cmd_description."` = '".$description."' "." WHERE `".$table."`.`".$champ_cmd_id."` = ".$id.";";
 	if (mysqli_query($con, $requete)) {
-    //echo "Insert successfully";	
+    	//echo "Insert successfully";	
 	} 
 	else 
 	{
-    //echo "Error updating record: " . mysqli_error($con);						
-    // echo $requete;
+    	echo "Error updating record: " . mysqli_error($con);						
+    	echo $requete;
 	}	
 }
 
@@ -169,7 +169,6 @@ function afficheAll($con){					// variable pour la requête
 }
 
 //afficheAll($con);	
-
 // déconnexion
 mysqli_close($con);
 ?>

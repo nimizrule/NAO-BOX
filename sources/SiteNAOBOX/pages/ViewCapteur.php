@@ -9,7 +9,7 @@
 <div>
 	<!-- Affichage d'une vidéo youtube -->
 	<object class="video"
-		 data="http://www.youtube.com/v/rSKRgasUEko">
+		 data="http://www.youtube.com/v/rSKRgasUEko" >
 	</object>		
 </div>		
 

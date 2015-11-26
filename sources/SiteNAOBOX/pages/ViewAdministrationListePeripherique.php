@@ -51,10 +51,8 @@ if (mysqli_connect_errno($con)){
 }
 			
 // de base les informations son en GET ( écris dans l'adresse internet)
-if (isset($_GET['action'])){	
-	//echo 'if action ';
+if (isset($_GET['action'])){		
 	if ($_GET['action']=="supprimer") {
-//echo 'supprimer delete ';
 		supprimerAction ($con,$_GET['prl_id']);
 	}						
 }		
@@ -62,20 +60,20 @@ if (isset($_GET['action'])){
 function supprimerAction ($con,$id){
 	$table="nb_peripherals";	
 	$requete = "DELETE FROM ".$table." WHERE prl_id=(".$id.");";
-//echo $requete;
+
 	if (mysqli_query($con, $requete)) {
-//echo "Delete row successfully";		
+		//echo "Delete row successfully";		
 	}
 	else 
 	{
 		echo "Error updating record: " . mysqli_error($con);						
-//echo $requete;
+		echo $requete;
 	}		
 }
 
 function afficheAll($con){					// variable pour la requête
 	$affiche="SELECT * FROM nb_peripherals;";		
-// requête					
+	// requête					
 	$resultat = mysqli_query($con,$affiche);		
 
 	while ($row = mysqli_fetch_array($resultat))
@@ -88,9 +86,9 @@ function afficheAll($con){					// variable pour la requête
 		echo"<td>".$row['prl_description']."</td>";
 		//echo "<td> <a href='?page=ViewAdministrationAjouterPeripherique&action=supprimer&id=".$row['id']."' > Supprimer </a> </td>";							
 		// Modifier action
-		echo"<td><a href='?page=ViewAdministrationModifierPeripherique&prl_id=".$row['prl_id']."'><img src='images/textures/EnregistrerPeriph.png' alt='' style=''width:20px;height:20px;'/></a></td>";
+		echo"<td><a href='?page=ViewAdministrationModifierPeripherique&prl_id=".$row['prl_id']."'><img src='img/textures/crayon.jpg' alt='' style=''width:20px;height:20px;'/></a></td>";
 		// Supprimer action
-		echo"<td><a href='?page=ViewAdministrationListePeripherique&action=supprimer&prl_id=".$row['prl_id']."' ><img src='images/textures/SuppPeriph.png' alt='' style=''width:20px;height:20px;'/></a></a></td>";
+		echo"<td><a href='?page=ViewAdministrationListePeripherique&action=supprimer&prl_id=".$row['prl_id']."' ><img src='img/textures/poubelle.jpg' alt='' style=''width:20px;height:20px;'/></a></a></td>";
 		echo "</tr>";	
 	}
 }
