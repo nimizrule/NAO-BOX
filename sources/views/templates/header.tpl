@@ -11,7 +11,7 @@
 			<a href="#">
 				<img src="{$settings.img}/header/stop.png" style="width:15px;height:15px;">			
 			</a>							
-			<a href="index.php?page=defaut">
+			<a href="menu">
 				<img src="{$settings.img}/header/home.png" style="width:30px;height:35px;">
 			</a>
 	</section>

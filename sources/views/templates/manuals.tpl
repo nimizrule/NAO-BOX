@@ -9,7 +9,37 @@
 				</a>
 			</div>
 			<hr />
-			<section id="content-blockTabPage"></section>
+			<section id="content-blockTabPage">
+				<div class="table-responsive">
+					<table class="table-bordered table-striped">
+						<tr>
+							<th>Utilisation du Raspberry Pi</th>
+						</tr>
+						<tr>
+							<td>
+								<a href="" target="_blank">Manuel d'utilisation</a>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="table-responsive">
+					<table class="table-bordered table-striped">
+						<tr>
+							<th>Utilisation de l'application</th>
+						</tr>
+						<tr>
+							<td>
+								<a href="" target="_blank">Manuel d'utilisation</a>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<a href="" target="_blank">test</a>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</section>
 		</div>
 	</section>
 {/block}
