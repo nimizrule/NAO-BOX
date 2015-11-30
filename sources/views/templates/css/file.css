@@ -21,7 +21,7 @@ th {
 /****************************************						HEADER						**********************************/
 /*****************************************************************************************************************************/
 .container .header-container {
-	height: 81px;
+	height: 82px;
 	background: url('../img/header/header_background.jpg');
 	background-repeat: repeat-x;
 	color: #ffffff;
@@ -49,7 +49,7 @@ th {
   }
 }
 .container .header-container header #header-title, .container .header-container header #header-controls {
-	line-height: 81px;
+	line-height: 82px;
 }	
 .container .header-container header #header-title {
 	text-align: left;
