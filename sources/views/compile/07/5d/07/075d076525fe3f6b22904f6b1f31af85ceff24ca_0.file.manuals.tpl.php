@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2015-11-30 17:47:00
+<?php /* Smarty version 3.1.27, created on 2015-12-01 14:02:13
          compiled from "C:\wamp\www\NAO-BOX\sources\views\templates\manuals.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:5742565c8b94179c58_83811724%%*/
+/*%%SmartyHeaderCode:18955565d9a55de4167_21356396%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,13 +9,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '075d076525fe3f6b22904f6b1f31af85ceff24ca' => 
     array (
       0 => 'C:\\wamp\\www\\NAO-BOX\\sources\\views\\templates\\manuals.tpl',
-      1 => 1448905618,
+      1 => 1448968029,
       2 => 'file',
     ),
     '411bc5cda1779eea21833ddbda967a3563f8eced' => 
     array (
       0 => 'C:\\wamp\\www\\NAO-BOX\\sources\\views\\templates\\layout.tpl',
-      1 => 1448831051,
+      1 => 1448968029,
       2 => 'file',
     ),
     '092c62c47c0be53bcf7c672d55beb386be2fe5ba' => 
@@ -31,26 +31,26 @@ $_valid = $_smarty_tpl->decodeProperties(array (
       2 => 'string',
     ),
   ),
-  'nocache_hash' => '5742565c8b94179c58_83811724',
+  'nocache_hash' => '18955565d9a55de4167_21356396',
   'variables' => 
   array (
     'settings' => 0,
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_565c8b942121f0_90175505',
+  'unifunc' => 'content_565d9a55ede195_12639168',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_565c8b942121f0_90175505')) {
-function content_565c8b942121f0_90175505 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_565d9a55ede195_12639168')) {
+function content_565d9a55ede195_12639168 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '5742565c8b94179c58_83811724';
+$_smarty_tpl->properties['nocache_hash'] = '18955565d9a55de4167_21356396';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 	<head>
 		<title><?php
-$_smarty_tpl->properties['nocache_hash'] = '5742565c8b94179c58_83811724';
+$_smarty_tpl->properties['nocache_hash'] = '18955565d9a55de4167_21356396';
 ?>
 NAOBOX - guides</title>
 		<meta charset="utf-8">
@@ -68,7 +68,7 @@ NAOBOX - guides</title>
 			</section>
 			<section class="page-container">
 				<?php
-$_smarty_tpl->properties['nocache_hash'] = '5742565c8b94179c58_83811724';
+$_smarty_tpl->properties['nocache_hash'] = '18955565d9a55de4167_21356396';
 ?>
 
 	<section id="page-row1" class="row">
