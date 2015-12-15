@@ -77,10 +77,10 @@
 					prl_mac_adress, 
 					prl_ip_adress, 
 					prl_description) VALUES (NULL, ?, ?, ?, ?)');				
-				$qry->bindValue(1, $prl_name, \PDO::PARAM_STR);
-				$qry->bindValue(2, $prl_mac_adress, \PDO::PARAM_STR);
-				$qry->bindValue(3, $prl_ip_adress, \PDO::PARAM_STR);
-				$qry->bindValue(4, $prl_description, \PDO::PARAM_STR);
+				$qry->bindValue(1, $prl_name, PDO::PARAM_STR);
+				$qry->bindValue(2, $prl_mac_adress, PDO::PARAM_STR);
+				$qry->bindValue(3, $prl_ip_adress, PDO::PARAM_STR);
+				$qry->bindValue(4, $prl_description, PDO::PARAM_STR);
 
 				$qry->execute();
 				$qry->closeCursor();
@@ -97,13 +97,13 @@
 		 * @param prl_id, peripheral's id
 		 * @return 0 without errors, exception message any others cases
 		 */
-		public function has_peripheral($prl_id) {
+		public function is_device($prl_id) {
 			try {
 
 				$qry = $this->db->prepare('SELECT naobox.nb_peripherals.prl_id FROM naobox.nb_peripherals WHERE nb_peripherals.prl_id =?');	
-				$qry->bindValue(1, $prl_id, \PDO::PARAM_STR);
+				$qry->bindValue(1, $prl_id, PDO::PARAM_STR);
 				$qry->execute();
-				$return_qry = $qry->fetch(\PDO::FETCH_OBJ);
+				$return_qry = $qry->fetch(PDO::FETCH_OBJ);
 				$qry->closeCursor();
 				return (!empty($return_qry->prl_id)) ? 1 : 0;
 			} catch(Exception $e) {
@@ -122,11 +122,10 @@
 			try {
 				
 				$qry = $this->db->prepare('DELETE FROM naobox.nb_peripherals WHERE nb_peripherals.prl_id =?');
-				$qry->bindValue(1, $prl_id, \PDO::PARAM_INT);
+				$qry->bindValue(1, $prl_id, PDO::PARAM_INT);
 
 				$qry->execute();
-				$qry->closeCursor();
-				return 0;
+				$qry->closeCursor();				
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
@@ -143,8 +142,7 @@
 				$qry = $this->db->prepare('DELETE FROM naobox.nb_peripherals');
 
 				$qry->execute();
-				$qry->closeCursor();
-				return 0;
+				$qry->closeCursor();				
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
@@ -159,17 +157,57 @@
 		 * @param prl_description, peripheral's description
 		 * @return 0 without errors, exception message any others cases
 		 */
-		public function uptdate_Commands($prl_id, $prl_name, $prl_mac_adress, $prl_ip_adress, $prl_description) {
+		public function update_Device($prl_id, $prl_name, $prl_mac_adress, $prl_ip_adress, $prl_description) {
 			try {
 				$qry = $this->db->prepare('UPDATE naobox.nb_peripherals SET prl_name =?, prl_mac_adress =?, prl_ip_adress =?, prl_description =? WHERE nb_peripherals.prl_id =?');
 
-				$qry->bindValue(1, $prl_name, \PDO::PARAM_STR);
-				$qry->bindValue(2, $prl_mac_adress, \PDO::PARAM_STR);
-				$qry->bindValue(3, $prl_ip_adress, \PDO::PARAM_STR);
-				$qry->bindValue(4, $prl_id, \PDO::PARAM_STR);
+				$qry->bindValue(1, $prl_name, PDO::PARAM_STR);
+				$qry->bindValue(2, $prl_mac_adress, PDO::PARAM_STR);
+				$qry->bindValue(3, $prl_ip_adress, PDO::PARAM_STR);
+				$qry->bindValue(4, $prl_id, PDO::PARAM_STR);
 				$qry->execute();
 				$qry->closeCursor();
-				return 0;
+			} catch(Exception $e) {
+				return $e->getMessage();
+			}
+		}
+
+		/**
+		 * Display all commands's informations
+		 *
+	     * @return return_qry : result into an object, exception message any others cases
+		 */
+		public function get_Peripherals() {
+			try {
+				$qry = $this->db->prepare('SELECT * FROM naobox.nb_peripherals ORDER BY prl_id');				
+				
+				$qry->execute();
+				//put  the result into an object
+				$return_qry = $qry->fetchAll();
+				$qry->closeCursor();
+				return $return_qry;
+				
+			} catch(Exception $e) {
+				return $e->getMessage();
+			}
+		}
+
+		/**
+		 * return a peripheral from an Id
+		 *	
+		 * @return return_qry : result into an object, exception message any others cases
+		 */
+		public function get_Peripheral($prl_id) {
+			try {
+				$qry = $this->db->prepare('SELECT * FROM  naobox.nb_peripherals WHERE nb_peripherals.prl_id =?');
+
+				$qry->bindValue(1, $prl_id, PDO::PARAM_STR);				
+
+				$qry->execute();				
+				$return_qry = $qry->fetchAll();
+
+				$qry->closeCursor();
+				return $return_qry;
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}

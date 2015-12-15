@@ -63,7 +63,7 @@
 			try {
 				$qry = $this->db->prepare('INSERT INTO naobox.nb_profiles
 				   (pkg_id,	pkg_name, pkg_path) VALUES (NULL, ?, ?)');				
-				$qry->bindValue(1, $pkg_name, \PDO::PARAM_STR);
+				$qry->bindValue(1, $pkg_name, PDO::PARAM_STR);
 				$qry->execute();
 				$qry->closeCursor();
 				return 0;
@@ -78,12 +78,12 @@
 		 * @param prf_name, profile's name
 		 * @return 0 without errors, exception message any others cases
 		 */
-		public function update_Profile($prf_name,%prf_id) {
+		public function update_Profile($prf_name,$prf_id) {
 			try {
 				$qry = $this->db->prepare
 				('UPDATE naobox.nb_profiles SET prf_name =? WHERE nb_profiles.prf_id =?');				
-				$qry->bindValue(1, $prf_name, \PDO::PARAM_STR);
-				$qry->bindValue(1, $prf_id, \PDO::PARAM_STR);
+				$qry->bindValue(1, $prf_name, PDO::PARAM_STR);
+				$qry->bindValue(1, $prf_id, PDO::PARAM_STR);
 				$qry->execute();
 				$qry->closeCursor();
 				return 0;
@@ -97,7 +97,7 @@
 		 *
 	     * @return return_qry : result into an object, exception message any others cases
 		 */
-		public function display_Profiles() {
+		public function get_Profiles() {
 			try {
 				$qry = $this->db->prepare('SELECT * FROM naobox.nb_profiles ORDER BY prf_id');				
 				$qry->execute();
@@ -116,10 +116,10 @@
 		 * @param prf_id, profile's id	
 		 * @return return_qry : result into an object, exception message any others cases
 		 */
-		public function display_Profile_From_ID($prf_id) {
+		public function get_Profile_From_ID($prf_id) {
 			try {
 				$qry = $this->db->prepare('SELECT * FROM  naobox.nb_profiles WHERE nb_profiles.prf_id =?');
-				$qry->bindValue(1, $cmd_id, \PDO::PARAM_STR);				
+				$qry->bindValue(1, $prf_id, PDO::PARAM_STR);				
 
 				$qry->execute();				
 				$return_qry = $qry->fetchAll();
@@ -136,10 +136,10 @@
 		 * @param prf_name, profile's name	
 		 * @return return_qry : result into an object, exception message any others cases
 		 */
-		public function display_Profile_From_Name($prf_name) {
+		public function get_Profile_From_Name($prf_name) {
 			try {
 				$qry = $this->db->prepare('SELECT * FROM  naobox.nb_profiles WHERE nb_profiles.prf_name =?');
-				$qry->bindValue(1, $cmd_id, \PDO::PARAM_STR);				
+				$qry->bindValue(1, $prf_name, PDO::PARAM_STR);				
 
 				$qry->execute();				
 				$return_qry = $qry->fetchAll();
@@ -177,7 +177,7 @@
 		public function delete_Profile($pkg_id) {
 			try {				
 				$qry = $this->db->prepare('DELETE FROM naobox.nb_profiles WHERE nb_profiles.pkg_id =?');
-				$qry->bindValue(1, $pkg_id, \PDO::PARAM_STR);				
+				$qry->bindValue(1, $pkg_id, PDO::PARAM_STR);				
 
 				$qry->execute();				
 				$return_qry = $qry->fetchAll();
@@ -195,8 +195,18 @@
 		 * @param usr_pwd ,  user's password
 		 * @return 0 without errors, exception message any others cases
 		 */
-		public function Create_User($usr_login,$usr_pwd) 
+		public function Create_User($usr_login,$usr_pwd,$profile_id) 
 		{
+			/** Check if admin parameter is used or notand set the value **/
+			$choice = 0;
+			if (isset($profile_id)) {
+				// 2 is the admin value in profile
+			   $choice = '2';
+			}
+			else {
+				// 1 is the user value in profile
+			   $choice = '1';
+			}
 			try {
 				$qry = $this->db->prepare('INSERT INTO naobox.nb_users
 				   (usr_id,
@@ -204,9 +214,11 @@
 					usr_pwd, 
 					usr_connected, 
 					usr_last_use, 
-					usr_profile_id) VALUES (NULL, ?, ?, 0, NULL, 1)');				
-				$qry->bindValue(1, $usr_login, \PDO::PARAM_STR);
-				$qry->bindValue(2, $usr_pwd, \PDO::PARAM_STR);
+					usr_profile_id) VALUES (NULL, ?, ?, 0, NULL, ?)');				
+				$qry->bindValue(1, $usr_login, PDO::PARAM_STR);
+				$qry->bindValue(2, $usr_pwd, PDO::PARAM_STR);
+				$qry->bindValue(3, $choice, PDO::PARAM_STR);
+			
 				$qry->execute();
 				$qry->closeCursor();
 				return 0;
@@ -227,8 +239,8 @@
 				$qry = $this->db->prepare
 				('UPDATE naobox.nb_users SET usr_login =?, usr_pwd =? WHERE nb_users.usr_id =1');
 
-				$qry->bindValue(1, $usr_login, \PDO::PARAM_STR);
-				$qry->bindValue(2, $usr_pwd, \PDO::PARAM_STR);
+				$qry->bindValue(1, $usr_login, PDO::PARAM_STR);
+				$qry->bindValue(2, $usr_pwd, PDO::PARAM_STR);
 				
 				$qry->execute();
 				$qry->closeCursor();
@@ -237,117 +249,14 @@
 					return $e->getMessage();
 			}
 		}
-
-
-		/**
-		 * Create an Admin	
-		 * @param usr_login, Admin's  login
-		 * @param usr_pwd ,  Admin's password
-		 * @return 0 without errors, exception message any others cases
-		 */
-		public function Create_Admin($usr_login,$usr_pwd) {
-			try {
-				$qry = $this->db->prepare('INSERT INTO naobox.nb_users
-				   (usr_id,
-					usr_login, 
-					usr_pwd, 
-					usr_connected, 
-					usr_last_use, 
-					usr_profile_id) VALUES (NULL, ?, ?, 0, NULL, 2)');				
-				$qry->bindValue(1, $usr_login, \PDO::PARAM_STR);
-				$qry->bindValue(2, $usr_pwd, \PDO::PARAM_STR);
-				$qry->execute();
-				$qry->closeCursor();
-				return 0;
-				} catch(Exception $e) {
-					return $e->getMessage();
-			}
-		}
-
-		/**
-		 * Update a user
-		 * @param usr_login, user's  login
-		 * @param usr_pwd ,  user's password
-		 * @return 0 without errors, exception message any others cases
-		 */
-		public function Update_Admin($usr_login,$usr_pwd) 
-		{
-			try {
-				$qry = $this->db->prepare
-				('UPDATE naobox.nb_users SET usr_login =?, usr_pwd =? WHERE nb_users.usr_id =2');
-
-				$qry->bindValue(1, $usr_login, \PDO::PARAM_STR);
-				$qry->bindValue(2, $usr_pwd, \PDO::PARAM_STR);
-
-				$qry->execute();
-				$qry->closeCursor();
-				return 0;
-				} catch(Exception $e) {
-					return $e->getMessage();
-			}
-		}
-
-		/**
-		 * Create specific user
-		 * @param usr_profile_id, usr's  specific type from one of the profile Id
-		 * @param usr_login, usr's  login
-		 * @param usr_pwd ,  usr's password
-		 * @return 0 without errors, exception message any others cases
-		 */
-		public function Create_Specific_User($usr_profile_id,$usr_login,$usr_pwd) {
-			try {
-				$qry = $this->db->prepare('INSERT INTO naobox.nb_users
-				   (usr_id,
-					usr_login, 
-					usr_pwd, 
-					usr_connected, 
-					usr_last_use, 
-					usr_profile_id) VALUES (NULL, ?, ?, 0, NULL, ?)');				
-				$qry->bindValue(1, $usr_login, \PDO::PARAM_STR);
-				$qry->bindValue(2, $usr_pwd, \PDO::PARAM_STR);
-				$qry->bindValue(3, $usr_profile_id, \PDO::PARAM_STR);
-
-				$qry->execute();
-				$qry->closeCursor();
-				return 0;
-
-				} catch(Exception $e) {
-					return $e->getMessage();
-			}
-		}
-
-		/**
-		 * Update a specific user from an ID
-		 * @param usr_login, user's  login
-		 * @param usr_pwd ,  user's password
-		 * @param usr_id ,  user's password
-		 * @return 0 without errors, exception message any others cases
-		 */
-		public function Update_Specific_User($usr_login,$usr_pwd,$usr_id)
-		{
-			try {
-				$qry = $this->db->prepare
-				('UPDATE naobox.nb_users SET usr_login =?, usr_pwd =? WHERE nb_users.usr_id =2');
-
-				$qry->bindValue(1, $usr_login, \PDO::PARAM_STR);
-				$qry->bindValue(2, $usr_pwd, \PDO::PARAM_STR);
-				$qry->bindValue(2, $usr_id, \PDO::PARAM_STR);
-
-				$qry->execute();
-				$qry->closeCursor();
-				return 0;
-
-				} catch(Exception $e) {
-					return $e->getMessage();
-			}
-		}
+				
 		
 		/**
 		 * Display all profile's informations
 		 *
 	     * @return return_qry : result into an object, exception message any others cases
 		 */
-		public function display_users() {
+		public function get_users() {
 			try {
 				$qry = $this->db->prepare('SELECT * FROM naobox.nb_users ORDER BY usr_profile_id');				
 				$qry->execute();
@@ -366,11 +275,11 @@
 		 * @param prf_id, profile's id	
 		 * @return return_qry : result into an object, exception message any others cases
 		 */
-		public function display_Profile_With_ID($prf_id) {
+		public function get_Profile_With_ID($prf_id) {
 			try {
 				$qry = $this->db->prepare('SELECT * FROM  naobox.nb_profiles WHERE nb_profiles.prf_id =?');
 
-				$qry->bindValue(1, $cmd_id, \PDO::PARAM_STR);				
+				$qry->bindValue(1, $cmd_id, PDO::PARAM_STR);				
 
 				$qry->execute();				
 				$return_qry = $qry->fetchAll();
@@ -387,11 +296,11 @@
 		 * @param prf_name, profile's name	
 		 * @return return_qry : result into an object, exception message any others cases
 		 */
-		public function display_Profile_With_Name($prf_name) {
+		public function get_Profile_With_Name($prf_name) {
 			try {
 				$qry = $this->db->prepare('SELECT * FROM  naobox.nb_profiles WHERE nb_profiles.prf_name =?');
 
-				$qry->bindValue(1, $cmd_id, \PDO::PARAM_STR);				
+				$qry->bindValue(1, $cmd_id, PDO::PARAM_STR);				
 
 				$qry->execute();				
 				$return_qry = $qry->fetchAll();
@@ -447,7 +356,7 @@
 		public function delete_Specific_User($usr_id) {
 			try {				
 				$qry = $this->db->prepare('DELETE FROM naobox.nb_users WHERE nb_users.usr_id =?');
-				$qry->bindValue(1, $pkg_id, \PDO::PARAM_STR);				
+				$qry->bindValue(1, $pkg_id, PDO::PARAM_STR);				
 
 				$qry->execute();				
 				$return_qry = $qry->fetchAll();

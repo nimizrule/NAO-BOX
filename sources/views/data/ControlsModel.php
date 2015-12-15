@@ -60,7 +60,7 @@
 		 *
 	     * @return return_qry : result into an object, exception message any others cases
 		 */
-		public function display_commands() {
+		public function get_commands() {
 			try {
 				$qry = $this->db->prepare('SELECT * FROM naobox.nb_commands ORDER BY cmd_id');				
 				$qry->execute();
@@ -79,11 +79,11 @@
 		 *	
 		 * @return return_qry : result into an object, exception message any others cases
 		 */
-		public function display_command($cmd_id) {
+		public function get_command($cmd_id) {
 			try {
 				$qry = $this->db->prepare('SELECT * FROM  naobox.nb_commands WHERE nb_commands.cmd_id =?');
 
-				$qry->bindValue(1, $cmd_id, \PDO::PARAM_STR);				
+				$qry->bindValue(1, $cmd_id, PDO::PARAM_STR);				
 
 				$qry->execute();				
 				$return_qry = $qry->fetchAll();

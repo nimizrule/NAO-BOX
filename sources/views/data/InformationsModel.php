@@ -54,5 +54,44 @@
 			}			
 		}
 		
+		/**
+		 * Display all sensors's informations
+		 *
+	     * @return return_qry : result into an object, exception message any others cases
+		 */
+		public function get_Sensors() {
+			try {
+				$qry = $this->db->prepare('SELECT * FROM naobox.nb_sensors_buffer ORDER BY id_nao');				
+				$qry->execute();
+				//put  the result into an object
+				$return_qry = $qry->fetchAll();
+				$qry->closeCursor();
+				return $return_qry;
+				
+			} catch(Exception $e) {
+				return $e->getMessage();
+			}
+		}
+
+		/**
+		 * return a package
+		 *	
+		 * @return return_qry : result into an object, exception message any others cases
+		 */
+		public function get_Sensors_From_Specific_Nao($id_nao) {
+			try {
+				$qry = $this->db->prepare('SELECT * FROM  naobox.nb_sensors_buffer WHERE nb_sensors_buffer.id_nao =?');
+
+				$qry->bindValue(1, $id_nao, PDO::PARAM_STR);				
+
+				$qry->execute();				
+				$return_qry = $qry->fetchAll();
+
+				$qry->closeCursor();
+				return $return_qry;
+			} catch(Exception $e) {
+				return $e->getMessage();
+			}
+		}
 	}
 ?>

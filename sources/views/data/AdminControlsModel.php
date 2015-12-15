@@ -77,9 +77,9 @@
 					cmd_file, 
 					cmd_description, 
 					cmd_package_id) VALUES (NULL, ?, ?, ?, NULL)');				
-				$qry->bindValue(1, $cmd_name, \PDO::PARAM_STR);
-				$qry->bindValue(2, $cmd_file, \PDO::PARAM_STR);
-				$qry->bindValue(3, $cmd_description, \PDO::PARAM_STR);
+				$qry->bindValue(1, $cmd_name, PDO::PARAM_STR);
+				$qry->bindValue(2, $cmd_file, PDO::PARAM_STR);
+				$qry->bindValue(3, $cmd_description, PDO::PARAM_STR);
 				$qry->execute();
 				$qry->closeCursor();
 				return 0;
@@ -101,7 +101,7 @@
 				$qry = $this->db->prepare('SELECT naobox.nb_commands.cmd_id FROM commands WHERE nb_commands.cmd_id =?');	
 				$qry->bindValue(1, $cmd_id, \PDO::PARAM_STR);
 				$qry->execute();
-				$return_qry = $qry->fetch(\PDO::FETCH_OBJ);
+				$return_qry = $qry->fetch(PDO::FETCH_OBJ);
 				$qry->closeCursor();
 				return (!empty($return_qry->cmd_id)) ? 1 : 0;
 			} catch(Exception $e) {
@@ -120,7 +120,7 @@
 			try {
 				
 				$qry = $this->db->prepare('DELETE FROM naobox.nb_commands WHERE nb_commands.cmd_id =?');
-				$qry->bindValue(1, $cmd_id, \PDO::PARAM_INT);
+				$qry->bindValue(1, $cmd_id, PDO::PARAM_INT);
 
 				$qry->execute();
 				$qry->closeCursor();
@@ -160,10 +160,10 @@
 			try {
 				$qry = $this->db->prepare('UPDATE naobox.nb_commands SET cmd_name =?, cmd_file =?, cmd_description =? WHERE nb_commands.cmd_id =?');
 
-				$qry->bindValue(1, $cmd_name, \PDO::PARAM_STR);
-				$qry->bindValue(2, $cmd_file, \PDO::PARAM_STR);
-				$qry->bindValue(3, $cmd_description, \PDO::PARAM_STR);
-				$qry->bindValue(4, $cmd_id, \PDO::PARAM_STR);
+				$qry->bindValue(1, $cmd_name, PDO::PARAM_STR);
+				$qry->bindValue(2, $cmd_file, PDO::PARAM_STR);
+				$qry->bindValue(3, $cmd_description, PDO::PARAM_STR);
+				$qry->bindValue(4, $cmd_id, PDO::PARAM_STR);
 				
 				$qry->execute();
 				$qry->closeCursor();
@@ -185,8 +185,8 @@
 			try {
 				$qry = $this->db->prepare('INSERT INTO naobox.nb_packages
 				   (pkg_id,	pkg_name, pkg_path) VALUES (NULL, ?, ?)');				
-				$qry->bindValue(1, $pkg_name, \PDO::PARAM_STR);
-				$qry->bindValue(2, $pkg_path, \PDO::PARAM_STR);
+				$qry->bindValue(1, $pkg_name, PDO::PARAM_STR);
+				$qry->bindValue(2, $pkg_path, PDO::PARAM_STR);
 				// INSERT INTO `naobox`.`nb_packages` (`pkg_id`, `pkg_name`, `pkg_path`) VALUES (NULL, 'thename', 'the path ');
 				$qry->execute();
 				$qry->closeCursor();
@@ -201,7 +201,7 @@
 		 *
 	     * @return return_qry : result into an object, exception message any others cases
 		 */
-		public function display_Packages() {
+		public function get_Packages() {
 			try {
 				$qry = $this->db->prepare('SELECT * FROM naobox.nb_packages ORDER BY pkg_id');				
 				$qry->execute();
@@ -220,11 +220,11 @@
 		 *	
 		 * @return return_qry : result into an object, exception message any others cases
 		 */
-		public function display_Package($pkg_id) {
+		public function get_Package($pkg_id) {
 			try {
 				$qry = $this->db->prepare('SELECT * FROM  naobox.nb_packages WHERE nb_packages.pkg_id =?');
 
-				$qry->bindValue(1, $cmd_id, \PDO::PARAM_STR);				
+				$qry->bindValue(1, $cmd_id, PDO::PARAM_STR);				
 
 				$qry->execute();				
 				$return_qry = $qry->fetchAll();
@@ -246,7 +246,7 @@
 			try {
 				
 				$qry = $this->db->prepare('DELETE FROM naobox.nb_packages WHERE nb_packages.pkg_id =?');
-				$qry->bindValue(1, $pkg_id, \PDO::PARAM_INT);
+				$qry->bindValue(1, $pkg_id, PDO::PARAM_INT);
 
 				$qry->execute();
 				$qry->closeCursor();
