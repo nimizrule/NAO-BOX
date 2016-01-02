@@ -61,7 +61,9 @@
 		 */
 		public function dispatch() {
 			try {
-				// If the routes file exists, system can load the routes.
+				Dispatcher::getURI();
+				
+				// If the routes file exists, system can load the routes.				
 				if(file_exists(DIR_CONFIG."/routes.php")) {
 					require(DIR_CONFIG."/routes.php"); 
 				} else {
@@ -70,27 +72,38 @@
 					);
 				}
 				
-				Dispatcher::getURI();
-				
 				// Search the correct controller.
 				foreach ($_ROUTES as $key => $value) {
-					if (Dispatcher::isRoute($_ROUTES[$key]["url"])) {						
+					if (Dispatcher::isRoute($_ROUTES[$key]["url"])) {			
 						$this->controller["file"] = $_ROUTES[$key]["file"];
-						$this->controller["url"] = $_ROUTES[$key]["url"];						
+						$this->controller["url"] = $_ROUTES[$key]["url"];		
 						break;
 					}
 				}
-				
+
 				// When the debug's functions are activated and the URI is
 				// Null, the function redirects the user to home.
-				if ($this->uri == null) {
+				if ($this->uri == "/" || $this->uri == null) {
 					if (DEBUG_FUNCTIONS) {
-						header("Location: ".DEBUG_DIR."/".URW_HOME);
+						header("Location: ".DEBUG_DIR."/".URL_HOME);
 					} else {
-						header("Location: ./".URW_HOME);
+						header("Location: ".URL_HOME);
+					}
+				} else if ($this->uri == "/admin") {
+					if (DEBUG_FUNCTIONS) {
+						header("Location: ".DEBUG_DIR."/".URL_ADMIN_HOME);
+					} else {
+						header("Location: ".URL_ADMIN_HOME);
+					}
+				} else if($this->uri == "/admin/") {
+					if (DEBUG_FUNCTIONS) {
+						header("Location: ".DEBUG_DIR."/".URL_HOME);
+					} else {
+						header("Location: ".URL_HOME);
 					}
 				}
-				
+
+
 				// If the controller cannot be found, the function selects
 				// The controller 404 error.
 				if($this->controller == null) {
@@ -98,21 +111,21 @@
 					$this->controller["url"] = $_ROUTES["404"]["url"];
 				}
 				
-				// If the tools file exists, system can load the tools.
+				// If the tools file exists, system can load the tools.			
 				if (file_exists(DIR_CLASSES."/Tools.php")) {
 					require_once(DIR_CLASSES."/Tools.php");		
 				} else {
 					throw new Exception(
 						"The file 'Tools.php' cannot be found !"
 					);
-				}	
-				
+				}
+
 				// If the controller file exists, system can start the 
 				// Controller renderer.
 				if (
 					file_exists(
 						DIR_CONTROLLERS."/".$this->controller["file"].".php"
-					)
+					) 
 				) {
 					require_once(
 						DIR_CONTROLLERS."/".$this->controller["file"].".php"
@@ -129,15 +142,16 @@
 				Tools::getInstance()->urlBuilder(
 					$this->controller["file"], $this->uri
 				);
+
 				$controller = new $this->controller["file"]();
-				
+
 				// Checks the user access for this controller.
 				// If the user cannot open or view this controller, the system
 				// Redirects the user to 403 controller.
 				if(!$controller->checkAccess() || !$controller->viewAccess()) {
 					$this->controller["file"] = $_ROUTES["403"]["file"];
 					$this->controller["url"] = $_ROUTES["403"]["url"];
-					
+									
 					if (
 						file_exists(
 						   DIR_CONTROLLERS."/".$this->controller["file"].".php"
@@ -182,7 +196,7 @@
 				} else {
 					$this->uri = null;
 				}
-				
+
 				// When the debug's functions are activated, the function 
 				// Removes the DEBUG_DIR from the URL.
 				if (DEBUG_FUNCTIONS) {
@@ -208,7 +222,7 @@
 		private function isRoute($route) {
 			try {
 				// Here, the user ask an error page.
-				if (preg_match("#errors/[0-9]{3}$#", $this->uri)) {
+				if (preg_match("#(.+)errors/[0-9]{3}$#", $this->uri)) {
 					return (
 						preg_match("#^".$this->uri ."$#", $route)
 					) ? true : false;
@@ -231,13 +245,13 @@
 					) ? true : false;
 				} 
 				// Any others cases.
-				else {
-					return (
-						preg_match("#^".$this->uri ."$#", $route)
+				else {	
+                    return (
+						preg_match("#".$this->uri ."$#", $route)
 					) ? true : false;
 				}
 			} catch (Exception $e) {
 				throw new Exception($e->getMessage());
 			}
-		}	
+		}
 	}

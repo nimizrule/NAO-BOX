@@ -3,23 +3,23 @@
 	/*
 	 * NAOBOX
 	 **************************************************************************
-	 * Sensors controller, uses to display the sensors
+	 * Admin Peripherals controller, uses to display the peripherals
 	 **************************************************************************
-	 * @page			SensorsController.php
-	 * @publication		11/29/15
-	 * @edition			11/29/15	
+	 * @page			AdminPeripheralsController.php
+	 * @publication		11/28/15
+	 * @edition			12/27/15	
 	 * @author			Jérémie LIECHTI
 	 * @copyright		3IL, Jérémie LIECHTI
 	 */
 
-	require_once(DIR_CLASSES."/Controller.php");
-	 
-	class AdminSensorsController extends Controller {
+	require_once(DIR_CLASSES."/BackController.php");
+ 
+	class AdminPeripheralsController extends BackController {
 		
 		/**
 		 * Name of template
 		 */
-		 private $tpl_name = "sensors";
+		 private $tpl_name = "admin-peripherals";
 		
 		/**
 		 * Name of model
@@ -71,7 +71,23 @@
 				if (Tools::getInstance()->isAskedController(__CLASS__, $url)) {		
 					if (file_exists(DIR_TEMPLATES."/".$this->tpl_name.".tpl")) {	
 						try {	
+							$controls = array();
+							$controls[0]["name"] = "test";
+							$controls[0]["mac"] = "test";
+							$controls[0]["ip"] = "Test";
+							$controls[1]["name"] = "test1";
+							$controls[1]["mac"] = "test1";
+							$controls[1]["ip"] = "Test1";
+							$controls[2]["name"] = "test2";
+							$controls[2]["mac"] = "test2";
+							$controls[2]["ip"] = "Test2";
+							$controls[3]["name"] = "test3";
+							$controls[3]["mac"] = "test3";
+							$controls[3]["ip"] = "Test3";
+
 							$this->smarty->assign("nao_battery", 80);
+							$this->smarty->assign("content", "list");
+							$this->smarty->assign("controls", $controls); 
 							
 							// After assign variables to the template, 
 							// The controller show the render.

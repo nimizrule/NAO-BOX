@@ -3,23 +3,23 @@
 	/*
 	 * NAOBOX
 	 **************************************************************************
-	 * Menu controller, uses to display the menu page
+	 * Admin Menu controller, uses to display the menu page
 	 **************************************************************************
-	 * @page			MenuController.php
+	 * @page			AdminMenuController.php
 	 * @publication		11/28/15
-	 * @edition			11/28/15	
+	 * @edition			12/27/15	
 	 * @author			Jérémie LIECHTI
 	 * @copyright		3IL, Jérémie LIECHTI
 	 */
 
-	require_once(DIR_CLASSES."/Controller.php");
-	 
-	class AdminMenuController extends Controller {
+	require_once(DIR_CLASSES."/BackController.php");
+ 
+	class AdminMenuController extends BackController {
 		
 		/**
 		 * Name of template
 		 */
-		 private $tpl_name = "menu";
+		 private $tpl_name = "admin-menu";
 		
 		/**
 		 * Name of model
@@ -43,7 +43,7 @@
 				if(WEBSITE_MAINTENANCE) {
 					$this->access_view = false;
 				}
-				
+
 				$this->init();
 			} catch (Exception $e) {
 				echo $e->getMessage();
@@ -55,47 +55,47 @@
 		 */
 		public function init() {
 			try {
-				parent::init();	
+				parent::init();
+
+				// To starting display, the tool classe must exist.
+				if (file_exists (DIR_CLASSES."/Tools.php")) {
+					$url = Tools::getInstance()->url;
+	
+					// When the controller is good, the render can begin.
+					if (Tools::getInstance()->isAskedController(__CLASS__, $url)) {		
+						if (file_exists(DIR_TEMPLATES."/".$this->tpl_name.".tpl")) {	
+							try {	
+								$this->smarty->assign("nao_battery", 80);
+
+								// After assign variables to the template, 
+								// The controller show the render.
+								$this->smarty->display(DIR_TEMPLATES."/".
+								$this->tpl_name.".tpl");
+				
+							} catch (Exception $e) {
+								throw new Exception(
+									"An error has occured: ".$e->getMessage()
+								);
+							}
+						} else {
+							throw new Exception(
+								"The template '".$this->tpl_name."' doesn't 
+								exists !"
+							);
+						}
+					} else {
+						throw new Exception(
+							"An error has occured during the routing process !"
+						);
+					}
+				} else {
+					throw new Exception('The URL cannot be evaluable !');
+				}	
 			} catch (Exception $e) {
 				throw new Exception(
 					"An exception has occured during the loading: ".
 					$e->getMessage()
 				);
-			}
-			
-			// To starting display, the tool classe must exist.
-			if (file_exists (DIR_CLASSES."/Tools.php")) {
-				$url = Tools::getInstance()->url;
-				
-				// When the controller is good, the render can begin.
-				if (Tools::getInstance()->isAskedController(__CLASS__, $url)) {		
-					if (file_exists(DIR_TEMPLATES."/".$this->tpl_name.".tpl")) {	
-						try {	
-							$this->smarty->assign("nao_battery", 80);
-							
-							// After assign variables to the template, 
-							// The controller show the render.
-							$this->smarty->display(DIR_TEMPLATES."/".
-							$this->tpl_name.".tpl");
-			
-						} catch (Exception $e) {
-							throw new Exception(
-								"An error has occured: ".$e->getMessage()
-							);
-						}
-					} else {
-						throw new Exception(
-							"The template '".$this->tpl_name."' doesn't 
-							exists !"
-						);
-					}
-				} else {
-					throw new Exception(
-						"An error has occured during the routing process !"
-					);
-				}
-			} else {
-				throw new Exception('The URL cannot be evaluable !');
 			}
 		}
 		

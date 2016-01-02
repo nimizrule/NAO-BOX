@@ -3,9 +3,9 @@
 	/*
 	 * NAOBOX
 	 **************************************************************************
-	 * Admin Controls controller, uses to display the controls
+	 * Admin Login controller, uses to connect user to admin page
 	 **************************************************************************
-	 * @page			AdminControlsController.php
+	 * @page			AdminLoginController.php
 	 * @publication		11/28/15
 	 * @edition			12/27/15	
 	 * @author			Jérémie LIECHTI
@@ -14,12 +14,12 @@
 
 	require_once(DIR_CLASSES."/BackController.php");
 	 
-	class AdminControlsController extends BackController {
+	class AdminLoginController extends BackController {
 		
 		/**
 		 * Name of template
 		 */
-		 private $tpl_name = "admin-controls";
+		 private $tpl_name = "admin-login";
 		
 		/**
 		 * Name of model
@@ -70,24 +70,9 @@
 				// When the controller is good, the render can begin.
 				if (Tools::getInstance()->isAskedController(__CLASS__, $url)) {		
 					if (file_exists(DIR_TEMPLATES."/".$this->tpl_name.".tpl")) {	
-						try {	
-							$controls = array();
-							$controls[0]["file"] = "test";
-							$controls[0]["desc"] = "test";
-							$controls[0]["name"] = "Test";
-							$controls[1]["file"] = "test1";
-							$controls[1]["desc"] = "test1";
-							$controls[1]["name"] = "Test1";
-							$controls[2]["file"] = "test2";
-							$controls[2]["desc"] = "test2";
-							$controls[2]["name"] = "Test2";
-							$controls[3]["file"] = "test3";
-							$controls[3]["desc"] = "test3";
-							$controls[3]["name"] = "Test3";
-							
+						try {					
 							$this->smarty->assign("nao_battery", 80);
-							$this->smarty->assign("content", "list");
-							$this->smarty->assign("controls", $controls); 
+							$this->smarty->assign("session", "user");
 							
 							// After assign variables to the template, 
 							// The controller show the render.

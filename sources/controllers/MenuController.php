@@ -7,19 +7,19 @@
 	 **************************************************************************
 	 * @page			MenuController.php
 	 * @publication		11/28/15
-	 * @edition			11/28/15	
+	 * @edition			12/27/15	
 	 * @author			Jérémie LIECHTI
 	 * @copyright		3IL, Jérémie LIECHTI
 	 */
 
-	require_once(DIR_CLASSES."/Controller.php");
+	require_once(DIR_CLASSES."/FrontController.php");
 	 
-	class MenuController extends Controller {
+	class MenuController extends FrontController {
 		
 		/**
 		 * Name of template
 		 */
-		 private $tpl_name = "menu";
+		private $tpl_name = "menu";
 		
 		/**
 		 * Name of model

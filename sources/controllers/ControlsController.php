@@ -6,15 +6,15 @@
 	 * Controls controller, uses to display the controls
 	 **************************************************************************
 	 * @page			ControlsController.php
-	 * @publication		11/29/15
-	 * @edition			11/29/15	
+	 * @publication		11/28/15
+	 * @edition			12/27/15	
 	 * @author			Jérémie LIECHTI
 	 * @copyright		3IL, Jérémie LIECHTI
 	 */
 
-	require_once(DIR_CLASSES."/Controller.php");
+	require_once(DIR_CLASSES."/FrontController.php");
 	 
-	class ControlsController extends Controller {
+	class ControlsController extends FrontController {
 		
 		/**
 		 * Name of template
@@ -128,6 +128,7 @@
 							$controls[17]["name"] = "Test3";
 							
 							$this->smarty->assign("nao_battery", 80);
+							$this->smarty->assign("content", "full");
 							$this->smarty->assign("controls", $controls); 
 							
 							// After assign variables to the template, 

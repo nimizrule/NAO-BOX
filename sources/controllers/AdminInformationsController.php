@@ -3,23 +3,23 @@
 	/*
 	 * NAOBOX
 	 **************************************************************************
-	 * Informations controller, uses to display NAO's informations
+	 * Admin Informations controller, uses to display NAO's informations
 	 **************************************************************************
-	 * @page			InformationsController.php
-	 * @publication		11/29/15
-	 * @edition			11/29/15	
-	 * @author			Jérémie LIECHTI
-	 * @copyright		3IL, Jérémie LIECHTI
+	 * @page			AdminInformationsController.php
+	 * @publication		11/28/15
+	 * @edition			12/27/15	
+	 * @author			JÃ©rÃ©mie LIECHTI
+	 * @copyright		3IL, JÃ©rÃ©mie LIECHTI
 	 */
 
-	require_once(DIR_CLASSES."/Controller.php");
-	 
-	class AdminInformationsController extends Controller {
+	require_once(DIR_CLASSES."/BackController.php");
+
+	class AdminInformationsController extends BackController {
 		
 		/**
 		 * Name of template
 		 */
-		 private $tpl_name = "infos";
+		 private $tpl_name = "admin-infos";
 		
 		/**
 		 * Name of model
@@ -72,6 +72,7 @@
 					if (file_exists(DIR_TEMPLATES."/".$this->tpl_name.".tpl")) {	
 						try {	
 							$this->smarty->assign("nao_battery", 80);
+							$this->smarty->assign("content", "nao");
 							
 							// After assign variables to the template, 
 							// The controller show the render.

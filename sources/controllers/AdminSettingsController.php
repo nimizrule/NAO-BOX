@@ -3,7 +3,7 @@
 	/*
 	 * NAOBOX
 	 **************************************************************************
-	 * Admin Controls controller, uses to display the controls
+	 * Admin Settings controller, uses to modify admin's settings
 	 **************************************************************************
 	 * @page			AdminControlsController.php
 	 * @publication		11/28/15
@@ -14,12 +14,12 @@
 
 	require_once(DIR_CLASSES."/BackController.php");
 	 
-	class AdminControlsController extends BackController {
+	class AdminSettingsController extends BackController {
 		
 		/**
 		 * Name of template
 		 */
-		 private $tpl_name = "admin-controls";
+		 private $tpl_name = "admin-settings";
 		
 		/**
 		 * Name of model
@@ -72,21 +72,63 @@
 					if (file_exists(DIR_TEMPLATES."/".$this->tpl_name.".tpl")) {	
 						try {	
 							$controls = array();
-							$controls[0]["file"] = "test";
+							$controls[0]["link"] = "test";
 							$controls[0]["desc"] = "test";
 							$controls[0]["name"] = "Test";
-							$controls[1]["file"] = "test1";
+							$controls[1]["link"] = "test1";
 							$controls[1]["desc"] = "test1";
 							$controls[1]["name"] = "Test1";
-							$controls[2]["file"] = "test2";
+							$controls[2]["link"] = "test2";
 							$controls[2]["desc"] = "test2";
 							$controls[2]["name"] = "Test2";
-							$controls[3]["file"] = "test3";
+							$controls[3]["link"] = "test3";
 							$controls[3]["desc"] = "test3";
 							$controls[3]["name"] = "Test3";
+							$controls[4]["link"] = "test";
+							$controls[4]["desc"] = "test";
+							$controls[4]["name"] = "Test";
+							$controls[5]["link"] = "test1";
+							$controls[5]["desc"] = "test1";
+							$controls[5]["name"] = "Test1";
+							$controls[6]["link"] = "test2";
+							$controls[6]["desc"] = "test2";
+							$controls[6]["name"] = "Test2";
+							$controls[7]["link"] = "test3";
+							$controls[7]["desc"] = "test3";
+							$controls[7]["name"] = "Test3";
+							$controls[8]["link"] = "test";
+							$controls[8]["desc"] = "test";
+							$controls[8]["name"] = "Test";
+							$controls[9]["link"] = "test1";
+							$controls[9]["desc"] = "test1";
+							$controls[9]["name"] = "Test1";
+							$controls[10]["link"] = "test2";
+							$controls[10]["desc"] = "test2";
+							$controls[10]["name"] = "Test2";
+							$controls[11]["link"] = "test3";
+							$controls[11]["desc"] = "test3";
+							$controls[11]["name"] = "Test3";
+							$controls[12]["link"] = "test1";
+							$controls[12]["desc"] = "test1";
+							$controls[12]["name"] = "Test1";
+							$controls[13]["link"] = "test2";
+							$controls[13]["desc"] = "test2";
+							$controls[13]["name"] = "Test2";
+							$controls[14]["link"] = "test3";
+							$controls[14]["desc"] = "test3";
+							$controls[14]["name"] = "Test3";
+							$controls[15]["link"] = "test1";
+							$controls[15]["desc"] = "test1";
+							$controls[15]["name"] = "Test1";
+							$controls[16]["link"] = "test2";
+							$controls[16]["desc"] = "test2";
+							$controls[16]["name"] = "Test2";
+							$controls[17]["link"] = "test3";
+							$controls[17]["desc"] = "test3";
+							$controls[17]["name"] = "Test3";
 							
 							$this->smarty->assign("nao_battery", 80);
-							$this->smarty->assign("content", "list");
+							$this->smarty->assign("content", "password");
 							$this->smarty->assign("controls", $controls); 
 							
 							// After assign variables to the template, 

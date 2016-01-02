@@ -3,23 +3,23 @@
 	/*
 	 * NAOBOX
 	 **************************************************************************
-	 * Manuals controller, uses to display guides
+	 * Admin Manuals controller, uses to display guides
 	 **************************************************************************
-	 * @page			ManualsController.php
-	 * @publication		11/29/15
-	 * @edition			11/29/15	
+	 * @page			AdminManualsController.php
+	 * @publication		11/28/15
+	 * @edition			12/27/15	
 	 * @author			Jérémie LIECHTI
 	 * @copyright		3IL, Jérémie LIECHTI
 	 */
 
-	require_once(DIR_CLASSES."/Controller.php");
+	require_once(DIR_CLASSES."/BackController.php");
 	 
-	class AdminManualsController extends Controller {
+	class AdminManualsController extends BackController {
 		
 		/**
 		 * Name of template
 		 */
-		 private $tpl_name = "manuals";
+		 private $tpl_name = "admin-manuals";
 		
 		/**
 		 * Name of model
@@ -72,6 +72,7 @@
 					if (file_exists(DIR_TEMPLATES."/".$this->tpl_name.".tpl")) {	
 						try {	
 							$this->smarty->assign("nao_battery", 80);
+							$this->smarty->assign("content", "administration");
 							
 							// After assign variables to the template, 
 							// The controller show the render.
