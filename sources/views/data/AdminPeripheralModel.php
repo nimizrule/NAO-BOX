@@ -5,36 +5,32 @@
 	 * This class handles the add  of a customer
 	 *
 	 * @publication		01/12/15
-	 * @edition			01/12/15
+	 * @edition			04/01/16
 	 * @author Bastien VAUTIER
 	 * @version 0.0.1
 	 * @copyright 2015 3iL
 	 */
 
-	require_once(DIR_CLASSES."/Data.php"); 
+	require_once(dirname(__FILE__)."/../../classes/ModelRenderer.php"); 
 
-	class AdminPeripheralModel extends Data {
+	class AdminPeripheralModel extends ModelRenderer {
 
 		/**
 		 * AdminPeripheralModel instance
 		 */
 		public static $instance = null;
 		
-		/**
-		 * The constructor of AdminPeripheralModel
+		/** 
+		 * AdminPeripheralModel builder.
+		 * Initialize the objects.
 		 */
-		public function __construct() {
-			try {
-				AdminPeripheralModel::init();
-			} catch(Exception $e) {
-				echo $e->getMessage();
-			}
-		}
+		public function __construct() {}
 		
 		/**
 		 * Get current instance of AdminPeripheralModel (singleton)
 		 *
-		 * @return AdminPeripheralModel
+		 * @param 	void.
+		 * @return 	AdminPeripheralModel
 		 */
 		public static function getInstance() {
 			if (!self::$instance) {
@@ -44,14 +40,42 @@
 		}
 		
 		/**
-		 * Initialize the ControlsModel class
+		 * Display all commands's informations
+		 *
+	     * @return return_qry : result into an object, exception message any others cases
 		 */
-		public function init() {
+		public function get_peripherals() {
 			try {
-				parent::init();	
+				$qry = ModelRenderer::getDbInstance()->prepare("SELECT * FROM naobox.nb_peripherals ORDER BY prl_id");							
+				$qry->execute();
+				$return_qry = $qry->fetchAll();
+				$qry->closeCursor();
+
+				return $return_qry;
+				
 			} catch(Exception $e) {
-				throw new Exception('An exception has occured during the loading: '.$e->getMessage());
-			}			
+				return $e->getMessage();
+			}
+		}
+
+		/**
+		 * return a peripheral from an Id
+		 *	
+		 * @return return_qry : result into an object, exception message any others cases
+		 */
+		public function get_peripheral($prl_id) {
+			try {
+				$qry = ModelRenderer::getDbInstance()->repare("SELECT * FROM  naobox.nb_peripherals WHERE nb_peripherals.prl_id =?");
+				$qry->bindValue(1, $prl_id, PDO::PARAM_STR);				
+				$qry->execute();				
+				$return_qry = $qry->fetchAll();
+				$qry->closeCursor();
+
+				return $return_qry;
+
+			} catch(Exception $e) {
+				return $e->getMessage();
+			}
 		}
 
 		/**
@@ -167,47 +191,6 @@
 				$qry->bindValue(4, $prl_id, PDO::PARAM_STR);
 				$qry->execute();
 				$qry->closeCursor();
-			} catch(Exception $e) {
-				return $e->getMessage();
-			}
-		}
-
-		/**
-		 * Display all commands's informations
-		 *
-	     * @return return_qry : result into an object, exception message any others cases
-		 */
-		public function get_Peripherals() {
-			try {
-				$qry = $this->db->prepare('SELECT * FROM naobox.nb_peripherals ORDER BY prl_id');				
-				
-				$qry->execute();
-				//put  the result into an object
-				$return_qry = $qry->fetchAll();
-				$qry->closeCursor();
-				return $return_qry;
-				
-			} catch(Exception $e) {
-				return $e->getMessage();
-			}
-		}
-
-		/**
-		 * return a peripheral from an Id
-		 *	
-		 * @return return_qry : result into an object, exception message any others cases
-		 */
-		public function get_Peripheral($prl_id) {
-			try {
-				$qry = $this->db->prepare('SELECT * FROM  naobox.nb_peripherals WHERE nb_peripherals.prl_id =?');
-
-				$qry->bindValue(1, $prl_id, PDO::PARAM_STR);				
-
-				$qry->execute();				
-				$return_qry = $qry->fetchAll();
-
-				$qry->closeCursor();
-				return $return_qry;
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}

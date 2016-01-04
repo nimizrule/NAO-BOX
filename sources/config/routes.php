@@ -49,11 +49,19 @@
 		"adminControls" => array(
 			"file" => "AdminControlsController",
 			"url" => "/admin/controles"
-		),		
+		),	
+		"adminControls-action" => array(
+			"file" => "AdminControlsController",
+			"url" => "/admin/controles/{id|all}"
+		),	
 		"adminPeripherals" => array(
 			"file" => "AdminPeripheralsController",
 			"url" => "/admin/peripheriques"
 		),	
+		"adminPeripherals-action" => array(
+			"file" => "AdminPeripheralsController",
+			"url" => "/admin/peripheriques/{id|all}"
+		),
         "adminInformations" => array(
 			"file" => "AdminInformationsController",
 			"url" => "/admin/informations"

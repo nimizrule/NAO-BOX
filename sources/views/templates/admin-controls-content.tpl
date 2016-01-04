@@ -6,8 +6,12 @@
 					<td>{$control.name}</td>
 					<td>{$control.file}</td>
 					<td class="tableFormalism-action"><img src="{$settings.img}/buttons/list.jpg" class="adminControlRender-descAction" alt="Description"/></td>
-					<td class="tableFormalism-action"><img src="{$settings.img}/buttons/pen.jpg" alt="Modifier"/></td>
-					<td class="tableFormalism-action"><img src="{$settings.img}/buttons/trash.jpg" alt="Supprimer"/></td>
+					<td class="tableFormalism-action">
+						<a href="/admin/controles/{$control.id}#modifier" alt="Modifier l'action"><img src="{$settings.img}/buttons/pen.jpg" alt="Modifier"/></a>
+					</td>
+					<td class="tableFormalism-action">
+						<a href="/admin/controles/{$control.id}#supprimer" alt="Supprimer l'action"><img src="{$settings.img}/buttons/trash.jpg" class="adminControlRender-delAction" alt="Supprimer"/></a>
+					</td>
 				</tr>
 				<tr style="display: none; height: 49px;">
 					<td></td>

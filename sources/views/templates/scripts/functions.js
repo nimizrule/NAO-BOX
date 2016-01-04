@@ -236,7 +236,7 @@ $(document).ready(function() {
 		});
 	});
 	///// OTHER IMPLEMENTS
-	$(".adminControlRender-descAction").click(function() {
+	$(document).on("click", ".adminControlRender-descAction", function() {
 		var $elementDesc = getDescObject($(this));
 		var $elementLine = getParentObject($(this));
 
@@ -254,6 +254,11 @@ $(document).ready(function() {
 			$elementLine.children("td"[3]).css("border-bottom","none");
 			$elementLine.children("td"[4]).css("border-bottom","none");
 			$elementDesc.css("display", "table-row");
+		}
+	});
+	$(document).on("click", ".adminControlRender-delAction", function() {
+		if(!confirm("Suppression de l'action")) {
+			return false;
 		}
 	});
 });

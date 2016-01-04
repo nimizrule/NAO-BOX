@@ -16,15 +16,8 @@
  
 	class AdminPeripheralsController extends BackController {
 		
-		/**
-		 * Name of template
-		 */
-		 private $tpl_name = "admin-peripherals";
-		
-		/**
-		 * Name of model
-		 */
-		private $model_name = 'Modify';
+		/* Name of template */
+		private $tpl_name = "admin-peripherals";
 		
 		/* Allow user to use this controller */
 		private $access_check = true;
@@ -70,33 +63,41 @@
 				// When the controller is good, the render can begin.
 				if (Tools::getInstance()->isAskedController(__CLASS__, $url)) {		
 					if (file_exists(DIR_TEMPLATES."/".$this->tpl_name.".tpl")) {	
-						try {	
-							$controls = array();
-							$controls[0]["name"] = "test";
-							$controls[0]["mac"] = "test";
-							$controls[0]["ip"] = "Test";
-							$controls[1]["name"] = "test1";
-							$controls[1]["mac"] = "test1";
-							$controls[1]["ip"] = "Test1";
-							$controls[2]["name"] = "test2";
-							$controls[2]["mac"] = "test2";
-							$controls[2]["ip"] = "Test2";
-							$controls[3]["name"] = "test3";
-							$controls[3]["mac"] = "test3";
-							$controls[3]["ip"] = "Test3";
+						if (file_exists(DIR_VIEWS."/data/AdminPeripheralModel.php")) {
+							try {	
+								require_once(DIR_VIEWS."/data/AdminPeripheralModel.php");
 
-							$this->smarty->assign("nao_battery", 80);
-							$this->smarty->assign("content", "list");
-							$this->smarty->assign("controls", $controls); 
-							
-							// After assign variables to the template, 
-							// The controller show the render.
-							$this->smarty->display(DIR_TEMPLATES."/".
-							$this->tpl_name.".tpl");
-			
-						} catch (Exception $e) {
+								$controls = array();
+								$buffer = AdminPeripheralModel::getInstance()->get_peripherals();
+								$i = 0;
+
+								foreach($buffer as $control) {
+									$controls[$i]["id"] = $control["prl_id"];
+									$controls[$i]["name"] = $control["prl_name"];
+									$controls[$i]["mac"] = $control["prl_mac_adress"];
+									$controls[$i]["ip"] = $control["prl_ip_adress"];
+									$controls[$i]["desc"] = $control["prl_description"];
+									$i++;
+								}
+								
+								$this->smarty->assign("nao_battery", 80);
+								$this->smarty->assign("content", "list");
+								$this->smarty->assign("controls", $controls); 
+								
+								// After assign variables to the template, 
+								// The controller show the render.
+								$this->smarty->display(DIR_TEMPLATES."/".
+								$this->tpl_name.".tpl");
+				
+							} catch (Exception $e) {
+								throw new Exception(
+									"An error has occured: ".$e->getMessage()
+								);
+							}
+						} else {
 							throw new Exception(
-								"An error has occured: ".$e->getMessage()
+								"The model 'ConstrolsModel' doesn't 
+								exists !"
 							);
 						}
 					} else {

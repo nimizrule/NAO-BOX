@@ -86,62 +86,69 @@
 		 */
 		private function controlQuery($page, $adminProcess) {
 			try {
-				switch($page) {
-					case "controlFull":
-						$content = "full";
-						$controls = array();
-						$controls[0]["link"] = "test";
-						$controls[0]["desc"] = "test";
-						$controls[0]["name"] = "Test";
-						$controls[1]["link"] = "test1";
-						$controls[1]["desc"] = "test1";
-						$controls[1]["name"] = "Test1";
-						$controls[2]["link"] = "test2";
-						$controls[2]["desc"] = "test2";
-						$controls[2]["name"] = "Test2";
-						$controls[3]["link"] = "test3";
-						$controls[3]["desc"] = "test3";
-						$controls[3]["name"] = "Test3";
-						$this->smarty->assign("controls", $controls); 
-						break;
-					case "controlStep":
-						$content = "step";
-						break;
-					case "controlList":
-						$content = "list";
-						$controls = array();
-						$controls[0]["file"] = "test";
-						$controls[0]["desc"] = "test";
-						$controls[0]["name"] = "Test";
-						$controls[1]["file"] = "test1";
-						$controls[1]["desc"] = "test1";
-						$controls[1]["name"] = "Test1";
-						$controls[2]["file"] = "test2";
-						$controls[2]["desc"] = "test2";
-						$controls[2]["name"] = "Test2";
-						$controls[3]["file"] = "test3";
-						$controls[3]["desc"] = "test3";
-						$controls[3]["name"] = "Test3";
-						$this->smarty->assign("controls", $controls); 
-						break;
-					case "controlAdd":
-						$content = "add";
-						break;
-					default:
-						break;
-				}
+				if (file_exists(dirname(__FILE__)."/../views/data/ControlsModel.php")) {
+					require_once(dirname(__FILE__)."/../views/data/ControlsModel.php");
+					
+					switch($page) {					
+						case "controlFull":
+							$content = "full";						
+							$controls = array();
+							$buffer = ControlsModel::getInstance()->get_commands();
+							$i = 0;
 
-				$this->smarty->force_compile = 1;
-				$this->smarty->assign("content", $content);
+							foreach($buffer as $control) {
+								$controls[$i]["id"] = $control["cmd_id"];
+								$controls[$i]["name"] = $control["cmd_name"];
+								$controls[$i]["link"] = $control["cmd_file"];
+								$controls[$i]["desc"] = $control["cmd_description"];
+								$i++;
+							}
+							$this->smarty->assign("controls", $controls); 
+							break;
 
-				if($adminProcess) {
-					return $this->smarty->fetch("../admin-controls-content.tpl");
+						case "controlStep":
+							$content = "step";
+							break;
+						case "controlList":
+							$content = "list";
+							$controls = array();
+							$buffer = ControlsModel::getInstance()->get_commands();
+							$i = 0;
+
+							foreach($buffer as $control) {
+								$controls[$i]["id"] = $control["cmd_id"];
+								$controls[$i]["name"] = $control["cmd_name"];
+								$controls[$i]["file"] = $control["cmd_file"];
+								$controls[$i]["desc"] = $control["cmd_description"];
+								$i++;
+							}
+							$this->smarty->assign("controls", $controls); 
+							break;
+
+						case "controlAdd":
+							$content = "add";
+							break;
+						default:
+							break;
+					}
+
+					$this->smarty->force_compile = 1;
+					$this->smarty->assign("content", $content);
+
+					if($adminProcess) {
+						return $this->smarty->fetch("../admin-controls-content.tpl");
+					} else {
+						return $this->smarty->fetch("../controls-content.tpl");
+					}
 				} else {
-					return $this->smarty->fetch("../controls-content.tpl");
+					throw new Exception(
+						"The model 'ConstrolsModel' doesn't 
+						exists !"
+					);
 				}
 				
 			} catch (Exception $e) {
-				throw new Exception($e->getMessage());
+				echo $e->getMessage();
 			}
 		}
 
@@ -225,42 +232,51 @@
 		 */
 		private function peripheralQuery($page, $adminProcess) {
 			try {
-				switch($page) {
-					case "peripheralList":
-						$content = "list";
-						$controls = array();
-						$controls[0]["name"] = "test";
-						$controls[0]["mac"] = "test";
-						$controls[0]["ip"] = "Test";
-						$controls[1]["name"] = "test1";
-						$controls[1]["mac"] = "test1";
-						$controls[1]["ip"] = "Test1";
-						$controls[2]["name"] = "test2";
-						$controls[2]["mac"] = "test2";
-						$controls[2]["ip"] = "Test2";
-						$controls[3]["name"] = "test3";
-						$controls[3]["mac"] = "test3";
-						$controls[3]["ip"] = "Test3";
-						$this->smarty->assign("controls", $controls); 
-						break;
-					case "peripheralAdd":
-						$content = "add";
-						break;
-					default:
-						break;
-				}
+				if (file_exists(dirname(__FILE__)."/../views/data/AdminPeripheralModel.php")) {
+					require_once(dirname(__FILE__)."/../views/data/AdminPeripheralModel.php");
+					
+					switch($page) {
+						case "peripheralList":
+							$content = "list";						
+							$controls = array();
+							$buffer = AdminPeripheralModel::getInstance()->get_peripherals();
+							$i = 0;
 
-				$this->smarty->force_compile = 1;
-				$this->smarty->assign("content", $content);
+							foreach($buffer as $control) {
+								$controls[$i]["id"] = $control["prl_id"];
+								$controls[$i]["name"] = $control["prl_name"];
+								$controls[$i]["mac"] = $control["prl_mac_adress"];
+								$controls[$i]["ip"] = $control["prl_ip_adress"];
+								$controls[$i]["desc"] = $control["prl_description"];
+								$i++;
+							}
+							$this->smarty->assign("controls", $controls); 
+							break;
 
-				if($adminProcess) {
-					return $this->smarty->fetch("../admin-peripherals-content.tpl");
+						case "peripheralAdd":
+							$content = "add";
+							break;
+						default:
+							break;
+					}
+
+					$this->smarty->force_compile = 1;
+					$this->smarty->assign("content", $content);
+
+					if($adminProcess) {
+						return $this->smarty->fetch("../admin-peripherals-content.tpl");
+					} else {
+						return $this->smarty->fetch("../peripherals-content.tpl");
+					}
 				} else {
-					return $this->smarty->fetch("../peripherals-content.tpl");
+					throw new Exception(
+						"The model 'AdminPeripheralModel' doesn't 
+						exists !"
+					);
 				}
 				
 			} catch (Exception $e) {
-				throw new Exception($e->getMessage());
+				echo $e->getMessage();
 			}
 		}
 
@@ -330,19 +346,5 @@
 			} catch (Exception $e) {
 				throw new Exception($e->getMessage());
 			}
-		}
-		
-		/**
-	     * @see Controller::checkAccess()
-	     */
-	    public function checkAccess() {
-			return true;
-	    }
-
-		/**
-		 * @see Controller::viewAccess()
-		 */
-		public function viewAccess() {
-			return true;
 		}
 	}
