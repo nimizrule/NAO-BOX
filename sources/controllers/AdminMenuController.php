@@ -6,7 +6,7 @@
 	 * Admin Menu controller, uses to display the menu page
 	 **************************************************************************
 	 * @page			AdminMenuController.php
-	 * @publication		11/28/15
+	 * @publication		12/27/15
 	 * @edition			12/27/15	
 	 * @author			Jérémie LIECHTI
 	 * @copyright		3IL, Jérémie LIECHTI

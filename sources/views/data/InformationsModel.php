@@ -61,7 +61,7 @@
 		 */
 		public function get_Sensors() {
 			try {
-				$qry = $this->db->prepare('SELECT * FROM naobox.nb_sensors_buffer ORDER BY id_nao');				
+				$qry = $this->db->prepare('SELECT * FROM naobox.nb_sensors ORDER BY id_nao');				
 				$qry->execute();
 				//put  the result into an object
 				$return_qry = $qry->fetchAll();
@@ -80,7 +80,7 @@
 		 */
 		public function get_Sensors_From_Specific_Nao($id_nao) {
 			try {
-				$qry = $this->db->prepare('SELECT * FROM  naobox.nb_sensors_buffer WHERE nb_sensors_buffer.id_nao =?');
+				$qry = $this->db->prepare('SELECT * FROM  naobox.nb_sensors WHERE nb_sensors.id_nao =?');
 
 				$qry->bindValue(1, $id_nao, PDO::PARAM_STR);				
 

@@ -3,7 +3,7 @@
 	<head>
 		<title>{block name=title}NAOBOX{/block}</title>
 		<meta charset="utf-8">
-		<link rel="stylesheet" href="{$settings.bootstrap}" >
+		<link rel="stylesheet" type="text/css" href="{$settings.bootstrap}" >
 		<link rel="stylesheet" type="text/css" href="{$settings.css}" media="screen">	
 		<script type="text/javascript" src="{$settings.jquery}"></script>	
 	</head>

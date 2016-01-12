@@ -2,39 +2,35 @@
 
 	/*
 	 * Model for the AdminControlsModel
-	 * This class handles the add  of a customer
+	 * This class handles the admin controls model
 	 *
 	 * @publication		01/12/15
-	 * @edition			01/12/15
+	 * @edition			01/09/16
 	 * @author Bastien VAUTIER
 	 * @version 0.0.1
 	 * @copyright 2015 3iL
 	 */
 
-	require_once(DIR_CLASSES."/Data.php"); 
+	require_once(dirname(__FILE__)."/../../classes/ModelRenderer.php"); 
 
-	class AdminControlsModel extends Data {
+	class AdminControlsModel extends ModelRenderer {
 
 		/**
 		 * AdminControlsModel instance
 		 */
 		public static $instance = null;
 		
-		/**
-		 * The constructor of AdminControlsModel
+		/** 
+		 * AdminControlsModel builder.
+		 * Initialize the objects.
 		 */
-		public function __construct() {
-			try {
-				AdminControlsModel::init();
-			} catch(Exception $e) {
-				echo $e->getMessage();
-			}
-		}
+		public function __construct() {}
 		
 		/**
 		 * Get current instance of AdminControlsModel (singleton)
 		 *
-		 * @return AdminControlsModel
+		 * @param 	void.
+		 * @return 	AdminControlsModel
 		 */
 		public static function getInstance() {
 			if (!self::$instance) {
@@ -43,17 +39,6 @@
 			return self::$instance;
 		}
 		
-		/**
-		 * Initialize the AdminControlsModel class
-		 */
-		public function init() {
-			try {
-				parent::init();	
-			} catch(Exception $e) {
-				throw new Exception('An exception has occured during the loading: '.$e->getMessage());
-			}			
-		}
-
 		/**
 		 * Add an controls
 		 *
@@ -81,7 +66,7 @@
 				$qry->bindValue(2, $cmd_file, PDO::PARAM_STR);
 				$qry->bindValue(3, $cmd_description, PDO::PARAM_STR);
 				$qry->execute();
-				$qry->closeCursor();
+
 				return 0;
 				} catch(Exception $e) {
 					return $e->getMessage();
@@ -97,13 +82,14 @@
 		 */
 		public function has_command($cmd_id) {
 			try {
-
 				$qry = $this->db->prepare('SELECT naobox.nb_commands.cmd_id FROM commands WHERE nb_commands.cmd_id =?');	
 				$qry->bindValue(1, $cmd_id, \PDO::PARAM_STR);
 				$qry->execute();
 				$return_qry = $qry->fetch(PDO::FETCH_OBJ);
 				$qry->closeCursor();
+
 				return (!empty($return_qry->cmd_id)) ? 1 : 0;
+
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
@@ -117,14 +103,13 @@
 		 * @return 0 without errors, exception message any others cases
 		 */
 		public function delete_Command($cmd_id) {
-			try {
-				
-				$qry = $this->db->prepare('DELETE FROM naobox.nb_commands WHERE nb_commands.cmd_id =?');
+			try {				
+				$qry = ModelRenderer::getDbInstance()->prepare("DELETE FROM naobox.nb_commands WHERE nb_commands.cmd_id =?");
 				$qry->bindValue(1, $cmd_id, PDO::PARAM_INT);
-
 				$qry->execute();
-				$qry->closeCursor();
+
 				return 0;
+
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
@@ -137,12 +122,11 @@
 		 */
 		public function delete_Commands() {
 			try {								
-
-				$qry = $this->db->prepare('DELETE FROM naobox.nb_commands');
-
+				$qry = ModelRenderer::getDbInstance()->prepare("DELETE FROM naobox.nb_commands");
 				$qry->execute();
-				$qry->closeCursor();
+
 				return 0;
+
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
@@ -156,18 +140,16 @@
 		 * @param cmd_description, command's description
 		 * @return 0 without errors, exception message any others cases
 		 */
-		public function uptdate_Commands($cmd_id, $cmd_name, $cmd_file, $cmd_description) {
+		public function update_Command($cmd_id, $cmd_name, $cmd_description) {
 			try {
-				$qry = $this->db->prepare('UPDATE naobox.nb_commands SET cmd_name =?, cmd_file =?, cmd_description =? WHERE nb_commands.cmd_id =?');
-
+				$qry = ModelRenderer::getDbInstance()->prepare("UPDATE naobox.nb_commands SET cmd_name =?, cmd_description =? WHERE nb_commands.cmd_id =?");
 				$qry->bindValue(1, $cmd_name, PDO::PARAM_STR);
-				$qry->bindValue(2, $cmd_file, PDO::PARAM_STR);
-				$qry->bindValue(3, $cmd_description, PDO::PARAM_STR);
-				$qry->bindValue(4, $cmd_id, PDO::PARAM_STR);
-				
+				$qry->bindValue(2, $cmd_description, PDO::PARAM_STR);
+				$qry->bindValue(3, $cmd_id, PDO::PARAM_STR);				
 				$qry->execute();
-				$qry->closeCursor();
+
 				return 0;
+
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
@@ -189,7 +171,7 @@
 				$qry->bindValue(2, $pkg_path, PDO::PARAM_STR);
 				// INSERT INTO `naobox`.`nb_packages` (`pkg_id`, `pkg_name`, `pkg_path`) VALUES (NULL, 'thename', 'the path ');
 				$qry->execute();
-				$qry->closeCursor();
+
 				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();
@@ -249,7 +231,7 @@
 				$qry->bindValue(1, $pkg_id, PDO::PARAM_INT);
 
 				$qry->execute();
-				$qry->closeCursor();
+
 				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();
@@ -267,7 +249,7 @@
 				$qry = $this->db->prepare('DELETE FROM naobox.nb_packages');
 
 				$qry->execute();
-				$qry->closeCursor();
+
 				return 0;
 			} catch(Exception $e) {
 				return $e->getMessage();

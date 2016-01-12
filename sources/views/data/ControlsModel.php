@@ -2,7 +2,7 @@
 
 	/*
 	 * Model for the Controls
-	 * This class handles the add  of a customer
+	 * This class handles the controls model
 	 *
 	 * @publication		01/12/15
 	 * @edition			01/04/16
@@ -21,7 +21,7 @@
 		public static $instance = null;
 		
 		/** 
-		 * ControlModel builder.
+		 * ControlsModel builder.
 		 * Initialize the objects.
 		 */
 		public function __construct() {}

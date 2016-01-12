@@ -7,7 +7,7 @@
 	 **************************************************************************
 	 * @page			routes.php
 	 * @publication		11/28/15
-	 * @edition			12/04/15	
+	 * @edition			01/12/16	
 	 * @author			Jérémie LIECHTI
 	 * @copyright		3IL, Jérémie LIECHTI
 	 */
@@ -50,18 +50,26 @@
 			"file" => "AdminControlsController",
 			"url" => "/admin/controles"
 		),	
-		"adminControls-action" => array(
+		"adminControls-action-modification" => array(
 			"file" => "AdminControlsController",
-			"url" => "/admin/controles/{id|all}"
+			"url" => "/admin/controles/modifier/{id}"
+		),
+		"adminControls-action-deletion" => array(
+			"file" => "AdminControlsController",
+			"url" => "/admin/controles/supprimer/{id|all}"
 		),	
 		"adminPeripherals" => array(
 			"file" => "AdminPeripheralsController",
 			"url" => "/admin/peripheriques"
 		),	
-		"adminPeripherals-action" => array(
+		"adminPeripherals-action-modification" => array(
 			"file" => "AdminPeripheralsController",
-			"url" => "/admin/peripheriques/{id|all}"
+			"url" => "/admin/peripheriques/modifier/{id}"
 		),
+		"adminPeripherals-action-deletion" => array(
+			"file" => "AdminPeripheralsController",
+			"url" => "/admin/peripheriques/supprimer/{id|all}"
+		),	
         "adminInformations" => array(
 			"file" => "AdminInformationsController",
 			"url" => "/admin/informations"

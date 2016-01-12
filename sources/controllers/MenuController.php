@@ -66,7 +66,7 @@
 			// To starting display, the tool classe must exist.
 			if (file_exists (DIR_CLASSES."/Tools.php")) {
 				$url = Tools::getInstance()->url;
-				
+
 				// When the controller is good, the render can begin.
 				if (Tools::getInstance()->isAskedController(__CLASS__, $url)) {		
 					if (file_exists(DIR_TEMPLATES."/".$this->tpl_name.".tpl")) {	

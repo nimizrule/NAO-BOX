@@ -238,19 +238,19 @@
 					switch($page) {
 						case "peripheralList":
 							$content = "list";						
-							$controls = array();
+							$peripherals = array();
 							$buffer = AdminPeripheralModel::getInstance()->get_peripherals();
 							$i = 0;
 
-							foreach($buffer as $control) {
-								$controls[$i]["id"] = $control["prl_id"];
-								$controls[$i]["name"] = $control["prl_name"];
-								$controls[$i]["mac"] = $control["prl_mac_adress"];
-								$controls[$i]["ip"] = $control["prl_ip_adress"];
-								$controls[$i]["desc"] = $control["prl_description"];
+							foreach($buffer as $peripheral) {
+								$peripherals[$i]["id"] = $peripheral["prl_id"];
+								$peripherals[$i]["name"] = $peripheral["prl_name"];
+								$peripherals[$i]["mac"] = $peripheral["prl_mac_adress"];
+								$peripherals[$i]["ip"] = $peripheral["prl_ip_adress"];
+								$peripherals[$i]["desc"] = $peripheral["prl_description"];
 								$i++;
 							}
-							$this->smarty->assign("controls", $controls); 
+							$this->smarty->assign("peripherals", $peripherals); 
 							break;
 
 						case "peripheralAdd":

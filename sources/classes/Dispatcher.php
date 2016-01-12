@@ -138,10 +138,12 @@
 				}
 				
 				// Generates a new URL and a new instance for the controller.
+				
 				Tools::getInstance()->postVarBuilder($_POST); 
 				Tools::getInstance()->urlBuilder(
 					$this->controller["file"], $this->uri
 				);
+				Tools::getInstance()->uri = $this->uri;
 
 				$controller = new $this->controller["file"]();
 

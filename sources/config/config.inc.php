@@ -18,6 +18,7 @@
 	define("DIR_CONTROLLERS", "controllers");
 	define("DIR_TOOLS", "tools");
 	define("DIR_VIEWS", "views");
+	define("DIR_DOWNLOADS", "downloads");
 	
 	define("DIR_TEMPLATES", DIR_VIEWS."/templates");
 	define("DIR_CSS", DIR_TEMPLATES."/css");

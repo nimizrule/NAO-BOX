@@ -256,8 +256,35 @@ $(document).ready(function() {
 			$elementDesc.css("display", "table-row");
 		}
 	});
+	$(document).on("click", ".adminPeripheralRender-descAction", function() {
+		var $elementDesc = getDescObject($(this));
+		var $elementLine = getParentObject($(this));
+
+		if($elementDesc.is(":visible")) {
+			$elementLine.children("td"[0]).css("border-bottom","1px solid #ddd");
+			$elementLine.children("td"[1]).css("border-bottom","1px solid #ddd");
+			$elementLine.children("td"[2]).css("border-bottom","1px solid #ddd");
+			$elementLine.children("td"[3]).css("border-bottom","1px solid #ddd");
+			$elementLine.children("td"[4]).css("border-bottom","1px solid #ddd");
+			$elementDesc.css("display", "none");
+		} else {
+			$elementLine.children("td"[0]).css("border-bottom","none");
+			$elementLine.children("td"[1]).css("border-bottom","none");
+			$elementLine.children("td"[2]).css("border-bottom","none");
+			$elementLine.children("td"[3]).css("border-bottom","none");
+			$elementLine.children("td"[4]).css("border-bottom","none");
+			$elementDesc.css("display", "table-row");
+		}
+	});
 	$(document).on("click", ".adminControlRender-delAction", function() {
-		if(!confirm("Suppression de l'action")) {
+		if(!confirm(
+			"L'action et tous ses fichiers associés seront supprimés!")) {
+			return false;
+		}
+	});
+	$(document).on("click", ".adminPeripheralRender-delAction", function() {
+		if(!confirm(
+			"Ce périphérique ne pourra plus se connecter!")) {
 			return false;
 		}
 	});
