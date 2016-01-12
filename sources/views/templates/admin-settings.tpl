@@ -5,7 +5,7 @@
 		<div id="content-blockTabControl" class="col-xs-12">			
 			<div class="content-blockTab1">
 				<a href="#changer-mot-de-passe" alt="Changement du mot de passe" class="adminSettingRender">
-					<div class="content-blockTab_e" id="settingPassword">Changement du mot de passe</div>
+					<div class="content-blockTab_e" id="settingPassword">Mot de passe</div>
 				</a>
 			</div>
 			<div class="content-blockTab2">

@@ -7,7 +7,7 @@
 	 **************************************************************************
 	 * @page			Tools.php
 	 * @publication		11/28/15
-	 * @edition			11/28/15	
+	 * @edition			01/09/16
 	 * @author			Jérémie LIECHTI
 	 * @copyright		3IL, Jérémie LIECHTI
 	 */
@@ -19,6 +19,9 @@
 		
 		/* Current URL */
 		public $url;
+
+		/* Current URI */
+		public $uri;
 		
 		/* Current POST */
 		public $post;
@@ -114,6 +117,46 @@
 			try {
 				return preg_replace("#(.+)id=(.+)$#", "$2", $url);
 			} catch (Exception $e) {
+				throw new Exception($e->getMessage());
+			}
+		}
+
+		/**
+		 * Extracts the action's type from the URL.
+		 *
+		 * @param url, the URL.
+		 * @return string, the action.
+		 * @throws	Exception, if preg_match() encounter a problem.
+		 */
+		public function getAction($url) {
+			try {
+				if(preg_match("#(.+)/supprimer/[0-9]{1,}$#", $url)) {
+					return "delete";
+				} else if(preg_match("#(.+)/modifier/[0-9]{1,}$#", $url)) {
+					return "modify";
+				} else {
+					return "unexpected";
+				}
+			} catch(Exception $e) {
+				throw new Exception($e->getMessage());
+			}
+		}
+
+		/**
+		 * Extracts the ID from the URL when an action is required.
+		 *
+		 * @param url, the URL.
+		 * @return string, the ID.
+		 * @throws	Exception, if preg_*() encounter a problem.
+		 */
+		public function getID_intoURL($url) {
+			try {
+				if(preg_match("#(.+)/(supprimer|modifier)/[0-9]{1,}$#", $url)) {
+					return preg_replace("#(.+)/(supprimer|modifier)/([0-9]{1,})$#", "$3", $url);
+				} else if(preg_match("#(.+)/supprimer/all$#", $url)) {
+					return "all";
+				}
+			} catch(Exception $e) {
 				throw new Exception($e->getMessage());
 			}
 		}

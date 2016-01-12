@@ -37,7 +37,7 @@
 				self::$initialized = true;
 
 				if(file_exists(dirname(__FILE__)."/Renderer.php")) {
-					require(dirname(__FILE__)."/Renderer.php");
+					require_once(dirname(__FILE__)."/Renderer.php");
 					$this->smarty = Renderer::getInstance()->getSmartyInstance(true);
 				} else {
 					throw new Exception(

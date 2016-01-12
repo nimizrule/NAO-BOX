@@ -44,10 +44,11 @@
 		 * The function imports all Smarty's dependencies.
 		 *
 		 * @param	adminProcess, true if the render is for an admin session, false else.
+		 * @param 	action, true 
 		 * @return 	Smarty, the Smarty's instance.
 		 * @throws	Exception, if files doesn't exists or configuration fail.
 		 */
-		public function getSmartyInstance($adminProcess) {			
+		public function getSmartyInstance($adminProcess, $action = false) {			
 			try {
 
 				// If the smarty's configuration file exists, system can start the 
@@ -65,6 +66,7 @@
 					$this->smarty->cache_lifetime = SMARTY_CACHE_LIFETIME;
 					$this->smarty->inheritance_merge_compiled_includes = true;
 					
+					// Is not an admin page
 					if(!$adminProcess) {
 						$this->smarty->assign(
 							"settings", 
@@ -79,20 +81,42 @@
 							)
 						);
 						$this->smarty->assign("session", "user");
+
+					// Is an admin page
 					} else {
-						$this->smarty->assign(
-							"settings", 
-							array(
-								"bootstrap" => 
-									"../".BOOTSTRAP_DIR."/css/bootstrap.min.css",
-								"css" => "../".DIR_CSS."/file.css",
-								"img" => "../".DIR_IMG,
-								"jquery" => 
-									"../".JQUERY_DIR."/jquery-1.11.3.min.js",
-								"functions" => "../".DIR_SCRIPTS."/functions.js"
-							)
-						);
-						$this->smarty->assign("session", "admin");
+						
+						// An action is not required
+						if(!$action) {
+							$this->smarty->assign(
+								"settings", 
+								array(
+									"bootstrap" => 
+										"../".BOOTSTRAP_DIR."/css/bootstrap.min.css",
+									"css" => "../".DIR_CSS."/file.css",
+									"img" => "../".DIR_IMG,
+									"jquery" => 
+										"../".JQUERY_DIR."/jquery-1.11.3.min.js",
+									"functions" => "../".DIR_SCRIPTS."/functions.js"
+								)
+							);
+							$this->smarty->assign("session", "admin");
+
+						// An action is required
+						} else {
+							$this->smarty->assign(
+								"settings", 
+								array(
+									"bootstrap" => 
+										"../../../".BOOTSTRAP_DIR."/css/bootstrap.min.css",
+									"css" => "../../../".DIR_CSS."/file.css",
+									"img" => "../../../".DIR_IMG,
+									"jquery" => 
+										"../../../".JQUERY_DIR."/jquery-1.11.3.min.js",
+									"functions" => "../../../".DIR_SCRIPTS."/functions.js"
+								)
+							);
+							$this->smarty->assign("session", "admin");
+						}
 					}
 					
 					// When the debug's functions are activated, the cache system

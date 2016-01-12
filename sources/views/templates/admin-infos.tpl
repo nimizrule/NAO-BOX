@@ -10,7 +10,7 @@
 			</div>
 			<div  class="content-blockTab2">
 				<a href="#admin" alt="Informations d'administration" class="adminInformationRender">
-					<div class="content-blockTab_d" id="informationAdmin">Informations d'administration</div>
+					<div class="content-blockTab_d" id="informationAdmin">Administration</div>
 				</a>
 			</div>
 			<hr />
