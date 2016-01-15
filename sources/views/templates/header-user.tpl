@@ -12,10 +12,10 @@
 				<img src="{$settings.img}/header/stop_white.png" style="width:32px;height:32px;">			
 			</a>									
 			<a href="/menu">
-				<img src="{$settings.img}/header/home_white.png" style="width:32px;height:32px;">
+				<img src="{$settings.img}/header/home_white.png" style="width:35px;height:35px;">
 			</a>
 			<a href="/eteindre" class="raspRender-shutdown">
-				<img src="{$settings.img}/header/shutdown.png" style="width:32px;height:32px;">
+				<img src="{$settings.img}/header/shutdown.png" style="width:40px;height:40px;">
 			</a>	
 	</section>
 </header>
