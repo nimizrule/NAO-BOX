@@ -1,26 +1,40 @@
 {if $content == "list"}
-	<div class="table-responsive">
-		<table class="table-bordered">
-			{foreach from=$peripherals item=peripheral}
-				<tr>
-					<td>{$peripheral.name}</td>
-					<td>{$peripheral.mac}</td>
-					<td>{$peripheral.ip}</td>
-					<td class="tableFormalism-action"><img src="{$settings.img}/buttons/list.jpg" class="adminPeripheralRender-descAction" alt="Description"/></td>
-					<td class="tableFormalism-action">
-						<a href="/admin/peripheriques/modifier/{$peripheral.id}#action" alt="Modifier le périphérique"><img src="{$settings.img}/buttons/pen.jpg" alt="Modifier"/></a>
-					</td>
-					<td class="tableFormalism-action">
-						<a href="/admin/peripheriques/supprimer/{$peripheral.id}#action" alt="Supprimer le périphérique"><img src="{$settings.img}/buttons/trash.jpg" class="adminPeripheralRender-delAction" alt="Supprimer"/></a>
-					</td>
+	<section>
+		<div class="table-responsive">
+			<table class="table-bordered">
+				<tr>	
+					<th>NOM DU PERIPHERIQUE</th>
+					<th>ADRESSE MAC</th>
+					<th>ADRESSE IP</th>
+					<th colspan="3">ACTIONS</th>
 				</tr>
-				<tr style="display: none; height: 49px;">
-					<td></td>
-					<td colspan="4">{$peripheral.desc}</td>
-				</tr>
-			{/foreach}
-		</table>
-	</div>
+				{if $number > 0}
+					{foreach from=$peripherals item=peripheral}
+						<tr>
+							<td>{$peripheral.name}</td>
+							<td>{$peripheral.mac}</td>
+							<td>{$peripheral.ip}</td>
+							<td class="tableFormalism-action"><img src="{$settings.img}/buttons/list.jpg" class="adminPeripheralRender-descAction" alt="Description"/></td>
+							<td class="tableFormalism-action">
+								<a href="/admin/peripheriques/modifier/{$peripheral.id}#action" alt="Modifier le périphérique"><img src="{$settings.img}/buttons/pen.jpg" alt="Modifier"/></a>
+							</td>
+							<td class="tableFormalism-action">
+								<a href="/admin/peripheriques/supprimer/{$peripheral.id}#action" alt="Supprimer le périphérique"><img src="{$settings.img}/buttons/trash.jpg" class="adminPeripheralRender-delAction" alt="Supprimer"/></a>
+							</td>
+						</tr>
+						<tr style="display: none; height: 49px;">
+							<td></td>
+							<td colspan="4">{$peripheral.desc}</td>
+						</tr>
+					{/foreach}
+				{else}
+					<tr>
+						<td colspan="5" style="text-align: center;">Aucune donnée à afficher</td>
+					</tr>
+				{/if}
+			</table>
+		</div>
+	</section>
 {else if $content == "add"}
 	<section >
 		<form method="post" action="/admin/peripheriques#creer">
