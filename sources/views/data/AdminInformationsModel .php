@@ -74,66 +74,41 @@
 		}
 
 		/**
-		 * return a package
-		 *	
-		 * @return return_qry : result into an object, exception message any others cases
+		 * update temperature from one sensors
+		 * @param id_nao, nao's id
+		 * @param srs_value, temp value of the sensors
+		 * @return 0 without errors, exception message any others cases
 		 */
-		public function get_Sensors_From_Specific_Nao($id_nao) {
+		public function update_sensor_value
+			($id_nao, $srs_value) {
 			try {
-				$qry = $this->db->prepare('SELECT * FROM  naobox.nb_sensors WHERE nb_sensors.id_nao =?');
+				$qry = $this->db->prepare
+				('UPDATE naobox.nb_sensors SET srs_value =? WHERE nb_sensors.id_nao =?');
 
-				$qry->bindValue(1, $id_nao, PDO::PARAM_STR);				
+				$qry->bindValue(1, $srs_value, PDO::PARAM_INT);
+				$qry->bindValue(2, $id_nao, PDO::PARAM_INT);
 
-				$qry->execute();				
-				$return_qry = $qry->fetchAll();
-
+				$qry->execute();
 				$qry->closeCursor();
-				return $return_qry;
 			} catch(Exception $e) {
 				return $e->getMessage();
 			}
 		}
 
 		/**
-		 * Modify all peripheral's informations from one peripheral 
+		 * update temperature from one sensors
 		 * @param id_nao, nao's id
-		 * @param CPU, the cpu is in the head
-		 * @param RShoulderPitch, the right shoulder
-		 * @param LShoulderPitch, the left shoulder
-		 * @param RElbowYaw, the right elbow
-		 * @param LElbowYaw, the left elbow
-		 * @param RHipPitch, the right hip
-		 * @param LHipPitch, the left hip
-		 * @param RKneePitch, the right knee
-		 * @param LKneePitch, the right knee
-		 * @param LFoot, the right foot
-		 * @param RFoot, the left foot
+		 * @param srs_lvl, temp value of the sensors
 		 * @return 0 without errors, exception message any others cases
 		 */
-		public function update_sensors_values
-			($id_nao, $CPU
-			, $RShoulderPitch, $LShoulderPitch
-			, $RElbowYaw, $LElbowYaw
-			, $RHipPitch, $LHipPitch
-			, $RKneePitch, $LKneePitch
-			, $LFoot, $RFoot) {
+		public function update_sensor_lvl
+			($id_nao, $srs_lvl) {
 			try {
 				$qry = $this->db->prepare
-				('UPDATE naobox.nb_sensors SET CPU =?, RShoulderPitch =?, LShoulderPitch =?, RElbowYaw =?, LElbowYaw =?, RHipPitch =?, LHipPitch =?, RKneePitch =?, LKneePitch =?, LFoot =?, RFoot =? WHERE nb_sensors.id_nao =?');
+				('UPDATE naobox.nb_sensors SET srs_lvl =? WHERE nb_sensors.id_nao =?');
 
-				$qry->bindValue(1, $CPU, PDO::PARAM_STR);
-				$qry->bindValue(2, $RShoulderPitch, PDO::PARAM_STR);
-				$qry->bindValue(3, $LShoulderPitch, PDO::PARAM_STR);
-				$qry->bindValue(4, $RElbowYaw, PDO::PARAM_STR);
-				$qry->bindValue(5, $LElbowYaw, PDO::PARAM_STR);
-				$qry->bindValue(6, $RHipPitch, PDO::PARAM_STR);
-				$qry->bindValue(7, $LHipPitch, PDO::PARAM_STR);
-				$qry->bindValue(8, $RKneePitch, PDO::PARAM_STR);
-				$qry->bindValue(9, $LKneePitch, PDO::PARAM_STR);
-				$qry->bindValue(10, $LFoot, PDO::PARAM_STR);
-				$qry->bindValue(11, $RFoot, PDO::PARAM_STR);
-
-				$qry->bindValue(11, $id_nao, PDO::PARAM_INT);
+				$qry->bindValue(1, $srs_lvl, PDO::PARAM_INT);
+				$qry->bindValue(2, $id_nao, PDO::PARAM_INT);
 
 				$qry->execute();
 				$qry->closeCursor();

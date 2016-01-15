@@ -61,7 +61,7 @@
 		 */
 		public function get_Sensors() {
 			try {
-				$qry = $this->db->prepare('SELECT * FROM naobox.nb_sensors ORDER BY id_nao');				
+				$qry = $this->db->prepare('SELECT * FROM naobox.nb_sensors');				
 				$qry->execute();
 				//put  the result into an object
 				$return_qry = $qry->fetchAll();
