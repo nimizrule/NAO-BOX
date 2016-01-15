@@ -1,8 +1,9 @@
 <!--
-	 *  Page affichant des informatipns des capteurs principaux
+	 *  Page affichant la vue du base de l'administration
+	 * 
 	 * @author Bastien VAUTIER
 	 * @version 0.0.1
-	 * @copyright 2016 3iL
+	 * @copyright 2015 3iL
 -->
 
 
@@ -23,19 +24,75 @@
 
 la température des moteurs, son adresse IP, etc. Mais également des informations liées au Raspberry telles que la place restante sur la carte SD, la version de l’OS, le nombre de fichiers…
 
-
-<table border="1" style="width:100%">	
-	<tr>	
-		<td>ID</td>
-		<td>Nom du capteur</td>
-		<td>Valeur</td>
-		<td>Seuil d'alerte</td>
-	</tr>	
-	<tr>
-		<td>1	</td>
-		<td>GENOU	</td>
-		<td>44</td>
-		<td>45</td>
+<div>
+	<table border="1" style="width:100%">
+		<tr>
+			<td>
+				Nom du capteur :
+			</td>
+			<td>
+				Information qu'il contient :
+			</td>	
+		</tr>
+		<tr>
+			<td>Etat Capteur tactile tête</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Etat Caméra numéro 1</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Etat Caméra numéro 2</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Etat Emmeteur/recepteur infrarouge (led) pour les yeux</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Etat bouton ventre</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Etat sonar 1</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Etat sonar 2</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Etat sonar 3</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Etat sonar 4</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Etat main gauche</td>
+			<td></td>
+		</tr>	 
+		<tr>
+			<td>Etat main droite</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Etat bumper pied gauche</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Etat bumper pied droit</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Etat pied gauche</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Etat pied droit</td>
+			<td></td>
+		</tr>
 	</tr>
-
 </table>

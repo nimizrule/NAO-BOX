@@ -127,6 +127,12 @@
 
 						case "controlAdd":
 							$content = "add";
+							$controls = [
+								"name" => "",
+								"file" => "",
+								"desc" => ""
+							];
+							$this->smarty->assign("controls", $controls); 
 							break;
 						default:
 							break;
@@ -255,6 +261,13 @@
 
 						case "peripheralAdd":
 							$content = "add";
+							$peripherals = [
+								"name" => "",
+								"mac" => "",
+								"ip" => "",
+								"desc" => ""
+							];
+							$this->smarty->assign("peripheral", $peripherals); 
 							break;
 						default:
 							break;

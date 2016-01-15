@@ -59,34 +59,38 @@
 
 				// To starting display, the tool classe must exist.
 				if (file_exists (DIR_CLASSES."/Tools.php")) {
-					$url = Tools::getInstance()->url;
-	
-					// When the controller is good, the render can begin.
-					if (Tools::getInstance()->isAskedController(__CLASS__, $url)) {		
-						if (file_exists(DIR_TEMPLATES."/".$this->tpl_name.".tpl")) {	
-							try {	
-								$this->smarty->assign("nao_battery", 80);
+					if(Tools::isConnectedAdmin()) {
+						$url = Tools::getInstance()->url;
+		
+						// When the controller is good, the render can begin.
+						if (Tools::getInstance()->isAskedController(__CLASS__, $url)) {		
+							if (file_exists(DIR_TEMPLATES."/".$this->tpl_name.".tpl")) {	
+								try {	
+									$this->smarty->assign("nao_battery", 80);
 
-								// After assign variables to the template, 
-								// The controller show the render.
-								$this->smarty->display(DIR_TEMPLATES."/".
-								$this->tpl_name.".tpl");
-				
-							} catch (Exception $e) {
+									// After assign variables to the template, 
+									// The controller show the render.
+									$this->smarty->display(DIR_TEMPLATES."/".
+									$this->tpl_name.".tpl");
+					
+								} catch (Exception $e) {
+									throw new Exception(
+										"An error has occured: ".$e->getMessage()
+									);
+								}
+							} else {
 								throw new Exception(
-									"An error has occured: ".$e->getMessage()
+									"The template '".$this->tpl_name."' doesn't 
+									exists !"
 								);
 							}
 						} else {
 							throw new Exception(
-								"The template '".$this->tpl_name."' doesn't 
-								exists !"
+								"An error has occured during the routing process !"
 							);
 						}
 					} else {
-						throw new Exception(
-							"An error has occured during the routing process !"
-						);
+						header("Location: /admin/connexion");
 					}
 				} else {
 					throw new Exception('The URL cannot be evaluable !');

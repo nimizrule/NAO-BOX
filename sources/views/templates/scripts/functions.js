@@ -100,6 +100,9 @@ $(document).ready(function() {
 		});
 	});
 	///// OTHER IMPLEMENTS
+	$(document).on("click", ".raspRender-shutdown", function() {
+		return shutdownRaspConfirm();
+	});
 	/*************************************************************************/
 	/*						      ADMIN ACTIONS'S 							 */
 	/*************************************************************************/
@@ -288,7 +291,16 @@ $(document).ready(function() {
 			return false;
 		}
 	});
+	$(document).on("click", ".adminRaspRender-shutdown", function() {
+		return shutdownRaspConfirm();
+	});
 });
+function shutdownRaspConfirm() {
+	if(!confirm(
+		"En confirmant cette action, le Raspberry va s'éteindre et NAO ne pourra plus être contrôlé!")) {
+		return false;
+	}
+}
 function getChildID(object) {
 	return object.children("div").attr("id");
 }

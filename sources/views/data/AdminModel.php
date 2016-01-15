@@ -5,36 +5,30 @@
 	 * This class handles the add  of a customer
 	 *
 	 * @publication		01/12/15
-	 * @edition			01/12/15
+	 * @edition			01/13/16
 	 * @author Bastien VAUTIER
 	 * @version 0.0.1
 	 * @copyright 2015 3iL
 	 */
 
-	require_once(DIR_CLASSES."/Data.php"); 
+	require_once(dirname(__FILE__)."/../../classes/ModelRenderer.php"); 
 
-	class AdminModel extends Data {
+	class AdminModel extends ModelRenderer {
 
-		/**
-		 * AdminModel instance
-		 */
+		/* AdminModel instance */
 		public static $instance = null;
 		
-		/**
-		 * The constructor of AdminModel
+		/** 
+		 * AdminModel builder.
+		 * Initialize the objects.
 		 */
-		public function __construct() {
-			try {
-				AdminModel::init();
-			} catch(Exception $e) {
-				echo $e->getMessage();
-			}
-		}
+		public function __construct() {}
 		
 		/**
 		 * Get current instance of AdminModel (singleton)
 		 *
-		 * @return AdminModel
+		 * @param 	void.
+		 * @return 	AdminModel
 		 */
 		public static function getInstance() {
 			if (!self::$instance) {
@@ -42,16 +36,100 @@
 			}
 			return self::$instance;
 		}
-		
+
 		/**
-		 * Initialize the AdminModel class
+		 * Check if the account exists.
+		 *
+		 * @param 	user, user to check
+		 * @param 	password, password to check
+		 * @return 	true, if the account is valid,
+		 *			false any others cases.
 		 */
-		public function init() {
+		public function validAccount($user, $password) {
 			try {
-				parent::init();	
+				$qry = ModelRenderer::getDbInstance()->prepare("SELECT COUNT(usr_id) AS login FROM naobox.nb_users WHERE usr_login=? AND usr_pwd=?");				
+				$qry->bindValue(1, $user, PDO::PARAM_STR);
+				$qry->bindValue(2, $password, PDO::PARAM_STR);
+				$qry->execute();
+				$return_qry = $qry->fetch(PDO::FETCH_OBJ);
+				$qry->closeCursor();
+
+				return ($return_qry->login == 0) ? false : true;
+				
 			} catch(Exception $e) {
-				throw new Exception('An exception has occured during the loading: '.$e->getMessage());
-			}			
+				return false;
+			}
+		}
+
+		/**
+		 * Connect the account.
+		 *
+		 * @param 	user, user to connect
+		 */
+		public function connectAccount($user) {
+			try {
+				$qry = ModelRenderer::getDbInstance()->prepare("UPDATE naobox.nb_users SET usr_connected =1, usr_last_use =NOW() WHERE usr_login=?");
+				$qry->bindValue(1, $user, PDO::PARAM_STR);
+				$qry->execute();		
+
+				return 0;
+
+			} catch(Exception $e) {
+				return $e->getMessage();
+			}
+		}
+
+		/**
+		 * Disconnect the account.
+		 *
+		 * @param 	user, user to disconnect
+		 */
+		public function disconnectAccount($user) {
+			try {
+				$qry = ModelRenderer::getDbInstance()->prepare("UPDATE naobox.nb_users SET usr_connected =0, usr_last_use =NOW() WHERE usr_login=?");
+				$qry->bindValue(1, $user, PDO::PARAM_STR);
+				$qry->execute();		
+
+				return 0;
+
+			} catch(Exception $e) {
+				return $e->getMessage();
+			}
+		}
+
+		public function getPassword($user) {
+			try {
+				$qry = ModelRenderer::getDbInstance()->prepare("SELECT usr_pwd FROM naobox.nb_users WHERE usr_login=?");				
+				$qry->bindValue(1, $user, PDO::PARAM_STR);
+				$qry->execute();
+				$return_qry = $qry->fetch(PDO::FETCH_OBJ);
+				$qry->closeCursor();
+
+				return $return_qry->usr_pwd;
+				
+			} catch(Exception $e) {
+				return $e->getMessage();
+			}
+		}
+
+		/**
+		 * Change the password of the account.
+		 *
+		 * @param 	user, user
+		 * @param 	password, users's password
+		 */
+		public function changePassword($user, $password) {
+			try {
+				$qry = ModelRenderer::getDbInstance()->prepare("UPDATE naobox.nb_users SET usr_pwd =? WHERE usr_login=?");
+				$qry->bindValue(1, $password, PDO::PARAM_STR);
+				$qry->bindValue(2, $user, PDO::PARAM_STR);
+				$qry->execute();		
+
+				return 0;
+
+			} catch(Exception $e) {
+				return $e->getMessage();
+			}
 		}
 
 		/**

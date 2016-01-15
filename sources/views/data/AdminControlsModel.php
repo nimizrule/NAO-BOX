@@ -15,9 +15,7 @@
 
 	class AdminControlsModel extends ModelRenderer {
 
-		/**
-		 * AdminControlsModel instance
-		 */
+		/* AdminControlsModel instance */
 		public static $instance = null;
 		
 		/** 

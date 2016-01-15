@@ -16,15 +16,8 @@
 	 
 	class AdminLoginController extends BackController {
 		
-		/**
-		 * Name of template
-		 */
-		 private $tpl_name = "admin-login";
-		
-		/**
-		 * Name of model
-		 */
-		private $model_name = 'Modify';
+		/* Name of template */
+		private $tpl_name = "admin-login";
 		
 		/* Allow user to use this controller */
 		private $access_check = true;
@@ -65,35 +58,77 @@
 			
 			// To starting display, the tool classe must exist.
 			if (file_exists (DIR_CLASSES."/Tools.php")) {
-				$url = Tools::getInstance()->url;
+				if(!Tools::isConnectedAdmin()) {
+					$url = Tools::getInstance()->url;
+					
+					// When the controller is good, the render can begin.
+					if (Tools::getInstance()->isAskedController(__CLASS__, $url)) {		
+						if (file_exists(DIR_TEMPLATES."/".$this->tpl_name.".tpl")) {	
+							if (file_exists(DIR_VIEWS."/data/AdminModel.php")) {
+								try {	
 				
-				// When the controller is good, the render can begin.
-				if (Tools::getInstance()->isAskedController(__CLASS__, $url)) {		
-					if (file_exists(DIR_TEMPLATES."/".$this->tpl_name.".tpl")) {	
-						try {					
-							$this->smarty->assign("nao_battery", 80);
-							$this->smarty->assign("session", "user");
-							
-							// After assign variables to the template, 
-							// The controller show the render.
-							$this->smarty->display(DIR_TEMPLATES."/".
-							$this->tpl_name.".tpl");
-			
-						} catch (Exception $e) {
+									// The user asks to log in.
+									if(isset($_POST["connexion"])) {
+										
+										require_once(DIR_VIEWS."/data/AdminModel.php");
+
+										if(!empty($_POST["login"]) && !empty($_POST["password"])) {
+											if(AdminModel::getInstance()->validAccount(
+												$_POST["login"], hash(HASH_ALGORITHM,$_POST["password"]))
+											) {
+
+												$_SESSION["connected-admin"] = true;
+												$_SESSION["admin"] = $_POST["login"];
+												AdminModel::getInstance()->connectAccount(
+													$_POST["login"]
+												);
+												header("Location: /admin/menu");
+											} 
+										} 
+
+										$login = [
+											"user" => $_POST["login"],
+											"password" => $_POST["password"]
+										];
+									} else {
+										$login = [
+											"user" => "",
+											"password" => ""
+										];
+									}
+
+									$this->smarty->assign("login", $login);
+									$this->smarty->assign("nao_battery", 80);
+									
+									// After assign variables to the template, 
+									// The controller show the render.
+									$this->smarty->display(DIR_TEMPLATES."/".
+									$this->tpl_name.".tpl");
+
+								} catch (Exception $e) {
+									throw new Exception(
+										"An error has occured: ".$e->getMessage()
+									);
+								}
+							} else {
+								throw new Exception(
+									"The model 'AdminModel' doesn't 
+									exists !"
+								);
+							}
+						} else {
 							throw new Exception(
-								"An error has occured: ".$e->getMessage()
+								"The template '".$this->tpl_name."' doesn't 
+								exists !"
 							);
 						}
 					} else {
 						throw new Exception(
-							"The template '".$this->tpl_name."' doesn't 
-							exists !"
+							"An error has occured during the routing process !"
 						);
 					}
 				} else {
-					throw new Exception(
-						"An error has occured during the routing process !"
-					);
+					header("Location: /admin/menu");
 				}
 			} else {
 				throw new Exception('The URL cannot be evaluable !');

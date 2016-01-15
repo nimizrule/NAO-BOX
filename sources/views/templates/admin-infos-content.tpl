@@ -2,10 +2,9 @@
 	<div class="table-responsive">
 		<table class="table-bordered">
 			<tr>	
-				<td>ID</td>
-				<td>Nom du capteur</td>
-				<td>Valeur</td>
-				<td>Seuil d'alerte</td>
+				<td><strong>Nom du capteur</strong></td>
+				<td><strong>Valeur</strong></td>
+				<td><strong>Seuil d'alerte</strong></td>
 			</tr>					
 		</table>
 	</div>

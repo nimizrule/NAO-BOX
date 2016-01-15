@@ -105,6 +105,27 @@
 				throw new Exception($e->getMessage());
 			}
 		}
+
+		/**
+		 * Check if a session admin exists.
+		 *
+		 * @return 	true if the session exists, 
+		 *			false any others cases.
+		 */
+		public function isConnectedAdmin() {
+			if(isset($_SESSION["connected-admin"])) {
+				if(!empty($_SESSION["connected-admin"])) {
+					return true;
+				} else {
+					$_SESSION["admin"] = "";
+					return false;
+				}
+			} else {
+				$_SESSION["admin"] = "";
+				$_SESSION["connected-admin"] = false;
+				return false;
+			}
+		}
 		
 		/**
 		 * Extracts the id value from the URL.

@@ -10,9 +10,12 @@
 			</a>
 			<a href="#">
 				<img src="{$settings.img}/header/stop.png" style="width:15px;height:15px;">			
+			</a>
+			<a href="/admin/eteindre" class="adminRaspRender-shutdown">
+				<img src="{$settings.img}/header/home.png" style="width:32px;height:32px;">
 			</a>							
 			<a href="/admin/menu">
-				<img src="{$settings.img}/header/home.png" style="width:30px;height:35px;">
+				<img src="{$settings.img}/header/home.png" style="width:32px;height:32px;">
 			</a>
 	</section>
 </header>

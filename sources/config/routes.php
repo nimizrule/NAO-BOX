@@ -82,6 +82,16 @@
 			"file" => "AdminSettingsController",
 			"url" => "/admin/parametres"
 		),
+
+		"userShutdown" => array(
+			"file" => "ShutdownController",
+			"url" => "/eteindre" 
+		),
+
+		"adminShutdown" => array(
+			"file" => "ShutdownController",
+			"url" => "/admin/eteindre" 
+		),
 		
 		// ERRORS routes
 		'403' => array(

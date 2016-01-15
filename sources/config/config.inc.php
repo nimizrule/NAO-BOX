@@ -56,3 +56,6 @@
 	define("DB_NAME", "naobox"); 
 	define("DB_USER", "naobox"); 
 	define("DB_PASSWORD", "naobox");
+
+	/* Hash method */
+	define("HASH_ALGORITHM", "sha256");
