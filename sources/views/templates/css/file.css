@@ -7,15 +7,78 @@
 	padding: 0 4% 0 4%;
 }
 .table-responsive {
-	margin-top: 20px;
+	margin-top: 0px;
+}
+.table-bordered {
+	border: none;
+}
+.table-bordered>tbody>tr>td {
+	border: none;
+	border-bottom: 1px solid #ddd;
 }
 th, td {
-	width: 50%;
 	color: #707070;
-	padding: 15px;
+	padding: 9px 10px 9px 10px;
+}
+table {
+	border: 1px solid #ddd;
 }
 th {
-	text-decoration: underline;
+	background-color: #f9f9f9;
+}
+label {
+	font-weight: normal;
+}
+@media (min-width: 768px) {
+  .container .header-container header, .container .page-container #page-row1,
+  .container .page-container #page-row2 {
+    width: 100%;
+  }
+
+  .container .page-container #content-blockControls, .container .page-container #content-blockSensors,
+  .container .page-container #content-blockInfos, .container .page-container #content-blockManuals,
+  .container .page-container #content-blockPeripherals, .container .page-container #content-blockAdministrator {
+    margin-top: 40px;
+  }
+
+  .container .page-container #content-blockTabControl,
+  .container .page-container #content-blockTabControl #content-blockTabPage #content-blockControlActions {
+    margin: 30px 0 30px 0;
+  }
+}
+@media (min-width: 992px) {
+  .container .header-container header, .container .page-container #page-row1,
+  .container .page-container #page-row2 {
+    width: 80%;
+  }
+
+  .container .page-container #content-blockControls, .container .page-container #content-blockSensors,
+  .container .page-container #content-blockInfos, .container .page-container #content-blockManuals,
+  .container .page-container #content-blockPeripherals, .container .page-container #content-blockAdministrator  {
+    margin-top: 60px;
+  }
+
+  .container .page-container #content-blockTabControl,
+  .container .page-container #content-blockTabControl #content-blockTabPage #content-blockControlActions {
+    margin: 30px 0 30px 0;
+  }
+}
+@media (min-width: 1200px) {
+  .container .header-container header, .container .page-container #page-row1,
+  .container .page-container #page-row2 {
+    width: 80%;
+  }
+
+  .container .page-container #content-blockControls, .container .page-container #content-blockSensors,
+  .container .page-container #content-blockInfos, .container .page-container #content-blockManuals,
+  .container .page-container #content-blockPeripherals, .container .page-container #content-blockAdministrator {
+    margin-top: 80px;
+  }
+
+  .container .page-container #content-blockTabControl,
+  .container .page-container #content-blockTabControl #content-blockTabPage #content-blockControlActions {
+    margin: 50px 0 50px 0;
+  }
 }
 /*****************************************************************************************************************************/
 /****************************************						HEADER						**********************************/
@@ -30,24 +93,6 @@ th {
 .container .page-container #page-row2 {
 	margin: auto;
 }
-@media (min-width: 768px) {
-  .container .header-container header, .container .page-container #page-row1,
-  .container .page-container #page-row2 {
-    width: 100%;
-  }
-}
-@media (min-width: 992px) {
-  .container .header-container header, .container .page-container #page-row1,
-  .container .page-container #page-row2 {
-    width: 80%;
-  }
-}
-@media (min-width: 1200px) {
-  .container .header-container header, .container .page-container #page-row1,
-  .container .page-container #page-row2 {
-    width: 80%;
-  }
-}
 .container .header-container header #header-title, .container .header-container header #header-controls {
 	line-height: 82px;
 }	
@@ -59,10 +104,10 @@ th {
 }
 .container .header-container header #header-controls .battery-item {
 	width: 60px;
-	height: 20px;
+	height: 66px;
 }
 .container .header-container header #header-controls .battery {
-	margin: 0 30px 0 10px;
+	margin: 0 30px 0 -50px;
 }
 /*****************************************************************************************************************************/
 /****************************************						PAGE						**********************************/
@@ -70,50 +115,12 @@ th {
 .container .page-container #page-row1, .container .page-container #page-row2 {
 	text-align: center;
 }
-@media (min-width: 768px) {
-  .container .page-container #content-blockControl, .container .page-container #content-blockSensors,
-  .container .page-container #content-blockInfos, .container .page-container #content-blockManuals,
-  .container .page-container #content-blockAdministrator {
-    margin-top: 40px;
-  }
-}
-@media (min-width: 992px) {
-  .container .page-container #content-blockControl, .container .page-container #content-blockSensors,
-  .container .page-container #content-blockInfos, .container .page-container #content-blockManuals,
-  .container .page-container #content-blockAdministrator  {
-    margin-top: 60px;
-  }
-}
-@media (min-width: 1200px) {
-  .container .page-container #content-blockControl, .container .page-container #content-blockSensors,
-  .container .page-container #content-blockInfos, .container .page-container #content-blockManuals,
-  .container .page-container #content-blockAdministrator {
-    margin-top: 80px;
-  }
-}
-@media (min-width: 768px) {
-  .container .page-container #content-blockTabControl,
-  .container .page-container #content-blockTabControl #content-blockTabPage #content-blockControlActions {
-    margin: 30px 0 30px 0;
-  }
-}
-@media (min-width: 992px) {
-  .container .page-container #content-blockTabControl,
-  .container .page-container #content-blockTabControl #content-blockTabPage #content-blockControlActions {
-    margin: 30px 0 30px 0;
-  }
-}
-@media (min-width: 1200px) {
-  .container .page-container #content-blockTabControl,
-  .container .page-container #content-blockTabControl #content-blockTabPage #content-blockControlActions {
-    margin: 50px 0 50px 0;
-  }
-}
 .container .page-container #content-blockTabControl {
 	text-align: left;
 }
 .container .page-container #content-blockTabControl .content-blockTab1,
-.container .page-container #content-blockTabControl .content-blockTab2 {
+.container .page-container #content-blockTabControl .content-blockTab2,
+.container .page-container #content-blockTabControl .content-blockTab3 {
 	width: 181px;
 	height: 46px;
 	text-align: center;
@@ -123,6 +130,9 @@ th {
 }
 .container .page-container #content-blockTabControl .content-blockTab2 {
 	margin-left: 183px;
+}
+.container .page-container #content-blockTabControl .content-blockTab3 {
+	margin-left: 366px;
 }
 .container .page-container #content-blockTabControl a .content-blockTab_e {
 	background: url('../img/buttons/tabcontrol_e.jpg');
@@ -143,13 +153,46 @@ th {
 	max-height: 85%;
 	/*overflow-y: scroll;*/
 }
+.container .page-container #content-blockTabPage section {
+	margin-top: 20px;
+}
 .container .page-container #content-blockTabPage a {
 	text-decoration: none;
 	color: #615F5F;
 	line-height: 20px
 }
+.container .page-container #content-blockTabPage a:hover {
+	text-decoration: underline;
+}
+.container .page-container #content-blockTabPage .tableFormalism-action {
+	width: 60px;
+}
+.container .page-container #content-blockTabPage .tableFormalism-data input,
+.container .page-container #content-blockTabPage .tableFormalism-data textarea {
+	width: 100%;
+}
+.container .page-container #content-blockTabPage .tableFormalism-data input {
+	height: 30px;
+}
+.container .page-container #content-blockTabPage .tableFormalism-data textarea {
+	height: 200px;
+	min-height: 20%;
+	max-height: 140px;
+	min-width: 100%;
+	max-width: 100%;
+}
 .container .page-container #content-blockTabPage table {
 	width: 100%;
+}
+.container .page-container #container-blockTabPage #controls-step {
+	width: 50%;
+}
+.container .page-container #container-blockTabPage #controls-step td {
+	height: 60px;
+	padding: 0;
+}
+.container .page-container #container-blockTabPage #controls-step td img {
+	height: 60px;
 }
 .container .page-container #content-blockTabControl #content-blockTabPage #content-blockControlActions {
 	text-align: center;
@@ -225,8 +268,7 @@ th {
 		box-sizing:border-box;		
 		
 	}	
-	
-	
+
 	/*h1, h2 {
 		color:green;
 		font-style:italic;

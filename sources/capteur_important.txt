@@ -1,0 +1,50 @@
+Battery le niveau de batterie
+Key 	See ...
+Device/SubDeviceList/Battery/Current/Sensor/Value 	current Sensor (A)
+Device/SubDeviceList/Battery/Charge/Sensor/Value 	Charge Sensor (%)
+Device/SubDeviceList/Battery/Temperature/Sensor/Value 	Temperature Sensor (%)
+
+
+
+Température:
+
+tete   -> CPU :  Device/SubDeviceList/Head/Temperature/Sensor/Value 	Head cpu temperature (°C)
+
+Epaule :
+			RShoulderPitch : Device/SubDeviceList/RShoulderPitch/Temperature/Sensor/Value 	Temperature (°C)
+			LShoulderPitch : Device/SubDeviceList/LShoulderPitch/Temperature/Sensor/Value 	Temperature (°C)
+		 
+Coude : 
+		 RElbowYaw  : Device/SubDeviceList/RElbowYaw/Temperature/Sensor/Value 	Temperature (°C)
+		 LElbowYaw  : Device/SubDeviceList/LElbowYaw/Temperature/Sensor/Value 	Temperature (°C)
+		   
+hanche : 
+			RHipPitch : Device/SubDeviceList/RHipPitch/Temperature/Sensor/Value 	Temperature (°C)
+			LHipPitch : Device/SubDeviceList/LHipPitch/Temperature/Sensor/Value 	Temperature (°C)
+
+genou :  RKneePitch : Device/SubDeviceList/RKneePitch/Temperature/Sensor/Value 	Temperature (°C)
+		 LKneePitch : Device/SubDeviceList/LKneePitch/Temperature/Sensor/Value 	Temperature (°C)
+		   		
+
+FSR  le poids total sur chaque pied
+RFoot : Device/SubDeviceList/RFoot/FSR/TotalWeight/Sensor/Value 	FSR total (kg)
+LFoot : Device/SubDeviceList/LFoot/FSR/TotalWeight/Sensor/Value 	FSR total (kg)
+
+
+
+si pour une information spécifique :
+mem = ALProxy( "ALMemory" )
+listData = [
+              "Device/SubDeviceList/Battery/Current/Sensor/Value",
+              "Device/SubDeviceList/Battery/Charge/Sensor/Status",
+              "Device/SubDeviceList/Battery/Charge/Sensor/Value",
+           ]
+
+listVal = mem.getListData( listData )
+
+si pour toute les informations 
+
+print("ALMemory device keys...")
+for key in memoryProxy.getDataListName():
+    print(key)
+print("\n\n")

@@ -6,15 +6,15 @@
 	 * Informations controller, uses to display NAO's informations
 	 **************************************************************************
 	 * @page			InformationsController.php
-	 * @publication		11/29/15
-	 * @edition			11/29/15	
+	 * @publication		12/27/15
+	 * @edition			12/27/15	
 	 * @author			Jérémie LIECHTI
 	 * @copyright		3IL, Jérémie LIECHTI
 	 */
 
-	require_once(DIR_CLASSES."/Controller.php");
+	require_once(DIR_CLASSES."/FrontController.php");
 	 
-	class InformationsController extends Controller {
+	class InformationsController extends FrontController {
 		
 		/**
 		 * Name of template
@@ -72,6 +72,7 @@
 					if (file_exists(DIR_TEMPLATES."/".$this->tpl_name.".tpl")) {	
 						try {	
 							$this->smarty->assign("nao_battery", 80);
+							$this->smarty->assign("content", "nao");
 							
 							// After assign variables to the template, 
 							// The controller show the render.

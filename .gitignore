@@ -43,3 +43,4 @@ Temporary Items
 .apdisk
 documents/PMP/Qualite/~WRL0002.tmp
 *.tmp
+sources/views/data/AdminControlsModel.php

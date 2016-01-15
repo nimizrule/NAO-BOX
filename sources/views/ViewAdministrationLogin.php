@@ -1,0 +1,21 @@
+<!--
+	 *  Page permettant à l'adminstrateur ou un utilisateur de se connecter
+	 * 
+	 * @author Bastien VAUTIER
+	 * @version 0.0.1
+	 * @copyright 2015 3iL
+-->
+
+<h2>Administration</h2>	
+		
+<h3>Pour administrer l'application vous devez vous authentifier </h3>
+<div id="formulaire">
+	<form action="?page=ViewAdministration" method="post" onsubmit="gestionSubmit()">
+		<strong>Utilisateur:</strong> </br>
+		<input type="text" name="utilisateur" value=""/></br>
+		<strong>Mot de passe:</strong></br>					
+		<input type="password" name="password" value=""/></br>
+		<button type="submit" name="btConnexion">Administrer l'application</button></br>
+	</form>			
+</div>
+

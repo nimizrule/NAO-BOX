@@ -1,7 +1,7 @@
-<?php /* Smarty version 3.1.27, created on 2015-11-30 16:44:29
+<?php /* Smarty version 3.1.27, created on 2015-12-01 12:09:33
          compiled from "C:\wamp\www\NAO-BOX\sources\views\templates\header.tpl" */ ?>
 <?php
-/*%%SmartyHeaderCode:600565c7cede056f1_78245885%%*/
+/*%%SmartyHeaderCode:6333565d7fed37ee17_62772179%%*/
 if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
@@ -9,11 +9,11 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '6d30f30fef0f0b543d0ff7a222d26b6b859d36fc' => 
     array (
       0 => 'C:\\wamp\\www\\NAO-BOX\\sources\\views\\templates\\header.tpl',
-      1 => 1448901866,
+      1 => 1448968030,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '600565c7cede056f1_78245885',
+  'nocache_hash' => '6333565d7fed37ee17_62772179',
   'variables' => 
   array (
     'settings' => 0,
@@ -21,13 +21,13 @@ $_valid = $_smarty_tpl->decodeProperties(array (
   ),
   'has_nocache_code' => false,
   'version' => '3.1.27',
-  'unifunc' => 'content_565c7cede57795_82903459',
+  'unifunc' => 'content_565d7fed3c5320_51185483',
 ),false);
 /*/%%SmartyHeaderCode%%*/
-if ($_valid && !is_callable('content_565c7cede57795_82903459')) {
-function content_565c7cede57795_82903459 ($_smarty_tpl) {
+if ($_valid && !is_callable('content_565d7fed3c5320_51185483')) {
+function content_565d7fed3c5320_51185483 ($_smarty_tpl) {
 
-$_smarty_tpl->properties['nocache_hash'] = '600565c7cede056f1_78245885';
+$_smarty_tpl->properties['nocache_hash'] = '6333565d7fed37ee17_62772179';
 ?>
 <header class="row">
 	<section id="header-title" class="col-xs-12 col-sm-6">

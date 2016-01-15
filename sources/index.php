@@ -14,6 +14,7 @@
 	
 	if(file_exists(dirname(__FILE__)."/config/autoload.php")) {
 		try {
+			
 			// If the autoload exists, system can start the renderer
 			require(dirname(__FILE__)."/config/autoload.php");
 			Dispatcher::getInstance()->dispatch();

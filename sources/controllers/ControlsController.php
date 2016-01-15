@@ -6,25 +6,20 @@
 	 * Controls controller, uses to display the controls
 	 **************************************************************************
 	 * @page			ControlsController.php
-	 * @publication		11/29/15
-	 * @edition			11/29/15	
+	 * @publication		11/28/15
+	 * @edition			12/27/15	
 	 * @author			Jérémie LIECHTI
 	 * @copyright		3IL, Jérémie LIECHTI
 	 */
 
-	require_once(DIR_CLASSES."/Controller.php");
+	require_once(DIR_CLASSES."/FrontController.php");
 	 
-	class ControlsController extends Controller {
+	class ControlsController extends FrontController {
 		
 		/**
 		 * Name of template
 		 */
-		 private $tpl_name = "controls";
-		
-		/**
-		 * Name of model
-		 */
-		private $model_name = 'Modify';
+		private $tpl_name = "controls";
 		
 		/* Allow user to use this controller */
 		private $access_check = true;
@@ -70,74 +65,39 @@
 				// When the controller is good, the render can begin.
 				if (Tools::getInstance()->isAskedController(__CLASS__, $url)) {		
 					if (file_exists(DIR_TEMPLATES."/".$this->tpl_name.".tpl")) {	
-						try {	
-							$controls = array();
-							$controls[0]["link"] = "test";
-							$controls[0]["desc"] = "test";
-							$controls[0]["name"] = "Test";
-							$controls[1]["link"] = "test1";
-							$controls[1]["desc"] = "test1";
-							$controls[1]["name"] = "Test1";
-							$controls[2]["link"] = "test2";
-							$controls[2]["desc"] = "test2";
-							$controls[2]["name"] = "Test2";
-							$controls[3]["link"] = "test3";
-							$controls[3]["desc"] = "test3";
-							$controls[3]["name"] = "Test3";
-							$controls[4]["link"] = "test";
-							$controls[4]["desc"] = "test";
-							$controls[4]["name"] = "Test";
-							$controls[5]["link"] = "test1";
-							$controls[5]["desc"] = "test1";
-							$controls[5]["name"] = "Test1";
-							$controls[6]["link"] = "test2";
-							$controls[6]["desc"] = "test2";
-							$controls[6]["name"] = "Test2";
-							$controls[7]["link"] = "test3";
-							$controls[7]["desc"] = "test3";
-							$controls[7]["name"] = "Test3";
-							$controls[8]["link"] = "test";
-							$controls[8]["desc"] = "test";
-							$controls[8]["name"] = "Test";
-							$controls[9]["link"] = "test1";
-							$controls[9]["desc"] = "test1";
-							$controls[9]["name"] = "Test1";
-							$controls[10]["link"] = "test2";
-							$controls[10]["desc"] = "test2";
-							$controls[10]["name"] = "Test2";
-							$controls[11]["link"] = "test3";
-							$controls[11]["desc"] = "test3";
-							$controls[11]["name"] = "Test3";
-							$controls[12]["link"] = "test1";
-							$controls[12]["desc"] = "test1";
-							$controls[12]["name"] = "Test1";
-							$controls[13]["link"] = "test2";
-							$controls[13]["desc"] = "test2";
-							$controls[13]["name"] = "Test2";
-							$controls[14]["link"] = "test3";
-							$controls[14]["desc"] = "test3";
-							$controls[14]["name"] = "Test3";
-							$controls[15]["link"] = "test1";
-							$controls[15]["desc"] = "test1";
-							$controls[15]["name"] = "Test1";
-							$controls[16]["link"] = "test2";
-							$controls[16]["desc"] = "test2";
-							$controls[16]["name"] = "Test2";
-							$controls[17]["link"] = "test3";
-							$controls[17]["desc"] = "test3";
-							$controls[17]["name"] = "Test3";
-							
-							$this->smarty->assign("nao_battery", 80);
-							$this->smarty->assign("controls", $controls); 
-							
-							// After assign variables to the template, 
-							// The controller show the render.
-							$this->smarty->display(DIR_TEMPLATES."/".
-							$this->tpl_name.".tpl");
-			
-						} catch (Exception $e) {
+						if (file_exists(DIR_VIEWS."/data/ControlsModel.php")) {
+							try {	
+								require_once(DIR_VIEWS."/data/ControlsModel.php");
+
+								$controls = array();
+								$buffer = ControlsModel::getInstance()->get_commands();
+								$i = 0;
+
+								foreach($buffer as $control) {
+									$controls[$i]["name"] = $control["cmd_name"];
+									$controls[$i]["link"] = $control["cmd_file"];
+									$controls[$i]["desc"] = $control["cmd_description"];
+									$i++;
+								}
+
+								$this->smarty->assign("nao_battery", 80);
+								$this->smarty->assign("content", "full");
+								$this->smarty->assign("controls", $controls); 
+								
+								// After assign variables to the template, 
+								// The controller show the render.
+								$this->smarty->display(DIR_TEMPLATES."/".
+								$this->tpl_name.".tpl");
+				
+							} catch (Exception $e) {
+								throw new Exception(
+									"An error has occured: ".$e->getMessage()
+								);
+							}
+						} else {
 							throw new Exception(
-								"An error has occured: ".$e->getMessage()
+								"The model 'ConstrolsModel' doesn't 
+								exists !"
 							);
 						}
 					} else {
