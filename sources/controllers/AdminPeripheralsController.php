@@ -184,6 +184,7 @@
 										}
 
 										$this->smarty->assign("nao_battery", 80);
+										$this->smarty->assign("number", count($peripherals));
 										$this->smarty->assign("peripherals", $peripherals); 
 										
 										// After assign variables to the template, 

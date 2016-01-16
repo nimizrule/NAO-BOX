@@ -190,6 +190,7 @@
 										}
 
 										$this->smarty->assign("nao_battery", 80);
+										$this->smarty->assign("number", count($controls));
 										$this->smarty->assign("controls", $controls); 
 										
 										// After assign variables to the template, 

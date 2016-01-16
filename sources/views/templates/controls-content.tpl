@@ -3,7 +3,7 @@
 		<div id="content-blockControlActions" class="col-xs-12 col-sm-3">
 			<div>
 				<a href="{$control.link}" alt="{$control.desc}">
-					<div>{$control.name}</div>
+					<div><p>{$control.name}</p></div>
 				</a>
 			</div>
 		</div>

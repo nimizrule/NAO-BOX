@@ -97,12 +97,20 @@
 										];
 									}
 
-									$this->smarty->assign("login", $login);
-									$this->smarty->assign("nao_battery", 80);
+									// For display template, we need to create a new instance
+									// Of Smarty engine.
+									$smarty = Renderer::getInstance()->getSmartyInstance(
+										false, 
+										false,
+										true
+									);
+
+									$smarty->assign("login", $login);
+									$smarty->assign("nao_battery", 80);
 									
 									// After assign variables to the template, 
 									// The controller show the render.
-									$this->smarty->display(DIR_TEMPLATES."/".
+									$smarty->display(DIR_TEMPLATES."/".
 									$this->tpl_name.".tpl");
 
 								} catch (Exception $e) {

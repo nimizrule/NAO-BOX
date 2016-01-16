@@ -46,7 +46,7 @@
 		 */
 		public function get_commands() {
 			try {
-				$qry = ModelRenderer::getDbInstance()->prepare("SELECT * FROM naobox.nb_commands ORDER BY cmd_id");				
+				$qry = ModelRenderer::getDbInstance()->prepare("SELECT * FROM naobox.nb_commands ORDER BY cmd_name");				
 				$qry->execute();
 				$return_qry = $qry->fetchAll();
 				$qry->closeCursor();

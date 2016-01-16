@@ -7,11 +7,13 @@
 	 **************************************************************************
 	 * @page			index.php
 	 * @publication		11/28/15
-	 * @edition			11/28/15	
+	 * @edition			01/12/16	
 	 * @author			Jérémie LIECHTI
 	 * @copyright		3IL, Jérémie LIECHTI
 	 */
 	
+	session_start();
+
 	if(file_exists(dirname(__FILE__)."/config/autoload.php")) {
 		try {
 			

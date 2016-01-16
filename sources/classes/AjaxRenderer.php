@@ -122,6 +122,7 @@
 								$controls[$i]["desc"] = $control["cmd_description"];
 								$i++;
 							}
+							$this->smarty->assign("number", count($controls));
 							$this->smarty->assign("controls", $controls); 
 							break;
 
@@ -256,6 +257,7 @@
 								$peripherals[$i]["desc"] = $peripheral["prl_description"];
 								$i++;
 							}
+							$this->smarty->assign("number", count($peripherals));
 							$this->smarty->assign("peripherals", $peripherals); 
 							break;
 
@@ -314,6 +316,7 @@
 				}
 
 				$this->smarty->force_compile = 1;
+				$this->smarty->assign("number", 0);
 				$this->smarty->assign("content", $content);
 
 				if($adminProcess) {
@@ -339,6 +342,12 @@
 				switch($page) {
 					case "settingPassword":
 						$content = "password";
+						$password = [
+							"old" => "",
+							"new" => "",
+							"rep" => ""
+						];
+						$this->smarty->assign("pwd", $password);
 						break;
 					case "settingLevel":
 						$content = "level";

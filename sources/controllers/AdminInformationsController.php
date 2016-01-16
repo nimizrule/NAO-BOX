@@ -73,6 +73,7 @@
 						if (file_exists(DIR_TEMPLATES."/".$this->tpl_name.".tpl")) {	
 							try {	
 								$this->smarty->assign("nao_battery", 80);
+								$this->smarty->assign("number", 0);
 								$this->smarty->assign("content", "nao");
 								
 								// After assign variables to the template, 

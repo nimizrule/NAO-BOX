@@ -27,9 +27,8 @@ genou :  RKneePitch : Device/SubDeviceList/RKneePitch/Temperature/Sensor/Value 	
 		   		
 
 FSR  le poids total sur chaque pied
-RFoot : Device/SubDeviceList/RFoot/FSR/TotalWeight/Sensor/Value 	FSR total (kg)
-LFoot : Device/SubDeviceList/LFoot/FSR/TotalWeight/Sensor/Value 	FSR total (kg)
-
+Device/SubDeviceList/LFoot/FSR/TotalWeight/Sensor/Value 	FSR total (kg)
+Device/SubDeviceList/RFoot/FSR/TotalWeight/Sensor/Value 	FSR total (kg)
 
 
 si pour une information spécifique :

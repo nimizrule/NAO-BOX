@@ -48,7 +48,7 @@
 		 * @return 	Smarty, the Smarty's instance.
 		 * @throws	Exception, if files doesn't exists or configuration fail.
 		 */
-		public function getSmartyInstance($adminProcess, $action = false) {			
+		public function getSmartyInstance($adminProcess, $action = false, $login = false) {			
 			try {
 
 				// If the smarty's configuration file exists, system can start the 
@@ -67,7 +67,23 @@
 					$this->smarty->inheritance_merge_compiled_includes = true;
 					
 					// Is not an admin page
-					if(!$adminProcess) {
+					if($login) {
+						$this->smarty->assign(
+							"settings", 
+							array(
+								"bootstrap" => 
+									"../".BOOTSTRAP_DIR."/css/bootstrap.min.css",
+								"css" => "../".DIR_CSS."/file.css",
+								"img" => "../".DIR_IMG,
+								"jquery" => 
+									"../".JQUERY_DIR."/jquery-1.11.3.min.js",
+								"functions" => "../".DIR_SCRIPTS."/functions.js"
+							)
+						);
+						$this->smarty->assign("session", "user");
+
+					// If is a login page
+					} elseif(!$adminProcess) {
 						$this->smarty->assign(
 							"settings", 
 							array(
@@ -81,8 +97,7 @@
 							)
 						);
 						$this->smarty->assign("session", "user");
-
-					// Is an admin page
+					
 					} else {
 						
 						// An action is not required

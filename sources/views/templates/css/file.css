@@ -104,10 +104,10 @@ label {
 }
 .container .header-container header #header-controls .battery-item {
 	width: 60px;
-	height: 66px;
+	height: 60px;
 }
 .container .header-container header #header-controls .battery {
-	margin: 0 30px 0 -50px;
+	margin: 0 30px 0 10px;
 }
 /*****************************************************************************************************************************/
 /****************************************						PAGE						**********************************/
@@ -198,10 +198,14 @@ label {
 	text-align: center;
 }
 .container .page-container #content-blockTabControl #content-blockTabPage #content-blockControlActions div {
-	width: 138px;
-	height: 141px;
+	width: 150px;
+	height: 150px;
 	margin: auto;
-	background: url('../img/buttons/action.jpg');
+	background: url('../img/buttons/action_e.jpg');
+}
+.container .page-container #content-blockTabControl #content-blockTabPage #content-blockControlActions div p {
+	max-width: 130px;
+	margin: auto;
 }
 .container .page-container #content-blockTabControl #content-blockTabPage #content-blockControlActions div a {
 	text-decoration: none;
@@ -209,7 +213,7 @@ label {
 	color: #615F5F;
 }
 .container .page-container #content-blockTabControl #content-blockTabPage #content-blockControlActions div a div {
-	padding-top: 105px;
+	padding-top: 100px;
 }
 	#TexteMenuSuperieur {		
 		margin-top:5px;
@@ -268,7 +272,8 @@ label {
 		box-sizing:border-box;		
 		
 	}	
-
+	
+	
 	/*h1, h2 {
 		color:green;
 		font-style:italic;
