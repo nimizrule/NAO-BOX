@@ -102,6 +102,9 @@ label {
 .container .header-container header #header-controls {
 	text-align: right;
 }
+.container .header-container header #header-controls a img {
+	margin-left: 10px;
+}
 .container .header-container header #header-controls .battery-item {
 	width: 60px;
 	height: 60px;
